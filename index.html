@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0A0A0A">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>MIRAI CLUB | Train with purpose</title>
 <meta name="description" content="No es moda. Es evolución. Remeras oversize de edición limitada y estampados propios. Asunción, Paraguay.">
 <meta property="og:title" content="MIRAI CLUB">
@@ -15,9 +16,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="portada.jpg" fetchpriority="high">
 <style>
-:root{--bg:#0A0A0A;--text:#F5F5F5;--muted:#9a9a9a;--accent:#D90000;--wa:#0E7C3F;--ft:'Montserrat',system-ui,sans-serif;--fb:'Inter',system-ui,sans-serif;--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);--ease:cubic-bezier(.25,1,.5,1)}
+:root{--bg:#0A0A0A;--text:#F5F5F5;--muted:#9a9a9a;--accent:#D90000;--wa:#0E7C3F;--ft:'Montserrat',system-ui,sans-serif;--fb:'Inter',system-ui,sans-serif;--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);--ease:cubic-bezier(.25,1,.5,1);--gx:1.25rem}
+@media(min-width:900px){:root{--gx:2rem}}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth;scroll-padding-top:80px;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;scroll-padding-top:90px;-webkit-text-size-adjust:100%}
 html.lock,html.lock body{overflow:hidden}
 body{font-family:var(--fb);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.5;touch-action:manipulation;overflow-x:hidden}
 body.has-cart{padding-bottom:calc(5.5rem + var(--sb))}
@@ -25,52 +27,22 @@ img{max-width:100%;display:block;object-fit:cover}
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer;border:none;outline:none;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-/* grano sutil (pequeño y fijo: liviano en iPhone) */
-body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.035;pointer-events:none;z-index:9999}
+/* grano: tile chico repetido (el filtro se calcula una sola vez, no a pantalla completa) */
+body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px;opacity:.035;pointer-events:none;z-index:9999}
 #progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);z-index:400}
-/* header */
-  /* ================= HEADER LUXURY ================= */
-header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    /* Damos más espacio cuando la página está hasta arriba */
-    padding: calc(1.5rem + var(--st)) 1.5rem 1.5rem; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    /* Transición suave para todos los elementos (padding, fondo, borde) */
-    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    border-bottom: 1px solid transparent;
-    /* Un degradado muy sutil para asegurar que el menú se lea siempre */
-    background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
-}
-
-/* Estado al hacer scroll */
-header.solid {
-    /* La barra se encoge elegantemente */
-    padding: calc(0.8rem + var(--st)) 1.5rem 0.8rem; 
-    background: rgba(10, 10, 10, 0.75); /* Un poco más transparente */
-    -webkit-backdrop-filter: blur(20px); /* Mayor efecto de cristal esmerilado */
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Línea inferior súper sutil */
-}
-
-/* ================= LOGO ================= */
-.logo img {
-    height: 40px;
-    width: auto;
-    /* TRUCO: Fusiona el fondo oscuro del JPG con la barra, dejando solo la luz/blanco */
-    mix-blend-mode: screen; 
-    transition: transform 0.4s ease;
-}
-
-.logo:hover img {
-    transform: scale(1.05); /* Pequeño efecto al pasar el mouse */
-}
+/* ===== HEADER: padding fijo (sin reflow); solo cambian opacidades ===== */
+header{position:fixed;top:0;left:0;right:0;padding:calc(.9rem + var(--st)) var(--gx) .9rem;display:flex;justify-content:space-between;align-items:center;z-index:100}
+header::before,header::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;transition:opacity .5s var(--ease)}
+header::before{background:linear-gradient(to bottom,rgba(0,0,0,.55),transparent)}
+header::after{background:rgba(10,10,10,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);opacity:0}
+header.solid::before{opacity:0}
+header.solid::after{opacity:1}
+/* ===== LOGO ===== */
+.logo img{height:clamp(48px,6vw,80px);width:auto;mix-blend-mode:screen;transform-origin:left center;transition:transform .5s var(--ease)}
+header.solid .logo img{transform:scale(.78)}
 .nav a{font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 0 .6rem .8rem}
 /* hero */
-.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:6rem 1.25rem calc(2.5rem + var(--sb));overflow:hidden;isolation:isolate}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:7rem var(--gx) calc(2.5rem + var(--sb));overflow:hidden;isolation:isolate}
 .hero-bg{position:absolute;inset:-8% 0;background:url('portada.jpg') center/cover no-repeat;z-index:-2;will-change:transform}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,#0A0A0A 4%,rgba(10,10,10,.72) 38%,rgba(10,10,10,.25) 100%)}
 .hero-copy{max-width:640px;will-change:transform,opacity;text-shadow:0 2px 24px rgba(0,0,0,.6)}
@@ -78,7 +50,7 @@ header.solid {
 .hero p{font-size:.95rem;color:#cfcfcf;margin-bottom:1.6rem;max-width:340px}
 .btn{display:block;width:100%;background:var(--text);color:var(--bg);padding:1.05rem 1.5rem;min-height:52px;font:900 .85rem var(--ft);letter-spacing:.1em;text-align:center;text-transform:uppercase;transition:opacity .2s,background .2s,color .2s}
 .btn-ghost{background:transparent;border:1.5px solid var(--text);color:var(--text);width:fit-content;min-width:220px}
-.scroll-hint{position:absolute;right:1.25rem;bottom:calc(2.5rem + var(--sb));width:1px;height:56px;background:linear-gradient(var(--text),transparent);animation:hint 2s ease-in-out infinite}
+.scroll-hint{position:absolute;right:var(--gx);bottom:calc(2.5rem + var(--sb));width:1px;height:56px;background:linear-gradient(var(--text),transparent);animation:hint 2s ease-in-out infinite}
 @keyframes hint{0%,100%{transform:scaleY(.3);transform-origin:top}50%{transform:scaleY(1)}}
 /* marquee */
 .marquee{overflow:hidden;white-space:nowrap;background:var(--text);color:var(--bg);padding:.8rem 0;font:900 .8rem var(--ft);letter-spacing:.18em}
@@ -97,7 +69,7 @@ header.solid {
 .card.in{opacity:1;transform:none}
 .card-img{aspect-ratio:4/5;overflow:hidden;background:#141414;margin-bottom:.8rem;clip-path:inset(0 0 100% 0);transition:clip-path 1s var(--ease)}
 .card.in .card-img{clip-path:inset(0)}
-.card-img img{width:100%;height:112%;will-change:transform;transition:filter .4s}
+.card-img img{width:100%;height:100%;transition:transform .8s var(--ease)}
 .card-title{font:700 .78rem var(--ft);text-transform:uppercase;letter-spacing:.05em;line-height:1.3}
 .card-price{font-size:.82rem;color:var(--muted);font-weight:500;margin-top:.2rem}
 .tag{font-size:.68rem;color:var(--accent);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-top:.2rem}
@@ -110,8 +82,8 @@ header.solid {
 footer{padding:3rem 1.25rem calc(3rem + var(--sb));text-align:center;border-top:1px solid #1c1c1c;font-size:.85rem;color:var(--muted)}
 footer a{color:var(--text);font-weight:500;margin:0 .6rem;letter-spacing:.08em;text-transform:uppercase;display:inline-block;padding:.5rem 0}
 /* carrito flotante */
-.fab{position:fixed;left:1.25rem;right:1.25rem;bottom:calc(1rem + var(--sb));max-width:420px;margin:0 auto;background:var(--text);color:var(--bg);padding:1rem 1.5rem;min-height:54px;border-radius:50px;font:900 .85rem var(--ft);letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;z-index:90;box-shadow:0 10px 30px rgba(0,0,0,.6);transform:translateY(160%);transition:transform .45s var(--ease)}
-.fab.visible{transform:none}
+.fab{position:fixed;left:1.25rem;right:1.25rem;bottom:calc(1rem + var(--sb));max-width:420px;margin:0 auto;background:var(--text);color:var(--bg);padding:1rem 1.5rem;min-height:54px;border-radius:50px;font:900 .85rem var(--ft);letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;z-index:90;box-shadow:0 10px 30px rgba(0,0,0,.6);transform:translateY(160%);visibility:hidden;transition:transform .45s var(--ease),visibility 0s .45s}
+.fab.visible{transform:none;visibility:visible;transition-delay:0s}
 /* modal */
 .modal{position:fixed;inset:0;height:100vh;height:100dvh;background:var(--bg);z-index:200;visibility:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;transform:translateY(100%);transition:transform .45s var(--ease),visibility 0s .45s}
 .modal.active{visibility:visible;transform:none;transition-delay:0s}
@@ -139,10 +111,9 @@ footer a{color:var(--text);font-weight:500;margin:0 .6rem;letter-spacing:.08em;t
 .m-img{position:sticky;top:0;height:100dvh;max-height:none;aspect-ratio:auto}
 .m-info{align-self:stretch;overflow-y:auto;padding:4.5rem 3rem 0;max-width:none;width:100%}
 .x{right:1rem}
-.hero{padding:6rem 3rem 3.5rem}.hero p{max-width:400px}
-header{padding-left:2rem;padding-right:2rem}
 body.has-cart{padding-bottom:0}
 .fab{left:auto;right:2rem;margin:0}
+.hero p{max-width:400px}
 }
 /* drawer */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:290;opacity:0;pointer-events:none;transition:opacity .3s}
@@ -157,10 +128,14 @@ body.has-cart{padding-bottom:0}
 .item p{font-size:.9rem;font-weight:700}
 .item span{font-size:.8rem;color:var(--muted);display:block}
 .rm{background:none;color:var(--muted);font-size:1.5rem;width:44px;height:44px}
+.empty{color:#888}
 .d-foot{border-top:1px solid #222;padding-top:1.1rem;margin-top:1rem}
 .total{display:flex;justify-content:space-between;font-weight:700;font-size:1.15rem;margin-bottom:1rem}
+.wa{background:var(--wa);color:#fff}
 @media(hover:hover){
-.card:hover .card-img img{filter:brightness(1.1)}
+.logo:hover img{transform:scale(1.03)}
+header.solid .logo:hover img{transform:scale(.8)}
+.card:hover .card-img img{transform:scale(1.04)}
 .filter-btn:hover{color:var(--text)}
 .opt:not(:disabled):not(.selected):hover{border-color:var(--text)}
 .btn:hover{opacity:.9}
@@ -176,7 +151,7 @@ body.has-cart{padding-bottom:0}
 <div id="progress"></div>
 
 <header id="hdr">
-  <a href="#" class="logo" aria-label="MIRAI CLUB, inicio"><img src="logosinfondo.jpg" alt="MIRAI Club" width="200" height="200"></a>
+  <a href="#hero" class="logo" id="logo" aria-label="MIRAI CLUB, inicio"><img src="logosinfondo.jpg" alt="MIRAI Club" width="200" height="200"></a>
   <nav class="nav"><a href="https://instagram.com/miraiclubpy" target="_blank" rel="noopener">Instagram</a></nav>
 </header>
 
@@ -233,7 +208,7 @@ body.has-cart{padding-bottom:0}
     <p class="guide" id="guide">Corte oversize: pedí tu talle habitual para un calce holgado. Si preferís algo más ajustado, bajá un talle.</p>
     <div class="options" id="sizes"></div>
     <p class="note" id="stock-note"></p>
-    <p class="note" id="size-err">Seleccioná un talle para continuar.</p>
+    <p class="note" id="size-err" role="alert">Seleccioná un talle para continuar.</p>
     <div class="sel-head"><span class="sel-label">Color</span></div>
     <div class="options two" id="colors"></div>
     <div class="buy"><button class="btn" id="add">Agregar al pedido</button></div>
@@ -246,16 +221,16 @@ body.has-cart{padding-bottom:0}
   <div class="d-items" id="items"></div>
   <div class="d-foot">
     <div class="total"><span>Total</span><span id="total">Gs. 0</span></div>
-    <button class="btn" style="background:var(--wa);color:#fff" id="send">Pedir por WhatsApp</button>
+    <button class="btn wa" id="send">Pedir por WhatsApp</button>
   </div>
 </aside>
 
 <script>
-const WA = "595985316262";
-const gs = n => 'Gs. ' + new Intl.NumberFormat('es-PY').format(n);
-const src = f => encodeURI(f);
-const S = ["S","M","L","XL"];
-const products = [
+const WA="595985316262";
+const gs=n=>'Gs. '+new Intl.NumberFormat('es-PY').format(n);
+const src=f=>encodeURI(f);
+const S=["S","M","L","XL"];
+const products=[
  {id:1,name:"Remera Mirai Club (Back)",price:150000,category:"oversize",desc:"Algodón 240g, corte oversize. Detalle en la espalda.",image:"remera3.jpg",colors:["Negro"],stock:{S:5,M:1,L:0,XL:10}},
  {id:2,name:"Born to Run - Team",price:160000,category:"born-to-run",desc:"Estampado frontal de alta densidad. Boxy fit.",image:"todos.jpg",colors:["Negro"],stock:{S:2,M:5,L:5,XL:5}},
  {id:3,name:"Colección Mirai Athlete",price:140000,category:"oversize",desc:"Opciones en blanco y negro. Minimalista y premium.",image:"remera2.jpg",colors:["Negro","Blanco"],stock:{S:10,M:10,L:10,XL:10}},
@@ -263,146 +238,184 @@ const products = [
  {id:5,name:"Born to Run - Focus",price:150000,category:"born-to-run",desc:"Estilo urbano y atlético.",image:"juanchi yo.jpg",colors:["Negro"],stock:{S:5,M:5,L:0,XL:5}},
  {id:6,name:"Born to Run - Stretch",price:150000,category:"born-to-run",desc:"Comodidad en cada movimiento.",image:"juanchi hiro.jpg",colors:["Negro"],stock:{S:5,M:5,L:5,XL:5}}
 ];
-const $ = id => document.getElementById(id);
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-let cur=null, size=null, color=null, lastFocus=null, cart=[];
-try{ cart = JSON.parse(localStorage.getItem('mirai_cart')) || []; }catch(e){ cart=[]; }
-const save = () => { try{ localStorage.setItem('mirai_cart', JSON.stringify(cart)); }catch(e){} };
+const $=id=>document.getElementById(id);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+let cur=null,size=null,color=null,lastFocus=null;
 
-/* ---------- catálogo ---------- */
-const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12, rootMargin:'0px 0px -6% 0px'});
-function lowStock(p){ return Object.values(p.stock).some(n => n>0 && n<=2); }
+/* carrito: se valida contra el catálogo (precio, talle y stock siempre salen de aquí, no de localStorage) */
+let cart=[];
+try{
+  const raw=JSON.parse(localStorage.getItem('mirai_cart'));
+  cart=(Array.isArray(raw)?raw:[]).map(i=>{
+    const p=products.find(x=>x&&i&&x.id===i.id);
+    if(!p||!S.includes(i.size)||!p.colors.includes(i.color)||!(p.stock[i.size]>0)) return null;
+    return {id:p.id,name:p.name,price:p.price,size:i.size,color:i.color};
+  }).filter(Boolean).slice(0,30);
+}catch(e){cart=[];}
+const save=()=>{try{localStorage.setItem('mirai_cart',JSON.stringify(cart));}catch(e){}};
+if(history.state&&history.state.ui) history.replaceState(null,'');
+
+/* catálogo */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+const lowStock=p=>Object.values(p.stock).some(n=>n>0&&n<=2);
 function renderGrid(list){
-  const g=$('grid'); g.innerHTML='';
+  const g=$('grid');g.textContent='';
+  const frag=document.createDocumentFragment();
   list.forEach((p,i)=>{
-    const c=document.createElement('article'); c.className='card'; c.tabIndex=0; c.setAttribute('role','button');
+    const c=el('article','card');c.tabIndex=0;c.setAttribute('role','button');c.setAttribute('aria-label',p.name+', '+gs(p.price));
     c.style.transitionDelay=(i%4)*70+'ms';
-    c.innerHTML=`<div class="card-img"><img src="${src(p.image)}" alt="${p.name}" width="600" height="750" loading="lazy" decoding="async"></div><h3 class="card-title">${p.name}</h3><p class="card-price">${gs(p.price)}</p>${lowStock(p)?'<p class="tag">Últimas unidades</p>':''}`;
+    const w=el('div','card-img'),im=document.createElement('img');
+    im.src=src(p.image);im.alt=p.name;im.width=600;im.height=750;im.loading=i<2?'eager':'lazy';im.decoding='async';
+    w.appendChild(im);c.append(w,el('h3','card-title',p.name),el('p','card-price',gs(p.price)));
+    if(lowStock(p)) c.appendChild(el('p','tag','Últimas unidades'));
     c.addEventListener('click',()=>openModal(p));
-    c.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openModal(p);} });
-    g.appendChild(c); io.observe(c);
+    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openModal(p);}});
+    frag.appendChild(c);
   });
-  if(reduce) g.querySelectorAll('.card').forEach(c=>c.classList.add('in'));
+  g.appendChild(frag);
+  g.querySelectorAll('.card').forEach(c=>reduce?c.classList.add('in'):io.observe(c));
 }
 document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.filter-btn').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false');});
-  b.classList.add('active'); b.setAttribute('aria-pressed','true');
+  b.classList.add('active');b.setAttribute('aria-pressed','true');
   renderGrid(b.dataset.cat==='all'?products:products.filter(p=>p.category===b.dataset.cat));
 }));
 renderGrid(products);
 
-/* ---------- historial: un solo punto de cierre (botón atrás del celular) ---------- */
-function lock(on){ document.documentElement.classList.toggle('lock',on); }
-function closeAll(){ closeModalUI(); closeCartUI(); }
-window.addEventListener('popstate',closeAll);
-function back(){ if(history.state&&history.state.ui) history.back(); else closeAll(); }
+/* historial: un solo punto de cierre (botón atrás del celular) */
+const lock=on=>document.documentElement.classList.toggle('lock',on);
+function closeAll(){closeModalUI();closeCartUI();}
+addEventListener('popstate',closeAll);
+function back(){if(history.state&&history.state.ui)history.back();else closeAll();}
 
-/* ---------- modal ---------- */
+/* modal */
 function openModal(p){
-  lastFocus=document.activeElement; cur=p; size=null; color=p.colors[0];
-  $('m-img').src=src(p.image); $('m-img').alt=p.name;
-  $('m-title').textContent=p.name; $('m-price').textContent=gs(p.price); $('m-desc').textContent=p.desc;
-  $('size-err').style.display='none'; $('stock-note').style.display='none';
-  $('guide').classList.remove('open'); $('guide-btn').setAttribute('aria-expanded','false');
-  const sz=$('sizes'); sz.innerHTML='';
+  lastFocus=document.activeElement;cur=p;size=null;color=p.colors[0];
+  $('m-img').src=src(p.image);$('m-img').alt=p.name;
+  $('m-title').textContent=p.name;$('m-price').textContent=gs(p.price);$('m-desc').textContent=p.desc;
+  $('size-err').style.display='none';$('stock-note').style.display='none';
+  $('guide').classList.remove('open');$('guide-btn').setAttribute('aria-expanded','false');
+  const sz=$('sizes');sz.textContent='';
   S.forEach(s=>{
-    const n=p.stock[s]||0, b=document.createElement('button'); b.className='opt'; b.textContent=s;
-    if(n===0){ b.disabled=true; b.setAttribute('aria-label','Talle '+s+' agotado'); }
+    const n=p.stock[s]||0,b=el('button','opt',s);b.type='button';
+    if(n===0){b.disabled=true;b.setAttribute('aria-label','Talle '+s+' agotado');}
     else b.onclick=()=>{
-      sz.querySelectorAll('.opt').forEach(x=>x.classList.remove('selected')); b.classList.add('selected'); size=s;
+      sz.querySelectorAll('.opt').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');size=s;
       $('size-err').style.display='none';
-      const w=$('stock-note'); if(n<=2){ w.textContent='Quedan solo '+n+(n===1?' unidad':' unidades'); w.style.display='block'; } else w.style.display='none';
+      const w=$('stock-note');
+      if(n<=2){w.textContent='Quedan solo '+n+(n===1?' unidad':' unidades');w.style.display='block';}else w.style.display='none';
     };
     sz.appendChild(b);
   });
-  const cl=$('colors'); cl.innerHTML='';
+  const cl=$('colors');cl.textContent='';
   p.colors.forEach(c=>{
-    const b=document.createElement('button'); b.className='opt'+(c===color?' selected':''); b.textContent=c;
-    b.onclick=()=>{ cl.querySelectorAll('.opt').forEach(x=>x.classList.remove('selected')); b.classList.add('selected'); color=c; };
+    const b=el('button','opt'+(c===color?' selected':''),c);b.type='button';
+    b.onclick=()=>{cl.querySelectorAll('.opt').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');color=c;};
     cl.appendChild(b);
   });
-  $('modal').inert=false; $('modal').classList.add('active'); $('modal').scrollTop=0; lock(true);
-  history.pushState({ui:'modal'},''); $('m-close').focus({preventScroll:true});
+  const m=$('modal');m.inert=false;m.classList.add('active');m.scrollTop=0;lock(true);
+  history.pushState({ui:'modal'},'');$('m-close').focus({preventScroll:true});
 }
 function closeModalUI(){
-  const m=$('modal'); if(!m.classList.contains('active')) return;
-  m.classList.remove('active'); m.inert=true;
-  if(!$('drawer').classList.contains('active')) lock(false);
-  if(lastFocus&&lastFocus.focus) lastFocus.focus({preventScroll:true});
+  const m=$('modal');if(!m.classList.contains('active'))return;
+  m.classList.remove('active');m.inert=true;
+  if(!$('drawer').classList.contains('active'))lock(false);
+  if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
 }
 $('m-close').onclick=back;
-$('guide-btn').onclick=()=>{ const g=$('guide'); const o=g.classList.toggle('open'); $('guide-btn').setAttribute('aria-expanded',o); };
+$('guide-btn').onclick=()=>{const o=$('guide').classList.toggle('open');$('guide-btn').setAttribute('aria-expanded',o);};
 
-/* ---------- carrito ---------- */
+/* carrito UI */
 function renderCart(){
   $('count').textContent=cart.length;
   $('fab').classList.toggle('visible',cart.length>0);
   document.body.classList.toggle('has-cart',cart.length>0);
-  const box=$('items'); box.innerHTML=''; let total=0;
+  const box=$('items');box.textContent='';let total=0;
   cart.forEach((it,i)=>{
     total+=it.price;
-    const d=document.createElement('div'); d.className='item';
-    d.innerHTML=`<div><p>${it.name}</p><span>Talle ${it.size} · ${it.color}</span><span>${gs(it.price)}</span></div><button class="rm" aria-label="Quitar ${it.name}">&times;</button>`;
-    d.querySelector('.rm').onclick=()=>{ cart.splice(i,1); save(); renderCart(); };
-    box.appendChild(d);
+    const d=el('div','item'),t=document.createElement('div');
+    t.append(el('p',null,it.name),el('span',null,'Talle '+it.size+' · '+it.color),el('span',null,gs(it.price)));
+    const rm=el('button','rm','×');rm.type='button';rm.setAttribute('aria-label','Quitar '+it.name);
+    rm.onclick=()=>{cart.splice(i,1);save();renderCart();};
+    d.append(t,rm);box.appendChild(d);
   });
-  if(!cart.length) box.innerHTML='<p style="color:#888">Tu pedido está vacío. Elegí una remera para empezar.</p>';
+  if(!cart.length)box.appendChild(el('p','empty','Tu pedido está vacío. Elegí una remera para empezar.'));
   $('total').textContent=gs(total);
 }
-function openCartUI(){ $('drawer').inert=false; $('drawer').classList.add('active'); $('overlay').classList.add('active'); lock(true); $('d-close').focus({preventScroll:true}); }
+function openCartUI(){$('drawer').inert=false;$('drawer').classList.add('active');$('overlay').classList.add('active');lock(true);$('d-close').focus({preventScroll:true});}
 function closeCartUI(){
-  const d=$('drawer'); if(!d.classList.contains('active')) return;
-  d.classList.remove('active'); d.inert=true; $('overlay').classList.remove('active'); lock(false);
+  const d=$('drawer');if(!d.classList.contains('active'))return;
+  d.classList.remove('active');d.inert=true;$('overlay').classList.remove('active');
+  if(!$('modal').classList.contains('active'))lock(false);
 }
-$('fab').onclick=()=>{ lastFocus=$('fab'); openCartUI(); history.pushState({ui:'cart'},''); };
-$('d-close').onclick=back; $('overlay').onclick=back;
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') back(); });
+$('fab').onclick=()=>{lastFocus=$('fab');openCartUI();history.pushState({ui:'cart'},'');};
+$('d-close').onclick=back;$('overlay').onclick=back;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')back();});
 
 $('add').onclick=()=>{
-  if(!size){ $('size-err').style.display='block'; return; }
-  cart.push({id:cur.id,name:cur.name,price:cur.price,size,color}); save(); renderCart();
-  closeModalUI(); history.replaceState({ui:'cart'},''); openCartUI(); // reemplaza la entrada del modal: un solo "atrás"
+  const err=$('size-err');
+  if(!size){err.textContent='Seleccioná un talle para continuar.';err.style.display='block';return;}
+  const have=cart.filter(c=>c.id===cur.id&&c.size===size).length;
+  if(have>=cur.stock[size]){err.textContent='Ya agregaste todas las unidades disponibles de este talle.';err.style.display='block';return;}
+  if(cart.length>=30){err.textContent='Llegaste al máximo de prendas por pedido. Escribinos para pedidos grandes.';err.style.display='block';return;}
+  cart.push({id:cur.id,name:cur.name,price:cur.price,size,color});save();renderCart();
+  closeModalUI();history.replaceState({ui:'cart'},'');openCartUI();
 };
 $('send').onclick=()=>{
-  if(!cart.length) return;
-  let t="Hola MIRAI CLUB, quiero hacer el siguiente pedido:\n\n", sum=0;
-  cart.forEach(i=>{ t+=`▪️ ${i.name} (Talle ${i.size}, ${i.color}) - ${gs(i.price)}\n`; sum+=i.price; });
+  if(!cart.length)return;
+  let t="Hola MIRAI CLUB, quiero hacer el siguiente pedido:\n\n",sum=0;
+  cart.forEach(i=>{t+=`▪️ ${i.name} (Talle ${i.size}, ${i.color}) - ${gs(i.price)}\n`;sum+=i.price;});
   t+=`\n*TOTAL: ${gs(sum)}*\n\n¿Me confirman disponibilidad y métodos de pago/envío?`;
   window.open(`https://wa.me/${WA}?text=${encodeURIComponent(t)}`,'_blank','noopener');
 };
-$('wa-contact').onclick=e=>{ e.preventDefault(); window.open(`https://wa.me/${WA}?text=${encodeURIComponent("Hola MIRAI CLUB, tengo una consulta sobre el catálogo.")}`,'_blank','noopener'); };
+$('wa-contact').onclick=e=>{e.preventDefault();window.open(`https://wa.me/${WA}?text=${encodeURIComponent("Hola MIRAI CLUB, tengo una consulta sobre el catálogo.")}`,'_blank','noopener');};
+$('logo').onclick=e=>{e.preventDefault();scrollTo({top:0,behavior:reduce?'auto':'smooth'});};
 renderCart();
 
-/* ---------- marquee ---------- */
+/* marquee */
 const mq=$('marquee');
 mq.innerHTML=Array(8).fill('<span>TRAIN WITH PURPOSE</span><span>•</span><span>NO ES MODA. ES EVOLUCIÓN</span><span>•</span><span>EST. 26\' ASUNCIÓN</span><span>•</span>').join('');
 
-/* ---------- scroll: hero con profundidad, barra de progreso y marquee que responde ---------- */
-const hdr=$('hdr'), bg=$('hero-bg'), copy=$('hero-copy'), hero=$('hero'), bar=$('progress');
-let lastY=scrollY, vel=0, mx=0, ticking=false;
+/* scroll: medidas en caché (sin leer layout en cada frame) */
+const hdr=$('hdr'),bg=$('hero-bg'),copy=$('hero-copy'),hero=$('hero'),bar=$('progress');
+let heroH=1,maxY=1,half=1,lastY=scrollY,vel=0,mx=0,ticking=false,mqVisible=true;
+function measure(){heroH=hero.offsetHeight||1;maxY=Math.max(1,document.documentElement.scrollHeight-innerHeight);half=mq.scrollWidth/2;}
+new ResizeObserver(measure).observe(document.body);
+addEventListener('resize',measure,{passive:true});
+addEventListener('load',measure);
+measure();
 function onScroll(){
-  if(ticking) return; ticking=true;
+  if(ticking)return;ticking=true;
   requestAnimationFrame(()=>{
-    const y=scrollY, h=hero.offsetHeight;
+    const y=scrollY;
     hdr.classList.toggle('solid',y>40);
-    bar.style.transform=`scaleX(${Math.min(1,y/Math.max(1,document.documentElement.scrollHeight-innerHeight))})`;
-    if(!reduce && y<h*1.2){
-      const p=Math.min(1,y/h);
+    bar.style.transform=`scaleX(${Math.min(1,y/maxY)})`;
+    if(!reduce&&y<heroH*1.2){
+      const p=Math.min(1,y/heroH);
       bg.style.transform=`translate3d(0,${y*.3}px,0) scale(${1+p*.12})`;
       copy.style.transform=`translate3d(0,${-y*.18}px,0)`;
       copy.style.opacity=Math.max(0,1-p*1.6);
     }
-    vel=y-lastY; lastY=y; ticking=false;
+    vel=y-lastY;lastY=y;ticking=false;
   });
 }
-addEventListener('scroll',onScroll,{passive:true}); onScroll();
+addEventListener('scroll',onScroll,{passive:true});onScroll();
 if(!reduce){
-  (function loop(){
-    const half=mq.scrollWidth/2;
-    mx-=0.6+Math.min(Math.abs(vel)*.35,14); if(-mx>=half) mx+=half;
-    mq.style.transform=`translate3d(${mx}px,0,0)`;
-    vel*=.9; requestAnimationFrame(loop);
-  })();
+  new IntersectionObserver(es=>{mqVisible=es[0].isIntersecting;if(mqVisible)loop();}).observe(mq.parentElement);
+  let running=false;
+  function loop(){
+    if(running)return;running=true;
+    (function tick(){
+      if(!mqVisible||document.hidden){running=false;return;}
+      mx-=0.6+Math.min(Math.abs(vel)*.35,14);
+      if(-mx>=half)mx+=half;
+      mq.style.transform=`translate3d(${mx}px,0,0)`;
+      vel*=.9;requestAnimationFrame(tick);
+    })();
+  }
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)loop();});
+  loop();
 }
 </script>
 </body>
