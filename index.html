@@ -44,7 +44,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%;
             padding: 1rem;
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
@@ -57,10 +57,9 @@
             align-items: center; 
         }
         .logo img { 
-            height: 120px; 
+            height: 45px; 
             width: auto; 
             object-fit: contain;
-            /* Resplandor temporal para que el texto negro se vea sobre el fondo oscuro */
             filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.7)); 
         }
 
@@ -80,7 +79,6 @@
             background-repeat: no-repeat;
         }
         
-        /* Ajuste específico para celulares (Mobile First) */
         @media (max-width: 768px) {
             .hero {
                 min-height: 100svh; 
@@ -104,24 +102,53 @@
         }
         .btn-primary:active { transform: scale(0.98); }
 
+        /* ================= FILTROS DE CATEGORÍA ================= */
+        .filter-container {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid #333;
+            color: var(--text-muted);
+            padding: 0.6rem 1.2rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-family: var(--font-title);
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            border-color: var(--text-main);
+            color: var(--text-main);
+            background: #181818;
+        }
+
         /* ================= CATÁLOGO (GRILLA) ================= */
         .catalog-section { padding: 2rem 1rem; max-width: 1200px; margin: 0 auto; }
-        .section-title { font-family: var(--font-title); font-size: 1.2rem; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 1px; }
+        .section-title { font-family: var(--font-title); font-size: 1.2rem; text-transform: uppercase; margin-bottom: 1rem; letter-spacing: 1px; }
         
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2px; /* Estilo feed de IG */
+            gap: 2px;
         }
         @media (min-width: 768px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; } }
         
-        .card { cursor: pointer; position: relative; aspect-ratio: 4/5; overflow: hidden; background: #222; }
+        .card { cursor: pointer; position: relative; aspect-ratio: 4/5; overflow: hidden; background: #181818; }
         .card img { width: 100%; height: 100%; transition: transform 0.4s ease; }
         .card:hover img { transform: scale(1.03); }
+        .card:active { opacity: 0.9; }
         .card-overlay {
             position: absolute; bottom: 0; left: 0; width: 100%;
             padding: 1rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
             opacity: 0; transition: opacity 0.3s ease;
         }
         @media (max-width: 768px) { .card-overlay { opacity: 1; padding: 0.5rem; } }
@@ -192,7 +219,6 @@
 <body>
 
     <header>
-        <!-- Logo en imagen -->
         <a href="#" class="logo">
             <img src="logo.png" alt="MIRAI CLUB Logo">
         </a>
@@ -210,6 +236,14 @@
 
     <section id="catalogo" class="catalog-section">
         <h2 class="section-title">Drop 01</h2>
+        
+        <!-- Filtros interactivos -->
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterProducts('all', event)">Todos</button>
+            <button class="filter-btn" onclick="filterProducts('remeras', event)">Remeras</button>
+            <button class="filter-btn" onclick="filterProducts('born-to-run', event)">Born to Run</button>
+        </div>
+
         <div class="grid" id="product-grid">
             <!-- Las tarjetas se generan vía JavaScript -->
         </div>
@@ -241,7 +275,7 @@
     <div class="modal" id="product-modal">
         <button class="modal-close" id="close-modal">&times;</button>
         <div class="modal-img-container">
-            <img id="modal-img" src="" alt="Producto">
+            <img id="modal-img" src="" alt="Producto" loading="lazy">
         </div>
         <div class="modal-info">
             <h2 class="modal-title" id="modal-title">Nombre</h2>
@@ -269,12 +303,13 @@
         // ================= DATOS A REEMPLAZAR =================
         const WHATSAPP_NUM = "595985316262";
         
-        // Catálogo de productos
+        // Catálogo de productos con propiedad "category" añadida
         const products = [
             {
                 id: 1,
                 name: "Remera Mirai Club (Back)",
                 price: "Gs. 150.000",
+                category: "remeras",
                 desc: "Algodón 240g, corte oversize. Detalle en la espalda.",
                 image: "mockup.jpg",
                 sizes: ["S", "M", "L", "XL"],
@@ -284,6 +319,7 @@
                 id: 2,
                 name: "Born to Run - Team",
                 price: "Gs. 160.000",
+                category: "born-to-run",
                 desc: "Estampado frontal de alta densidad. Boxy fit.",
                 image: "todos.jpg",
                 sizes: ["S", "M", "L", "XL"],
@@ -293,6 +329,7 @@
                 id: 3,
                 name: "Colección Mirai Athlete",
                 price: "Gs. 140.000",
+                category: "remeras",
                 desc: "Opciones en blanco y negro. Minimalista y premium.",
                 image: "mockup1.jpg",
                 sizes: ["S", "M", "L", "XL"],
@@ -302,15 +339,17 @@
                 id: 4,
                 name: "Born to Run - Action",
                 price: "Gs. 150.000",
+                category: "born-to-run",
                 desc: "Diseñada para el movimiento. Ideal para entrenar.",
                 image: "los tres.jpg",
                 sizes: ["S", "M", "L", "XL"],
                 colors: ["Negro"]
             },
-             {
+            {
                 id: 5,
                 name: "Born to Run - Focus",
                 price: "Gs. 150.000",
+                category: "born-to-run",
                 desc: "Estilo urbano y atlético.",
                 image: "juanchi yo.jpg",
                 sizes: ["S", "M", "L", "XL"],
@@ -320,6 +359,7 @@
                 id: 6,
                 name: "Born to Run - Stretch",
                 price: "Gs. 150.000",
+                category: "born-to-run",
                 desc: "Comodidad en cada movimiento.",
                 image: "juanchi hiro.jpg",
                 sizes: ["S", "M", "L", "XL"],
@@ -336,27 +376,43 @@
         const modal = document.getElementById('product-modal');
         const btnClose = document.getElementById('close-modal');
 
-        // Renderizar Catálogo
-        products.forEach(prod => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <img src="${prod.image}" alt="${prod.name}">
-                <div class="card-overlay">
-                    <div class="card-title">${prod.name}</div>
-                    <div class="card-price">${prod.price}</div>
-                </div>
-            `;
-            card.addEventListener('click', () => openModal(prod));
-            grid.appendChild(card);
-        });
+        // Función para renderizar tarjetas en el DOM
+        function renderGrid(items) {
+            grid.innerHTML = '';
+            items.forEach(prod => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${prod.image}" alt="${prod.name}" loading="lazy">
+                    <div class="card-overlay">
+                        <div class="card-title">${prod.name}</div>
+                        <div class="card-price">${prod.price}</div>
+                    </div>
+                `;
+                card.addEventListener('click', () => openModal(prod));
+                grid.appendChild(card);
+            });
+        }
+
+        // Función de filtrado por categoría
+        function filterProducts(category, event) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            if (event) event.target.classList.add('active');
+
+            const filtered = category === 'all' 
+                ? products 
+                : products.filter(p => p.category === category);
+
+            renderGrid(filtered);
+        }
+
+        // Render inicial (Todos los productos)
+        renderGrid(products);
 
         // Abrir Modal
         function openModal(prod) {
             currentProduct = prod;
             selectedSize = null;
-            
-            // Seleccionar color por defecto (el primero)
             selectedColor = prod.colors[0]; 
 
             document.getElementById('modal-img').src = prod.image;
@@ -398,7 +454,7 @@
             });
 
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Evita scroll de fondo
+            document.body.style.overflow = 'hidden';
         }
 
         // Cerrar Modal
