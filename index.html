@@ -29,9 +29,45 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;color:inherit
 body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.035;pointer-events:none;z-index:9999}
 #progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);z-index:400}
 /* header */
-header{position:fixed;top:0;left:0;right:0;padding:calc(.75rem + var(--st)) 1rem .75rem;display:flex;justify-content:space-between;align-items:center;z-index:100;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
-header.solid{background:rgba(10,10,10,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-color:#1c1c1c}
-.logo img{height:40px;width:auto;border-radius:2px;box-shadow:0 2px 14px rgba(0,0,0,.55)}
+  /* ================= HEADER LUXURY ================= */
+header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    /* Damos más espacio cuando la página está hasta arriba */
+    padding: calc(1.5rem + var(--st)) 1.5rem 1.5rem; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    /* Transición suave para todos los elementos (padding, fondo, borde) */
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    border-bottom: 1px solid transparent;
+    /* Un degradado muy sutil para asegurar que el menú se lea siempre */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
+}
+
+/* Estado al hacer scroll */
+header.solid {
+    /* La barra se encoge elegantemente */
+    padding: calc(0.8rem + var(--st)) 1.5rem 0.8rem; 
+    background: rgba(10, 10, 10, 0.75); /* Un poco más transparente */
+    -webkit-backdrop-filter: blur(20px); /* Mayor efecto de cristal esmerilado */
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Línea inferior súper sutil */
+}
+
+/* ================= LOGO ================= */
+.logo img {
+    height: 40px;
+    width: auto;
+    /* TRUCO: Fusiona el fondo oscuro del JPG con la barra, dejando solo la luz/blanco */
+    mix-blend-mode: screen; 
+    transition: transform 0.4s ease;
+}
+
+.logo:hover img {
+    transform: scale(1.05); /* Pequeño efecto al pasar el mouse */
+}
 .nav a{font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 0 .6rem .8rem}
 /* hero */
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:6rem 1.25rem calc(2.5rem + var(--sb));overflow:hidden;isolation:isolate}
