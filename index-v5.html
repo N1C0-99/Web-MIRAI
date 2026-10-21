@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://images.unsplash.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+<title>MIRAI CLUB | Train with purpose</title>
+<meta name="description" content="No es moda. Es evolución. Remeras oversize de edición limitada y estampados propios. Asunción, Paraguay.">
+<meta property="og:title" content="MIRAI CLUB">
+<meta property="og:type" content="website">
+<meta property="og:description" content="Train with purpose. Catálogo oficial.">
+<meta property="og:image" content="logosinfondo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- precarga del hero: versión vertical en pantallas altas (celulares, tablets paradas), horizontal en el resto -->
+<link rel="preload" as="image" fetchpriority="high" media="(max-aspect-ratio: 4/5)"
+  href="https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&crop=faces,entropy&w=960&h=1707&q=75"
+  imagesrcset="https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&crop=faces,entropy&w=640&h=1138&q=75 640w, https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&crop=faces,entropy&w=960&h=1707&q=75 960w, https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&crop=faces,entropy&w=1280&h=2276&q=75 1280w"
+  imagesizes="max(100vw, 66vh)">
+<link rel="preload" as="image" fetchpriority="high" media="(min-aspect-ratio: 4/5)"
+  href="https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&w=1600&q=80"
+  imagesrcset="https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&w=1080&q=80 1080w, https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&w=1600&q=80 1600w, https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&w=2400&q=80 2400w"
+  imagesizes="100vw">
+<style>
+:root{
+--ink:#0A0A0A;--panel:#141414;--paper:#DCDCD9;--card:#ECECE9;--text:#F2F0EC;--muted:#8f8d89;--muted-d:#5d5b57;--line:rgba(242,240,236,.16);--line-d:rgba(10,10,10,.22);--red:#D90000;--red-d:#FF4B3E;--red-l:#B30000;--wa:#0E7C3F;
+--mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;--sans:'Inter',system-ui,sans-serif;
+--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);
+--sl:env(safe-area-inset-left,0px);--sr:env(safe-area-inset-right,0px);
+--gx:1.15rem;--pl:max(var(--gx),var(--sl));--pr:max(var(--gx),var(--sr));
+--ann:34px;
+/* motion: curvas fuertes (ease-out para entrar/salir, drawer tipo iOS para paneles) */
+--ease-out:cubic-bezier(.23,1,.32,1);--ease-in-out:cubic-bezier(.77,0,.175,1);--ease-drawer:cubic-bezier(.32,.72,0,1);
+--press:140ms}
+@media(min-width:900px){:root{--gx:2.5rem}}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+html.lock,html.lock body{overflow:hidden}
+body{font-family:var(--sans);background:var(--ink);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+body.has-cart{padding-bottom:calc(5rem + var(--sb))}
+img{max-width:100%;display:block;object-fit:cover}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;outline:none;color:inherit;background:none}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--red-d);outline-offset:3px}
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+/* controles: sin demora de tap, sin selección ni menú al mantener presionado */
+a,button,[role=button]{touch-action:manipulation}
+button,[role=button],.pill,.tile,.logo{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.eyebrow{font:500 .66rem var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px;opacity:.035;pointer-events:none;z-index:9999}
+#progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--red);transform-origin:0 50%;transform:scaleX(0);z-index:400}
+/* barra de progreso fuera del hilo principal cuando el navegador lo soporta */
+@supports (animation-timeline:scroll()){
+#progress{animation:prog linear both;animation-timeline:scroll(root)}
+@keyframes prog{to{transform:scaleX(1)}}
+}
+
+/* barra de anuncio (se va con el scroll) */
+.ann{position:absolute;top:0;left:0;right:0;height:calc(var(--ann) + var(--st));z-index:99;background:var(--ink);border-bottom:1px solid var(--line);display:flex;justify-content:center;align-items:center;gap:2.5rem;font:500 .62rem var(--mono);letter-spacing:.16em;text-transform:uppercase;padding-top:var(--st)}
+.ann span+span{display:none}
+@media(min-width:700px){.ann span+span{display:inline}}
+
+/* header: se desliza bajo la barra y queda fijo */
+header{position:fixed;top:0;left:0;right:0;z-index:100;padding-top:var(--st);transform:translate3d(0,var(--ann),0);will-change:transform}
+header::before,header::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;transition:opacity .3s ease}
+header::before{background:linear-gradient(to bottom,rgba(0,0,0,.6),transparent)}
+header::after{background:rgba(10,10,10,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);opacity:0}
+header.solid::before{opacity:0}
+header.solid::after{opacity:1}
+.hrow{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:.45rem var(--pr) .45rem var(--pl)}
+.hl,.hr{display:flex;align-items:center;gap:1.5rem}
+.hr{justify-content:flex-end}
+.hl a,.hr a,.hcart{position:relative;font:500 .66rem var(--mono);letter-spacing:.16em;text-transform:uppercase;padding:.8rem 0;min-height:44px;display:inline-flex;align-items:center;gap:.5rem}
+.hl a,.hr a{transition:color .2s ease,opacity .15s ease}
+.hl a::after,.hr a::after{content:"";position:absolute;left:0;right:0;bottom:.7rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .3s var(--ease-out)}
+.hcart{transition:scale var(--press) var(--ease-out)}
+.hide-sm{display:none!important}
+@media(min-width:700px){.hide-sm{display:inline-flex!important}}
+.hcart span{display:inline-grid;place-items:center;min-width:1.5rem;height:1.5rem;padding:0 .3rem;border-radius:999px;background:var(--text);color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums;transition:background-color .2s ease,color .2s ease,scale .35s var(--ease-out)}
+.hcart.has span{background:var(--red);color:#fff}
+.hcart.bump span{scale:1.3}
+.logo{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px}
+.logo img{height:clamp(30px,3.4vw,46px);width:auto;mix-blend-mode:screen;transition:transform .4s var(--ease-out);transform-origin:center}
+header.solid .logo img{transform:scale(.82)}
+
+/* hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:calc(8rem + var(--st)) var(--pr) calc(2.4rem + var(--sb)) var(--pl);overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:-8% 0;z-index:-2;will-change:transform}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(1.1);transition:transform 2.4s var(--ease-out)}
+html.ready .hero-img{transform:none}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,#0A0A0A 0%,rgba(10,10,10,.62) 42%,rgba(10,10,10,.4) 100%)}
+.hero-copy{will-change:transform,opacity;max-width:1200px}
+.hero-title{font:700 clamp(2.2rem,9.4vw,7.4rem)/.96 var(--mono);letter-spacing:-.055em;text-transform:uppercase;margin:1.1rem 0 1.4rem}
+.line{display:block;overflow:hidden;padding-bottom:.06em}
+.line>span{display:block;transform:translateY(112%);transition:transform 1.1s var(--ease-out)}
+html.ready .line>span{transform:none}
+html.ready .line:nth-child(2)>span{transition-delay:.08s}
+.hero-title .r{color:var(--red)}
+.fade{opacity:0;transform:translateY(14px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+html.ready .fade{opacity:1;transform:none;transition-delay:.4s}
+.hero-sub{font-size:1rem;color:#d6d3ce;max-width:34ch;margin-bottom:1.6rem}
+.pills{display:flex;flex-wrap:wrap;gap:.6rem}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 1.6rem;border:1px solid currentColor;border-radius:999px;font:500 .68rem var(--mono);letter-spacing:.16em;text-transform:uppercase;transition:background-color .2s ease,color .2s ease,border-color .2s ease,scale var(--press) var(--ease-out)}
+.pill-solid{background:var(--text);color:var(--ink);border-color:var(--text)}
+.scroll-hint{display:none}
+@media(min-width:900px){.scroll-hint{display:block;position:absolute;right:var(--pr);bottom:2.4rem;width:1px;height:70px;background:linear-gradient(var(--text),transparent);transform-origin:top;animation:hint 2.4s var(--ease-in-out) infinite}}
+@keyframes hint{0%,100%{transform:scaleY(.2)}50%{transform:scaleY(1)}}
+
+/* cinta */
+.ticker{position:relative;overflow:hidden;white-space:nowrap;background:var(--ink);border-block:1px solid var(--line);padding:1rem 0;font:500 .7rem var(--mono);letter-spacing:.2em;text-transform:uppercase}
+.ticker-track{display:inline-block;will-change:transform}
+.ticker-track span{padding-right:2rem}
+.ticker-track .d{color:var(--red-d)}
+.tpause{position:absolute;right:0;top:0;bottom:0;min-width:96px;padding:0 var(--pr) 0 2.4rem;background:linear-gradient(90deg,transparent,var(--ink) 45%);font:500 .6rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:right;transition:color .2s ease,scale var(--press) var(--ease-out)}
+
+/* mosaicos */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--ink)}
+.tile{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;color:#fff;background:#111}
+@media(min-width:768px){.tile{aspect-ratio:1/.82}}
+.tile img{position:absolute;left:0;top:-8%;width:100%;height:116%;transition:scale 1.2s var(--ease-out)}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 58%)}
+.tile-in{position:absolute;left:var(--pl);right:var(--pr);bottom:1.2rem;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;gap:.6rem;transition:scale var(--press) var(--ease-out),opacity var(--press) ease;transform-origin:left bottom}
+.tile-t{display:block;font:700 clamp(1rem,3vw,2rem)/1 var(--mono);letter-spacing:-.04em;text-transform:uppercase}
+.tile-s{font:500 .62rem var(--mono);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;padding-bottom:.2rem}
+@supports (animation-timeline:view()){
+.tile img{animation:tp linear both;animation-timeline:view()}
+@keyframes tp{from{transform:translateY(-6%)}to{transform:translateY(6%)}}
+}
+
+/* catálogo (claro) */
+.catalog{background:var(--paper);color:var(--ink);padding:clamp(4.5rem,9vw,7rem) 0 clamp(5rem,10vw,8rem)}
+.wrap{max-width:1500px;margin:0 auto;padding:0 var(--pr) 0 var(--pl)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin-bottom:2rem}
+.sec-title{font:700 clamp(1.6rem,4.8vw,2.8rem)/1 var(--mono);letter-spacing:-.055em;text-transform:uppercase}
+.sec-title sup{font:500 .62rem var(--mono);letter-spacing:.12em;margin-left:.4rem;position:relative;top:.2rem;color:var(--muted-d);font-variant-numeric:tabular-nums}
+.catalog .eyebrow{color:var(--muted-d)}
+.filters{display:flex;gap:.5rem;margin:0 calc(var(--pr) * -1) 2.4rem calc(var(--pl) * -1);padding:0 var(--pr) 2px var(--pl);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.filter-btn{flex:none;min-height:44px;padding:0 1.35rem;border:1px solid var(--ink);border-radius:999px;font:500 .66rem var(--mono);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;transition:background-color .2s ease,color .2s ease,border-color .2s ease,scale var(--press) var(--ease-out)}
+.filter-btn.active{background:var(--red);border-color:var(--red);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.6rem .75rem}
+@media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr);gap:4rem 1.25rem}}
+.card{container-type:inline-size;display:flex;flex-direction:column;opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease-out) var(--d,0ms),transform .8s var(--ease-out) var(--d,0ms)}
+.card.in{opacity:1;transform:none}
+.card-img{display:block;width:100%;padding:0;position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--card);clip-path:inset(0 0 100% 0);transition:clip-path 1s var(--ease-out) var(--d,0ms),scale var(--press) var(--ease-out)}
+.card.in .card-img{clip-path:inset(0)}
+.card-img img{width:100%;height:100%;transition:scale .9s var(--ease-out)}
+.card-n{position:absolute;top:.6rem;left:.6rem;background:var(--ink);color:#fff;padding:.18rem .45rem;font:500 .6rem var(--mono);letter-spacing:.12em;font-variant-numeric:tabular-nums}
+.card-v{position:absolute;right:.6rem;bottom:.6rem;background:var(--ink);color:#fff;padding:.3rem .65rem;border-radius:999px;font:500 .58rem var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .25s var(--ease-out)}
+.card-title{font:500 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;text-align:center;line-height:1.5;margin-top:1rem}
+.card-price{font:700 .78rem var(--mono);text-align:center;margin-top:.2rem;font-variant-numeric:tabular-nums}
+.tag{font:500 .58rem var(--mono);color:var(--red-l);letter-spacing:.16em;text-transform:uppercase;text-align:center;margin-top:.35rem}
+.tag::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--red-l);margin-right:.45rem;vertical-align:middle}
+/* compra rápida en la tarjeta: talles + WhatsApp */
+.card-out{position:absolute;top:.6rem;right:.6rem;background:var(--red);color:#fff;padding:.25rem .55rem;font:700 .6rem var(--mono);letter-spacing:.16em;text-transform:uppercase}
+.card.is-out .card-img img{filter:grayscale(1);opacity:.6}
+.sizes{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:auto;padding-top:1rem}
+@container (max-width:210px){.sizes{grid-template-columns:repeat(2,1fr)}}
+.sz{min-height:44px;border:1px solid var(--line-d);border-radius:4px;font:500 .72rem var(--mono);letter-spacing:.08em;color:var(--ink);transition:background-color .2s ease,color .2s ease,border-color .2s ease,scale var(--press) var(--ease-out)}
+.sz[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:700}
+.sz:disabled{opacity:.3;text-decoration:line-through;cursor:not-allowed}
+.card-buy{margin-top:.5rem;min-height:48px;padding:.75rem .6rem;font-size:.6rem;letter-spacing:.12em;line-height:1.3}
+.card-msg{color:var(--red-l);font-size:.8rem;text-align:center;margin-top:.5rem;transition:opacity .2s ease,transform .25s var(--ease-out)}
+@starting-style{.card-msg{opacity:0;transform:translateY(-4px)}}
+.grid-empty{grid-column:1/-1;color:var(--muted-d)}
+
+/* revelado al hacer scroll */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out) var(--d,0ms),transform .8s var(--ease-out) var(--d,0ms)}
+.rv.in{opacity:1;transform:none}
+
+/* armá tu pedido */
+.build{background:var(--panel);border-block:1px solid var(--line)}
+.build-in{display:grid;gap:2.6rem;padding:clamp(4.5rem,9vw,6rem) var(--pr) clamp(4.5rem,9vw,6rem) var(--pl);max-width:1500px;margin:0 auto}
+@media(min-width:900px){.build-in{grid-template-columns:1fr 1.15fr;align-items:center;gap:4rem}}
+.build h2{font:700 clamp(2.4rem,8vw,5.4rem)/.94 var(--mono);letter-spacing:-.06em;text-transform:uppercase;color:var(--red);margin:.9rem 0 1.5rem}
+.build ul{list-style:none;display:grid;gap:.75rem;margin-bottom:2rem;color:#d6d3ce;font-size:.95rem}
+.build li{display:flex;gap:.8rem}
+.build li::before{content:"+";font:700 .9rem var(--mono);color:var(--red-d)}
+.thumbs{display:flex;gap:2px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;border:1px solid var(--line)}
+.thumbs::-webkit-scrollbar{display:none}
+.thumb{flex:0 0 42%;scroll-snap-align:start;text-align:left;background:#0d0d0d;transition:scale var(--press) var(--ease-out)}
+@media(min-width:900px){.thumb{flex-basis:30%}}
+.thumb img{width:100%;height:auto;aspect-ratio:4/5;transition:opacity .2s ease}
+/* fotos propias (sin recorte del servidor): encuadre un poco arriba del centro para no cortar cabezas */
+.card-img img,.thumb img,.m-img img,.item img{object-position:50% 30%}
+.thumb span{display:block;padding:.75rem .75rem .85rem;font:500 .6rem var(--mono);letter-spacing:.1em;text-transform:uppercase;line-height:1.5}
+
+/* manifiesto */
+.manifesto{padding:clamp(5.5rem,15vw,11rem) var(--pr) clamp(5.5rem,15vw,11rem) var(--pl);max-width:1300px;margin:0 auto}
+.manifesto p{font:700 clamp(1.45rem,4.8vw,3.3rem)/1.14 var(--mono);letter-spacing:-.045em;text-transform:uppercase}
+.w{opacity:.16;transition:opacity .4s ease}
+.w.lit{opacity:1}
+.w.em{color:var(--red)}
+
+/* cómo pedir (claro) */
+.how{background:var(--paper);color:var(--ink);padding:clamp(4.5rem,9vw,7rem) 0 clamp(5rem,10vw,8rem)}
+.how .eyebrow{color:var(--muted-d)}
+.how ol{list-style:none;display:grid;gap:2.2rem;margin-top:2.2rem}
+@media(min-width:768px){.how ol{grid-template-columns:repeat(3,1fr);gap:3rem}}
+.how li{border-top:1px solid var(--ink);padding-top:1.3rem}
+.how .n{display:block;font:700 3rem/1 var(--mono);letter-spacing:-.06em;color:var(--red-l);margin-bottom:1rem;font-variant-numeric:tabular-nums}
+.how p{max-width:30ch;color:#2b2b2a}
+
+/* la tienda: redes, nosotros, ubicación, horario */
+.store{background:var(--panel);border-top:1px solid var(--line)}
+.store-in{max-width:1500px;margin:0 auto;padding:clamp(4rem,8vw,6rem) var(--pr) clamp(4rem,8vw,6rem) var(--pl);display:grid;gap:2.75rem}
+.store-id{display:flex;align-items:center;gap:1.1rem}
+.store-logo{width:72px;height:72px;border-radius:16px;background:#000;overflow:hidden;flex:none}
+.store-logo{display:grid;place-items:center;padding:10px}
+.store-logo img{width:100%;height:auto;object-fit:contain;mix-blend-mode:screen}
+.store-name{font:700 clamp(1.6rem,4vw,2.4rem)/1 var(--mono);letter-spacing:-.05em;text-transform:uppercase}
+.store-grid{display:grid;gap:2.4rem}
+@media(min-width:900px){.store-grid{grid-template-columns:1fr 1fr;gap:3rem 4rem}}
+.store-block h3{font:500 .66rem var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.socials{display:flex;gap:.75rem}
+.social{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;transition:background-color .2s ease,scale var(--press) var(--ease-out)}
+.social svg{width:24px;height:24px}
+.social.ig{background:rgba(225,48,108,.14);color:#ff3d7f}
+.social.tt{background:rgba(242,240,236,.08);color:var(--text)}
+.social.wa{background:rgba(37,211,102,.12);color:#25d366}
+.about{color:#d6d3ce;max-width:52ch;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.about.open{display:block}
+.more{display:inline-flex;align-items:center;gap:.45rem;min-height:44px;margin-top:.25rem;font:500 .66rem var(--mono);letter-spacing:.14em;text-transform:uppercase;transition:color .2s ease,scale var(--press) var(--ease-out)}
+.more[hidden]{display:none}
+.more svg{width:12px;height:12px;transition:transform .25s var(--ease-out)}
+.more[aria-expanded=true] svg{transform:rotate(180deg)}
+.addr{color:#d6d3ce;font:500 .8rem/1.6 var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem}
+.chip{display:inline-flex;align-items:center;gap:.55rem;min-height:44px;padding:0 1.15rem;border:1px solid var(--line);border-radius:999px;font:500 .66rem var(--mono);letter-spacing:.14em;text-transform:uppercase;transition:background-color .2s ease,color .2s ease,border-color .2s ease,scale var(--press) var(--ease-out)}
+.chip svg,.share svg{width:16px;height:16px;flex:none}
+.hours{display:grid;gap:.75rem;max-width:420px}
+.hours div{display:flex;justify-content:space-between;gap:1rem;color:#d6d3ce}
+.hours dt{color:var(--muted)}
+.hours dd{font-variant-numeric:tabular-nums}
+.share-wrap{width:100%;max-width:520px}
+.share-panel{margin-top:.75rem;padding:1rem;border:1px solid var(--line);border-radius:18px;background:var(--ink);transition:opacity .2s ease,transform .25s var(--ease-out)}
+@starting-style{.share-panel{opacity:0;transform:translateY(-6px)}}
+.share-opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}
+.share-opt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.45rem;min-height:72px;padding:.6rem .3rem;border-radius:12px;background:var(--panel);font:500 .6rem var(--mono);letter-spacing:.1em;text-transform:uppercase;text-align:center;transition:background-color .2s ease,scale var(--press) var(--ease-out)}
+.share-opt svg{width:22px;height:22px}
+.share-opt.wa svg{color:#25d366}.share-opt.fb svg{color:#4d8eff}
+.share-url{display:block;width:100%;margin-top:.75rem;min-height:44px;padding:0 .9rem;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--muted);font:400 16px var(--sans);text-overflow:ellipsis}
+.share-url:focus{color:var(--text);outline:none;border-color:var(--text)}
+.share-status{min-height:1.4em;margin-top:.5rem;color:var(--muted);font-size:.8rem}
+.share{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;max-width:520px;min-height:52px;border:1px solid var(--line);border-radius:999px;font:500 .7rem var(--mono);letter-spacing:.14em;text-transform:uppercase;transition:background-color .2s ease,color .2s ease,border-color .2s ease,scale var(--press) var(--ease-out)}
+
+/* footer */
+footer{background:var(--ink);padding:4.5rem var(--pr) calc(2rem + var(--sb)) var(--pl);overflow:hidden}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.2rem 1.5rem;max-width:1500px;margin:0 auto 3rem}
+@media(min-width:768px){.f-grid{grid-template-columns:1.4fr 1fr 1fr}}
+.f-grid h4{font:500 .66rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem}
+.f-grid a,.f-grid p{font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;line-height:1.5}
+.f-grid p{padding:.45rem 0}
+.f-grid a{display:flex;align-items:center;min-height:44px;width:fit-content;transition:color .2s ease,opacity .15s ease}
+.f-grid .wide{grid-column:1/-1}
+@media(min-width:768px){.f-grid .wide{grid-column:auto}}
+.wordmark{font:700 clamp(2.4rem,13.6vw,12.5rem)/.9 var(--mono);letter-spacing:-.06em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px rgba(242,240,236,.2);white-space:nowrap;user-select:none;max-width:1500px;margin:0 auto 2rem}
+.copy{max-width:1500px;margin:0 auto;padding-top:1.2rem;border-top:1px solid var(--line);color:var(--muted)}
+
+/* botón flotante (solo móvil) */
+.fab{position:fixed;left:var(--pl);right:var(--pr);bottom:calc(.9rem + var(--sb));max-width:440px;margin:0 auto;background:var(--text);color:var(--ink);padding:0 1.4rem;min-height:56px;border-radius:999px;font:700 .68rem var(--mono);letter-spacing:.16em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;z-index:90;box-shadow:0 14px 40px rgba(0,0,0,.6);font-variant-numeric:tabular-nums;transform:translateY(160%);visibility:hidden;transition:transform .3s var(--ease-out),scale var(--press) var(--ease-out),visibility 0s .3s}
+.fab.visible{transform:none;visibility:visible;transition:transform .5s var(--ease-drawer),scale var(--press) var(--ease-out),visibility 0s}
+@media(min-width:900px){.fab{display:none}body.has-cart{padding-bottom:0}}
+
+/* botones */
+.btn{position:relative;overflow:hidden;isolation:isolate;display:block;width:100%;background:var(--text);color:var(--ink);padding:1.1rem 1.5rem;min-height:56px;border-radius:4px;font:700 .7rem var(--mono);letter-spacing:.18em;text-align:center;text-transform:uppercase;transition:color .25s ease,scale var(--press) var(--ease-out)}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--red);transform:scaleY(0);transform-origin:bottom;transition:transform .35s var(--ease-out)}
+.btn.wa{background:var(--wa);color:#fff}
+.btn.wa::before{background:#0a5e30}
+.btn-inline{display:inline-flex;width:auto;min-height:48px;padding:0 1.9rem;align-items:center;border-radius:999px}
+.btn:disabled,.btn.wa:disabled{background:#c9c8c4;color:#55534f;cursor:not-allowed}
+.modal .btn:disabled{background:#2a2a28;color:var(--muted)}
+
+/* presionado: respuesta inmediata al apoyar el dedo (funciona en touch y mouse) */
+.pill:active,.btn:not(:disabled):active,.filter-btn:active,.opt:not(:disabled):active,.sz:not(:disabled):active,.x:active,.hcart:active,.fab:active,.tpause:active,.rm:active,.link:active,.thumb:active{scale:.97}
+.card-img:active{scale:.98}
+.social:active,.chip:active,.share:active,.more:active,.share-opt:active{scale:.95}
+.tile:active .tile-in{scale:.97;opacity:.8}
+.hl a:active,.hr a:active,.f-grid a:active{opacity:.6}
+
+/* modal */
+.modal{position:fixed;inset:0;height:100vh;height:100dvh;background:var(--ink);z-index:200;visibility:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;transform:translateY(100%);transition:transform .3s var(--ease-out),visibility 0s .3s}
+.modal.active{visibility:visible;transform:none;transition:transform .5s var(--ease-drawer),visibility 0s}
+.x{position:absolute;top:calc(.75rem + var(--st));right:max(.75rem,var(--sr));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(10,10,10,.75);font:400 1.5rem var(--mono);display:flex;align-items:center;justify-content:center;z-index:210;transition:background-color .2s ease,color .2s ease,scale var(--press) var(--ease-out)}
+.m-img{width:100%;aspect-ratio:4/5;max-height:62svh;background:#111}
+.m-img img{width:100%;height:100%}
+.m-info{padding:2rem var(--pr) 0 var(--pl);max-width:620px;margin:0 auto}
+.m-title{font:700 clamp(1.6rem,5vw,2.4rem)/1.05 var(--mono);letter-spacing:-.05em;text-transform:uppercase;margin:.6rem 0 .5rem}
+.m-price{font:700 1.15rem var(--mono);color:var(--red-d);margin-bottom:1.5rem;font-variant-numeric:tabular-nums}
+.m-desc{color:#bdbab4;margin-bottom:1.9rem;padding-bottom:1.9rem;border-bottom:1px solid var(--line)}
+.sel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem}
+.link{display:inline-flex;align-items:center;color:var(--muted);text-decoration:underline;text-underline-offset:4px;font:500 .64rem var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:.5rem 0;min-height:44px;transition:color .2s ease,scale var(--press) var(--ease-out)}
+.guide{display:none;font-size:.88rem;color:#bdbab4;border-left:2px solid var(--red);padding:.2rem 0 .2rem .9rem;margin-bottom:1rem;transition:opacity .2s ease,transform .25s var(--ease-out)}
+.guide.open{display:block}
+.options{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:1.5rem}
+.options.two{grid-template-columns:repeat(2,1fr)}
+.opt{border:1px solid var(--line);border-radius:4px;padding:.9rem 0;min-height:48px;font:500 .8rem var(--mono);letter-spacing:.1em;text-transform:uppercase;transition:border-color .2s ease,background-color .2s ease,color .2s ease,scale var(--press) var(--ease-out)}
+.opt.selected{background:var(--text);border-color:var(--text);color:var(--ink);font-weight:700}
+.opt:disabled{opacity:.28;text-decoration:line-through;cursor:not-allowed}
+.note{display:none;color:var(--red-d);font-size:.84rem;margin:-.7rem 0 1rem;transition:opacity .2s ease,transform .25s var(--ease-out)}
+/* entrada suave de textos que aparecen (guía de talles, errores) */
+@starting-style{.guide.open,.note{opacity:0;transform:translateY(-4px)}}
+.fine{font-size:.8rem;color:var(--muted);margin-top:.2rem}
+.buy{position:sticky;bottom:0;background:linear-gradient(transparent,var(--ink) 28%);padding:1.5rem 0 calc(1rem + var(--sb));margin-top:.8rem}
+/* PC, y celulares acostados: foto a un lado e info al otro (si no, la foto quedaría como una tira finita) */
+@media(min-width:900px),(orientation:landscape) and (min-width:600px){
+.modal{display:grid;grid-template-columns:1.1fr 1fr;overflow:hidden}
+.m-img{position:sticky;top:0;height:100dvh;max-height:none;aspect-ratio:auto}
+.m-info{align-self:stretch;overflow-y:auto;overscroll-behavior:contain;padding:5rem 3.5rem 0;max-width:none;width:100%}
+.x{right:max(1rem,var(--sr))}
+}
+@media(orientation:landscape) and (max-height:600px){
+.m-info{padding:calc(1rem + var(--st)) var(--pr) 0 1.5rem}
+.m-title{margin-top:.2rem;padding-right:52px}
+.m-desc{margin-bottom:1.2rem;padding-bottom:1.2rem}
+.buy{position:static;background:none;padding-top:.5rem} /* con tan poca altura, fijo taparía los talles */
+}
+
+/* carrito */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:290;opacity:0;pointer-events:none;transition:opacity .25s ease}
+.overlay.active{opacity:1;pointer-events:auto;transition-duration:.4s}
+.drawer{position:fixed;top:0;right:0;width:100%;max-width:430px;height:100vh;height:100dvh;background:var(--panel);z-index:300;border-left:1px solid var(--line);display:flex;flex-direction:column;padding:calc(1.25rem + var(--st)) max(1.3rem,var(--sr)) calc(1.25rem + var(--sb)) 1.3rem;visibility:hidden;transform:translateX(100%);transition:transform .3s var(--ease-out),visibility 0s .3s}
+.drawer.active{visibility:visible;transform:none;transition:transform .5s var(--ease-drawer),visibility 0s}
+.d-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem}
+.d-head h3{font:700 1.2rem var(--mono);letter-spacing:-.04em;text-transform:uppercase}
+.d-head .x{position:static}
+.d-items{flex:1;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:1rem}
+.item{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:.9rem;border-bottom:1px solid var(--line);padding-bottom:1rem}
+.item img{width:56px;height:70px;background:#222}
+.item p{font:500 .68rem var(--mono);letter-spacing:.08em;text-transform:uppercase;line-height:1.4}
+.item span{font-size:.8rem;color:var(--muted);display:block;font-variant-numeric:tabular-nums}
+.rm{color:var(--muted);font-size:1.5rem;width:44px;height:44px;transition:color .2s ease,scale var(--press) var(--ease-out)}
+.empty{color:var(--muted)}
+.d-foot{border-top:1px solid var(--line);padding-top:1.2rem;margin-top:1rem}
+.total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.2rem;font:500 .66rem var(--mono);letter-spacing:.16em;text-transform:uppercase}
+.total span:last-child{font:700 1.4rem var(--mono);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+
+/* hover solo con mouse real: en celular no se queda "pegado" después del tap */
+@media(hover:hover) and (pointer:fine){
+.hl a:hover,.hr a:hover,.f-grid a:hover{color:var(--red-d)}
+.hl a:hover::after,.hr a:hover::after{transform:scaleX(1);transform-origin:left}
+.pill:hover,.pill-solid:hover{background:var(--red);border-color:var(--red);color:#fff}
+.tile:hover img{scale:1.04}
+.card:hover .card-img img{scale:1.04}
+.card:hover .card-v{opacity:1;transform:none}
+.filter-btn:not(.active):hover{background:var(--ink);color:#fff}
+.opt:not(:disabled):not(.selected):hover{border-color:var(--text)}
+.btn:not(:disabled):hover{color:#fff}.btn:not(:disabled):hover::before{transform:scaleY(1)}
+.sz:not(:disabled):not([aria-pressed=true]):hover{border-color:var(--ink)}
+.social.ig:hover{background:rgba(225,48,108,.26)}.social.tt:hover{background:rgba(242,240,236,.16)}.social.wa:hover{background:rgba(37,211,102,.24)}
+.chip:hover,.share:hover{background:var(--text);color:var(--ink);border-color:var(--text)}
+.more:hover{color:var(--red-d)}
+.share-opt:hover{background:#222}
+.x:hover{background:var(--text);color:var(--ink)}
+.thumb:hover img{opacity:.85}
+.tpause:hover,.link:hover,.rm:hover{color:var(--text)}
+}
+/* movimiento reducido: sin desplazamientos, se mantienen fundidos cortos */
+@media(prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+*,*::before,*::after{animation:none!important}
+.card,.rv,.line>span,.fade{opacity:1!important;transform:none!important;transition:none!important}
+.card-img{clip-path:none!important}
+.w{opacity:1}
+.hero-img{transform:none!important;transition:none}
+.modal,.drawer,.fab{transform:none!important;opacity:0;transition:opacity .2s ease,visibility 0s .2s!important}
+.modal.active,.drawer.active,.fab.visible{opacity:1;transition:opacity .2s ease,visibility 0s!important}
+}
+</style>
+<noscript><style>.line>span,.fade,.rv{transform:none;opacity:1}.w{opacity:1}.hero-img{transform:none}.card{opacity:1;transform:none}.card-img{clip-path:none}</style></noscript>
+</head>
+<body>
+<div id="progress"></div>
+
+<div class="ann" id="ann"><span>Drop 01 — Edición limitada</span><span>Envío o retiro en Asunción</span><span>Pedidos por WhatsApp</span></div>
+
+<header id="hdr">
+  <div class="hrow">
+    <nav class="hl">
+      <a href="#catalogo">Colección</a>
+      <a class="hide-sm" href="#como">Cómo pedir</a>
+    </nav>
+    <a href="#hero" class="logo" id="logo" aria-label="MIRAI CLUB, inicio">
+      <!-- Logo real de la marca (archivo local). No se reemplaza por placeholder. -->
+      <img src="img/logo-mirai.png" alt="MIRAI Club" width="489" height="253">
+    </a>
+    <div class="hr">
+      <a class="hide-sm" href="https://instagram.com/miraiclubpy" target="_blank" rel="noopener">Instagram</a>
+      <button class="hcart" id="hcart" aria-label="Ver pedido">Pedido <span id="hcount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="hero">
+  <div class="hero-bg" id="hero-bg">
+    <!--
+    PROMPT HERO (reemplaza a portada.jpg) · Midjourney: --ar 3:2 --style raw --v 7
+    Se recorta a vertical en el celular: mantené a los corredores en el centro del cuadro.
+    Fotografía editorial de running urbano de noche en Asunción. Tres corredores de 20 a 25 años
+    con remeras oversize negras MIRAI CLUB (algodón pesado 240 g, logo blanco chico en el pecho),
+    shorts negros y zapatillas de running oscuras, corriendo en grupo por una avenida vacía
+    (Costanera o Av. España) después de la lluvia. Toma en paneo: la cámara acompaña al grupo,
+    fondo barrido en líneas horizontales de luces de la ciudad, cuerpos casi nítidos.
+    Luz: farolas de sodio cálidas al fondo + flash directo frío de segunda cortinilla que congela
+    los bordes de los cuerpos; asfalto mojado con reflejos. Lente 35 mm f/2, 1/20 s, ISO 1600.
+    Look: casi blanco y negro con un solo acento rojo #D90000 (luz de freno o semáforo fuera de foco),
+    negros profundos, grano tipo Ilford HP5 forzada a 3200. Dejá espacio negativo oscuro en el
+    tercio inferior para el titular.
+    -->
+    <!-- Pantallas altas (celular, tablet parada): recorte vertical 9:16 centrado en las personas. El resto: horizontal. -->
+    <picture>
+      <source media="(max-aspect-ratio: 4/5)" sizes="max(100vw, 66vh)"
+        srcset="https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&crop=faces,entropy&w=640&h=1138&q=75 640w, https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&crop=faces,entropy&w=960&h=1707&q=75 960w, https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&crop=faces,entropy&w=1280&h=2276&q=75 1280w">
+      <img class="hero-img" alt="" width="2400" height="1600" fetchpriority="high" decoding="async"
+        src="https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&w=1600&q=80"
+        srcset="https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&w=1080&q=80 1080w, https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&w=1600&q=80 1600w, https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&w=2400&q=80 2400w"
+        sizes="100vw">
+    </picture>
+  </div>
+  <div class="hero-copy" id="hero-copy">
+    <p class="eyebrow fade">Drop 01 — Est. 26'</p>
+    <h1 class="hero-title"><span class="line"><span>Train with</span></span><span class="line"><span class="r">purpose.</span></span></h1>
+    <p class="hero-sub fade">No es moda. Es evolución.</p>
+    <div class="pills fade">
+      <a href="#catalogo" class="pill pill-solid" data-go="oversize">Oversize</a>
+      <a href="#catalogo" class="pill" data-go="born-to-run">Born to Run</a>
+    </div>
+  </div>
+  <span class="scroll-hint" aria-hidden="true"></span>
+</section>
+
+<div class="ticker"><div class="ticker-track" id="marquee" aria-hidden="true"></div><button class="tpause" id="tpause" aria-pressed="false" aria-label="Pausar cinta de texto">Pausa</button></div>
+
+<section class="tiles" aria-label="Líneas">
+  <a class="tile" href="#catalogo" data-go="oversize" aria-label="Ver línea Oversize">
+    <!--
+    PROMPT MOSAICO OVERSIZE (reemplaza a remera2.jpg) · Midjourney: --ar 4:5 --style raw --v 7
+    Retrato vertical de cuerpo entero. Modelo de 22 años, delgado, pelo rapado, de pie bajo un
+    viaducto de hormigón, el peso en una pierna, manos en los bolsillos, mirada fuera de cámara.
+    Remera oversize negra MIRAI CLUB que cae por debajo de la cadera, hombro caído y mangas a mitad
+    del antebrazo; jean baggy gris lavado, cadena plateada fina, zapatillas negras.
+    Luz natural de tarde nublada entrando de costado (lateral suave, 5600 K), sombras abiertas.
+    Lente 50 mm f/2.8 a la altura de la cintura, apenas en contrapicado para darle presencia.
+    Paleta: grises de hormigón y negro, nada saturado. Tela nítida para que se note el gramaje.
+    -->
+    <picture>
+      <source media="(min-width:768px)" sizes="50vw"
+        srcset="https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=700&h=700&q=80 700w, https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=1000&h=1000&q=80 1000w, https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=1400&h=1400&q=80 1400w">
+      <img src="https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=600&h=870&q=80"
+        srcset="https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=400&h=580&q=80 400w, https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=600&h=870&q=80 600w, https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=900&h=1305&q=80 900w"
+        sizes="50vw" alt="" width="600" height="870" loading="lazy" decoding="async">
+    </picture>
+    <div class="tile-in"><span class="tile-t">Oversize</span><span class="tile-s">+ Ver</span></div>
+  </a>
+  <a class="tile" href="#catalogo" data-go="born-to-run" aria-label="Ver línea Born to Run">
+    <!--
+    PROMPT MOSAICO BORN TO RUN (reemplaza a todos.jpg) · Midjourney: --ar 4:5 --style raw --v 7
+    Dos corredores de espaldas trotando por un sendero urbano de noche, entre torres con ventanas
+    encendidas que se vuelven bokeh. Remeras negras Born to Run con el estampado de la espalda
+    visible. Una farola alta por detrás y arriba recorta hombros y nuca (contraluz).
+    Lente 85 mm f/1.8 tomado de lejos para comprimir el fondo, 1/250 s, ISO 2000.
+    Fondo frío azul verdoso, remeras y piel neutras, grano fino. Figuras en el tercio central,
+    cielo oscuro arriba para que el título del mosaico se lea.
+    -->
+    <picture>
+      <source media="(min-width:768px)" sizes="50vw"
+        srcset="https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=700&h=700&q=80 700w, https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=1000&h=1000&q=80 1000w, https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=1400&h=1400&q=80 1400w">
+      <img src="https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=600&h=870&q=80"
+        srcset="https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=400&h=580&q=80 400w, https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=600&h=870&q=80 600w, https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=900&h=1305&q=80 900w"
+        sizes="50vw" alt="" width="600" height="870" loading="lazy" decoding="async">
+    </picture>
+    <div class="tile-in"><span class="tile-t">Born to Run</span><span class="tile-s">+ Ver</span></div>
+  </a>
+</section>
+
+<section id="catalogo" class="catalog">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 class="sec-title">Colección<sup id="total-n"></sup></h2>
+      <p class="eyebrow">Edición limitada</p>
+    </div>
+    <!-- Filtros y productos se generan desde los datos (planilla o MOCK_PRODUCTS). Los prompts de las fotos de prueba están en MOCK_PRODUCTS. -->
+    <div class="filters" id="filters" role="group" aria-label="Filtrar productos"></div>
+    <div class="grid" id="grid" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="build">
+  <div class="build-in">
+    <div class="rv">
+      <p class="eyebrow">Un pedido, un mensaje</p>
+      <h2>Armá tu pedido</h2>
+      <ul>
+        <li>Sumá todas las prendas que quieras.</li>
+        <li>Se arma un solo mensaje con tu selección.</li>
+        <li>Confirmamos stock y coordinamos pago y envío.</li>
+      </ul>
+      <a href="#catalogo" class="btn btn-inline" data-go="all">Empezar</a>
+    </div>
+    <div class="thumbs rv" id="thumbs" role="list" aria-label="Selección rápida" style="--d:120ms"></div>
+  </div>
+</section>
+
+<section class="manifesto" id="manifesto"><p id="manifesto-text"></p></section>
+
+<section class="how" id="como">
+  <div class="wrap">
+    <p class="eyebrow rv">Cómo pedir</p>
+    <ol>
+      <li class="rv"><span class="n">01</span><p>Elegí la remera que te representa y seleccioná tu talle.</p></li>
+      <li class="rv" style="--d:80ms"><span class="n">02</span><p>Agregala al pedido y tocá "Pedir por WhatsApp".</p></li>
+      <li class="rv" style="--d:160ms"><span class="n">03</span><p>Coordinamos el pago y el envío o retiro en Asunción.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- LA TIENDA · los textos marcados con EDITAR son de muestra: reemplazalos por los reales -->
+<section class="store" id="tienda" aria-labelledby="store-title">
+  <div class="store-in">
+    <div class="store-id rv">
+      <div class="store-logo"><img src="img/logo-mirai.png" alt="" width="489" height="253" loading="lazy" decoding="async"></div>
+      <h2 class="store-name" id="store-title">Mirai Club</h2>
+    </div>
+    <div class="store-grid">
+      <div class="store-block rv">
+        <h3>Redes</h3>
+        <div class="socials">
+          <a class="social ig" href="https://instagram.com/miraiclubpy" target="_blank" rel="noopener" aria-label="Instagram de Mirai Club">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>
+          </a>
+          <a class="social tt" href="https://www.tiktok.com/@miraipy" target="_blank" rel="noopener" aria-label="TikTok de Mirai Club">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.53.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <a class="social wa" href="https://wa.me/595991513572" target="_blank" rel="noopener" aria-label="WhatsApp de Mirai Club, 0991 513 572">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.65-4.53A9 9 0 1 1 7.6 19.5Z"/><path d="M9 8.6c.2 2.9 2.5 5.3 5.4 5.6l1.1-1.3-1.9-.9-.8.7a4 4 0 0 1-2.2-2.2l.7-.8-.9-1.9Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="store-block rv" style="--d:80ms">
+        <h3>Nosotros</h3>
+        <!-- EDITAR: historia de la marca -->
+        <p class="about" id="about">En Mirai Club diseñamos remeras para entrenar y para el día a día. Nacimos en Asunción con una idea simple: ropa cómoda, de buena calidad y con identidad propia, hecha para gente que se mueve con propósito. Cada drop es de edición limitada y no se repite, por eso cada prenda es parte de un momento del club.</p>
+        <button class="more" id="about-more" type="button" aria-expanded="false" aria-controls="about"><span id="about-more-label">Ver más</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+      </div>
+      <div class="store-block rv" style="--d:160ms">
+        <h3>Ubicación</h3>
+        <!-- EDITAR: dirección real y el texto de búsqueda del mapa (query=...) -->
+        <p class="addr">Dirección a confirmar · Asunción, Paraguay</p>
+        <a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Asunci%C3%B3n%2C%20Paraguay" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Ver en el mapa
+        </a>
+      </div>
+      <div class="store-block rv" style="--d:240ms">
+        <h3>Horario de atención</h3>
+        <!-- EDITAR: horarios reales -->
+        <dl class="hours">
+          <div><dt>Lun – Vie</dt><dd>09:00 – 18:00</dd></div>
+          <div><dt>Sábado</dt><dd>09:00 – 13:00</dd></div>
+          <div><dt>Domingo</dt><dd>Cerrado</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="share-wrap rv">
+      <button class="share" id="share" type="button" aria-expanded="false" aria-controls="share-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+        <span>Compartir tienda</span>
+      </button>
+      <!-- se abre cuando el navegador no tiene menú nativo de compartir (la mayoría de las PC) -->
+      <div class="share-panel" id="share-panel" hidden>
+        <div class="share-opts">
+          <a class="share-opt wa" id="share-wa" href="https://wa.me/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.65-4.53A9 9 0 1 1 7.6 19.5Z"/><path d="M9 8.6c.2 2.9 2.5 5.3 5.4 5.6l1.1-1.3-1.9-.9-.8.7a4 4 0 0 1-2.2-2.2l.7-.8-.9-1.9Z"/></svg>WhatsApp</a>
+          <a class="share-opt fb" id="share-fb" href="https://www.facebook.com/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.5-1 .9-1H17V2.2L14.1 2.2C10.9 2.2 10.2 4.6 10.2 6.1v2.4H8v3.7h2.2V22H14v-9.8h2.9l.4-3.7Z"/></svg>Facebook</a>
+          <button class="share-opt" id="share-copy" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg><span id="share-copy-label">Copiar link</span></button>
+        </div>
+        <input class="share-url" id="share-url" type="text" readonly aria-label="Link de la tienda">
+        <p class="share-status" id="share-status" role="status"></p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="f-grid">
+    <div class="wide"><h4>Mirai Club</h4><p>Train with purpose.<br>Est. 26' Asunción, Paraguay.</p></div>
+    <div><h4>Ayuda</h4><a href="#como">Cómo pedir</a><a href="#tienda">Horarios y ubicación</a><a href="#" id="wa-contact">Soporte WhatsApp</a></div>
+    <div><h4>Seguinos</h4><a href="https://instagram.com/miraiclubpy" target="_blank" rel="noopener">@miraiclubpy</a></div>
+  </div>
+  <p class="wordmark" aria-hidden="true">Mirai Club</p>
+  <p class="eyebrow copy">© 2026 Mirai Club</p>
+</footer>
+
+<button id="fab" class="fab" aria-label="Ver pedido"><span>Mi pedido</span><span id="count">0</span></button>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title" inert>
+  <button class="x" id="m-close" aria-label="Cerrar">&times;</button>
+  <!-- Imagen dinámica: usa la foto del producto abierto (ver prompts en el array "products"). -->
+  <div class="m-img"><img id="m-img" src="data:," alt="" width="800" height="1000"></div>
+  <div class="m-info">
+    <p class="eyebrow">Drop 01</p>
+    <h2 class="m-title" id="m-title"></h2>
+    <p class="m-price" id="m-price"></p>
+    <p class="m-desc" id="m-desc"></p>
+    <div class="sel-head"><span class="eyebrow">Talle</span><button class="link" id="guide-btn" aria-expanded="false">Guía de talles</button></div>
+    <p class="guide" id="guide">Corte oversize: pedí tu talle habitual para un calce holgado. Si preferís algo más ajustado, bajá un talle.</p>
+    <div class="options" id="sizes"></div>
+    <p class="note" id="stock-note"></p>
+    <p class="note" id="size-err" role="alert">Seleccioná un talle para continuar.</p>
+    <p class="fine">Coordinamos el pago y el envío o retiro en Asunción por WhatsApp.</p>
+    <div class="buy"><button class="btn" id="add">Agregar al pedido</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Tu pedido" inert>
+  <div class="d-head"><h3>Tu pedido</h3><button class="x" id="d-close" aria-label="Cerrar pedido">&times;</button></div>
+  <div class="d-items" id="items"></div>
+  <div class="d-foot">
+    <div class="total"><span>Total</span><span id="total">Gs. 0</span></div>
+    <button class="btn wa" id="send">Pedir por WhatsApp</button>
+  </div>
+</aside>
+
+<script>
+/* ── CONFIGURACIÓN ──────────────────────────────────────────────────────────
+   SHEET_API_URL: pegá acá la URL que termina en /exec de tu Apps Script (código en google-apps-script.gs).
+   Vacía = la web usa MOCK_PRODUCTS. Si la planilla falla, responde mal o tarda más de 8 s, también usa MOCK_PRODUCTS.
+   Si las fotos de la planilla están en otro dominio, agregalo a img-src del Content-Security-Policy (en el <head>). */
+const SHEET_API_URL="https://script.google.com/macros/s/AKfycbwF8c3DqaQhEeE6HhgeIU67aes67FTxQTWv_gen9pRi8k-7qEuBfADxLi7LFtzzijY7/exec";
+/* SITE_URL: la dirección pública de la web cuando la publiques (ej. "https://miraiclub.com.py"). Es el link que se comparte.
+   Vacía = se comparte la dirección actual si la web está publicada; abierta desde el archivo, se comparte el Instagram. */
+const SITE_URL="";
+
+const $=id=>document.getElementById(id);
+const html=document.documentElement;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+requestAnimationFrame(()=>requestAnimationFrame(()=>html.classList.add('ready')));
+/* iOS Safari solo aplica :active si hay un listener de touch en la página */
+addEventListener('touchstart',()=>{},{passive:true});
+
+const WA="595991513572"; /* 0991 513 572 en formato internacional, sin el 0 */
+const gs=n=>'Gs. '+new Intl.NumberFormat('es-PY').format(n);
+const SIZES=["S","M","L","XL"];
+
+/* imágenes: las de Unsplash llegan en el tamaño justo y, con ratio (alto/ancho), ya recortadas a la forma de su caja
+   centrando rostros y la zona con más detalle. Cualquier otra URL https o archivo local (ej. "img/remera3.jpg") se usa tal
+   cual y la recorta CSS con object-fit: cover, encuadrando un poco por encima del centro (ver .card-img img). */
+const isUnsplash=u=>/^https:\/\/images\.unsplash\.com\//.test(u);
+const PRODUCT_RATIO=1.25; /* 4:5, la forma de tarjetas, miniaturas, ficha y carrito */
+function sized(u,w,ratio){
+  if(!u)return '';
+  if(isUnsplash(u)){
+    const x=new URL(u);x.searchParams.set('w',w);x.searchParams.set('auto','format');x.searchParams.set('fit','crop');
+    if(ratio){x.searchParams.set('h',Math.round(w*ratio));x.searchParams.set('crop','faces,entropy');}else x.searchParams.delete('h');
+    if(!x.searchParams.has('q'))x.searchParams.set('q','80');
+    return x.href;
+  }
+  return /^https:/i.test(u)?u:encodeURI(u);
+}
+function setImg(im,u,widths,sizes,ratio){
+  if(!u){im.removeAttribute('src');im.removeAttribute('srcset');return;}
+  im.src=sized(u,widths[Math.min(1,widths.length-1)],ratio);
+  if(isUnsplash(u)){im.srcset=widths.map(w=>sized(u,w,ratio)+' '+w+'w').join(', ');im.sizes=sizes;}
+  /* foto propia con versión liviana al lado (ej. img/web/remera2-4x5-1000.jpg + ...-600.jpg): el navegador elige */
+  else if(/-1000\.jpg$/i.test(u)&&!/^https?:/i.test(u)){const s=u.replace(/-1000\.jpg$/i,'-600.jpg');im.src=encodeURI(u);im.srcset=encodeURI(s)+' 600w, '+encodeURI(u)+' 1000w';im.sizes=sizes;}
+  else{im.removeAttribute('srcset');im.removeAttribute('sizes');}
+}
+
+/* datos de prueba con la misma estructura que la planilla:
+   id · title · price · category · imageUrl · sizes (talles disponibles) · stock (unidades totales) · description */
+const MOCK_PRODUCTS=[
+ /* PROMPT 01 · Remera Mirai Club (Back) · --ar 4:5 --style raw --v 7
+    Vista de espalda, plano medio desde la cintura. Modelo de pelo rizado oscuro mirando hacia abajo y a la izquierda,
+    frente a una pared de ladrillo pintada de blanco. Remera oversize negra con el logo MIRAI CLUB grande en la espalda
+    (serigrafía blanca), costura de hombro caída. Luz dura de ventana desde la derecha que marca los pliegues de la tela.
+    Lente 50 mm f/4, foco en el estampado. Fondo gris claro desaturado. */
+ {id:"1",title:"Remera Mirai Club (Back)",price:150000,category:"Oversize",imageUrl:"img/web/remera2-4x5-1000.jpg",sizes:["S","M","XL"],stock:16,description:"Algodón 240g, corte oversize. Detalle en la espalda."},
+ /* PROMPT 02 · Born to Run - Team · --ar 4:5 --style raw --v 7
+    Grupo de 3 o 4 corredores (hombres y mujeres) parados en una vereda de noche charlando después de entrenar,
+    respiración agitada, uno con las manos en la cintura. Todos con remeras Born to Run negras. Fondo de ciudad con torres
+    iluminadas y semáforos. Flash directo en cámara estilo snapshot editorial de revista de running, sombras duras detrás,
+    fondo subexpuesto 1 paso. Lente 28 mm f/5.6, 1/60 s. */
+ {id:"2",title:"Born to Run - Team",price:160000,category:"Born to Run",imageUrl:"https://images.unsplash.com/photo-1788607316355-b0709feb75cb?auto=format&fit=crop&w=800&q=80",sizes:["S","M","L","XL"],stock:2,description:"Estampado frontal de alta densidad. Boxy fit."},
+ /* PROMPT 03 · Colección Mirai Athlete · --ar 4:5 --style raw --v 7
+    Foto de producto: remera negra lisa colgada de una percha de madera clara sobre pared blanca con textura (hacé una
+    segunda toma igual con la remera blanca). Luz suave de ventana grande a 45° + rebotador blanco del lado opuesto, sombra
+    suave detrás. Lente macro 90 mm f/8, encuadre centrado, la remera ocupa el 70 % del cuadro. Estampado minimalista
+    MIRAI en el pecho, tipografía monoespaciada chica. */
+ {id:"3",title:"Colección Mirai Athlete",price:140000,category:"Oversize",imageUrl:"img/web/remera3-4x5-1000.jpg",sizes:["S","M","L","XL"],stock:40,description:"Opciones en blanco y negro. Minimalista y premium."},
+ /* PROMPT 04 · Born to Run - Action · --ar 4:5 --style raw --v 7
+    Modelo saltando en el aire desde la baranda de una escalera urbana junto a un muro de ladrillo blanco, piernas recogidas,
+    remera oversize negra flotando por el movimiento. Jogger negro, zapatillas blancas. 1/1000 s para congelar, sol alto de
+    mediodía con luz dura, recorte de cielo arriba. Lente 24 mm f/8 desde abajo (contrapicado) para exagerar la altura. */
+ {id:"4",title:"Born to Run - Action",price:150000,category:"Born to Run",imageUrl:"https://images.unsplash.com/photo-1618453292507-4959ece6429e?auto=format&fit=crop&w=800&q=80",sizes:["S","M","L","XL"],stock:16,description:"Diseñada para el movimiento. Ideal para entrenar."},
+ /* PROMPT 05 · Born to Run - Focus · --ar 4:5 --style raw --v 7
+    Retrato frontal en plano americano, modelo de 20 años con cuello térmico negro tapando la boca y mirada fija a cámara,
+    remera negra Born to Run, brazos relajados. Fondo de parque oscuro desenfocado al atardecer. Luz: softbox grande a la
+    izquierda (Rembrandt suave) + luz de recorte detrás. Lente 85 mm f/1.8. Paleta oscura, piel cálida. */
+ {id:"5",title:"Born to Run - Focus",price:150000,category:"Born to Run",imageUrl:"https://images.unsplash.com/photo-1618328198676-499703032285?auto=format&fit=crop&w=800&q=80",sizes:["S","M","XL"],stock:0,description:"Estilo urbano y atlético."},
+ /* PROMPT 06 · Born to Run - Stretch · --ar 4:5 --style raw --v 7
+    Corredora agachada atándose las zapatillas en el medio de una calle vacía de noche, iluminada por una farola cenital que
+    dibuja un círculo de luz sobre el asfalto; el resto en penumbra, árboles a los costados. Remera negra Born to Run, calzas
+    negras. Lente 35 mm f/1.4 tomado de lejos, figura chica en el tercio inferior, mucho espacio negativo. ISO 3200, grano. */
+ {id:"6",title:"Born to Run - Stretch",price:150000,category:"Born to Run",imageUrl:"https://images.unsplash.com/photo-1679769177248-727f4d1047a5?auto=format&fit=crop&w=800&q=80",sizes:["S","M","L","XL"],stock:20,description:"Comodidad en cada movimiento."}
+];
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+const openWA=text=>window.open(`https://wa.me/${WA}?text=${encodeURIComponent(text)}`,'_blank','noopener');
+let products=[],cart=[],cur=null,size=null,lastFocus=null,pendingFilter='all';
+const byId=id=>products.find(p=>p.id===String(id));
+const isOut=p=>p.stock<=0||!p.sizes.length;
+const lowStock=p=>p.stock>0&&p.stock<=2;
+
+/* datos: todo lo que entra (planilla o prueba) pasa por normalize(); nada se escribe con innerHTML */
+const slug=s=>String(s??'').trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const toPrice=v=>typeof v==='number'?Math.round(v):Number(String(v??'').replace(/[^\d]/g,''));
+function safeImg(u){
+  u=String(u??'').trim();
+  if(/^https:\/\/[^\s"'<>]+$/i.test(u))return u;
+  if(/^[\w\- ./]+\.(jpe?g|png|webp|avif)$/i.test(u)&&!u.includes('..'))return u;
+  return '';
+}
+function normalize(raw){
+  const list=Array.isArray(raw)?raw:(raw&&Array.isArray(raw.products)?raw.products:null);
+  if(!list)throw new Error('La respuesta no es una lista de productos');
+  const seen=new Set();
+  const out=list.map((r,i)=>{
+    if(!r||typeof r!=='object')return null;
+    const title=String(r.title??'').trim().slice(0,120),price=toPrice(r.price);
+    if(!title||!(price>0))return null;
+    const id=String(r.id??'').trim().slice(0,40)||'p'+(i+1);
+    if(seen.has(id))return null;seen.add(id);
+    const sizes=(Array.isArray(r.sizes)?r.sizes:String(r.sizes??'').split(/[\s,;/|]+/))
+      .map(s=>String(s).trim().toUpperCase()).filter((s,j,a)=>SIZES.includes(s)&&a.indexOf(s)===j)
+      .sort((a,b)=>SIZES.indexOf(a)-SIZES.indexOf(b));
+    const label=String(r.category??'').trim().slice(0,40)||'Otros';
+    return {id,title,price,category:slug(label)||'otros',categoryLabel:label,imageUrl:safeImg(r.imageUrl),sizes,
+      stock:Math.max(0,Math.floor(Number(r.stock))||0),description:String(r.description??'').trim().slice(0,600)};
+  }).filter(Boolean);
+  if(!out.length)throw new Error('No hay productos válidos');
+  return out.slice(0,200);
+}
+async function loadProducts(){
+  if(SHEET_API_URL){
+    const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),8000);
+    try{
+      const res=await fetch(SHEET_API_URL,{signal:ctrl.signal,cache:'no-store'});
+      if(!res.ok)throw new Error('HTTP '+res.status);
+      return normalize(await res.json());
+    }catch(err){console.warn('[Mirai] No se pudo leer la planilla; uso MOCK_PRODUCTS.',err);}
+    finally{clearTimeout(timer);}
+  }
+  return normalize(MOCK_PRODUCTS);
+}
+
+/* carrito validado contra el catálogo cargado (precio, talle y stock nunca salen de localStorage) */
+const save=()=>{try{localStorage.setItem('mirai_cart',JSON.stringify(cart));}catch(e){}};
+function restoreCart(){
+  try{
+    const raw=JSON.parse(localStorage.getItem('mirai_cart')),count={};
+    cart=(Array.isArray(raw)?raw:[]).map(i=>{
+      const p=i&&byId(i.id);
+      if(!p||isOut(p)||!p.sizes.includes(i.size))return null;
+      return {id:p.id,title:p.title,price:p.price,size:i.size};
+    }).filter(i=>i&&(count[i.id]=(count[i.id]||0)+1)<=byId(i.id).stock).slice(0,30);
+  }catch(e){cart=[];}
+  save();
+}
+if(history.state&&history.state.ui)history.replaceState(null,'');
+
+/* revelado al entrar en pantalla (una sola vez) */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+const reveal=n=>reduce?n.classList.add('in'):io.observe(n);
+document.querySelectorAll('.rv').forEach(reveal);
+
+/* catálogo: cada tarjeta trae foto, título, precio, talles y compra directa por WhatsApp */
+function buildCard(p,i){
+  const out=isOut(p),c=el('article','card'+(out?' is-out':''));
+  c.style.setProperty('--d',(i%3)*60+'ms');
+  const view=el('button','card-img');view.type='button';view.setAttribute('aria-label','Ver detalles de '+p.title);
+  const im=document.createElement('img');
+  setImg(im,p.imageUrl,[400,700,1000],'(min-width:768px) 31vw, 48vw',PRODUCT_RATIO);
+  im.alt=p.imageUrl?p.title:'';im.width=600;im.height=750;im.loading=i<2?'eager':'lazy';im.decoding='async';
+  view.append(im,el('span','card-n',String(i+1).padStart(2,'0')),el('span','card-v','+ Ver'));
+  if(out)view.append(el('span','card-out','Agotado'));
+  view.onclick=()=>openModal(p);
+  c.append(view,el('h3','card-title',p.title),el('p','card-price',gs(p.price)));
+  if(!out&&lowStock(p))c.append(el('p','tag','Últimas unidades'));
+
+  let chosen=null;
+  const group=el('div','sizes');group.setAttribute('role','group');group.setAttribute('aria-label','Talle de '+p.title);
+  const msg=el('p','card-msg');msg.setAttribute('role','alert');msg.hidden=true;
+  const buy=el('button','btn wa card-buy',out?'Agotado':'Comprar por WhatsApp');buy.type='button';buy.disabled=out;
+  const chips=SIZES.map(s=>{
+    const b=el('button','sz',s);b.type='button';b.setAttribute('aria-pressed','false');
+    if(out||!p.sizes.includes(s)){b.disabled=true;b.setAttribute('aria-label','Talle '+s+' no disponible');return b;}
+    b.onclick=()=>{
+      chosen=s;chips.forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+      msg.hidden=true;buy.setAttribute('aria-label','Comprar '+p.title+' en talle '+s+' por WhatsApp');
+    };
+    return b;
+  });
+  group.append(...chips);
+  buy.onclick=()=>{
+    if(!chosen){msg.textContent='Elegí un talle primero.';msg.hidden=false;const f=chips.find(x=>!x.disabled);if(f)f.focus();return;}
+    openWA(`Hola MIRAI CLUB! Quiero comprar la prenda ${p.title} en talle ${chosen}. ¿Tienen disponibilidad?`);
+  };
+  c.append(group,buy,msg);
+  return c;
+}
+function renderGrid(list){
+  const g=$('grid'),cards=list.map(buildCard);
+  g.replaceChildren(...cards);
+  if(!cards.length)g.append(el('p','grid-empty','No hay prendas en esta categoría por ahora.'));
+  cards.forEach(reveal);
+}
+function buildFilters(){
+  const cats=[...new Map(products.map(p=>[p.category,p.categoryLabel])).entries()];
+  $('filters').replaceChildren(...[['all','Ver todo'],...cats].map(([key,label])=>{
+    const b=el('button','filter-btn',label);b.type='button';b.dataset.cat=key;b.setAttribute('aria-pressed','false');
+    b.onclick=()=>setFilter(key);return b;
+  }));
+}
+function setFilter(cat){
+  pendingFilter=cat;if(!products.length)return;
+  if(cat!=='all'&&!products.some(p=>p.category===cat))cat='all';
+  document.querySelectorAll('.filter-btn').forEach(x=>{
+    const on=x.dataset.cat===cat;x.classList.toggle('active',on);x.setAttribute('aria-pressed',on?'true':'false');
+  });
+  renderGrid(cat==='all'?products:products.filter(p=>p.category===cat));
+}
+document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();setFilter(a.dataset.go);
+  $('catalogo').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+}));
+
+/* selección rápida (bloque "armá tu pedido") */
+function renderThumbs(){
+  $('thumbs').replaceChildren(...products.map(p=>{
+    const b=el('button','thumb');b.type='button';b.setAttribute('role','listitem');
+    b.setAttribute('aria-label',p.title+', '+gs(p.price)+(isOut(p)?', agotado':''));
+    const im=document.createElement('img');setImg(im,p.imageUrl,[300,500],'(min-width:900px) 16vw, 42vw',PRODUCT_RATIO);
+    im.alt='';im.width=300;im.height=375;im.loading='lazy';im.decoding='async';
+    b.append(im,el('span',null,isOut(p)?p.title+' · Agotado':p.title));
+    b.onclick=()=>openModal(p);
+    return b;
+  }));
+}
+
+/* historial: un solo punto de cierre (botón atrás del celular) */
+const lock=on=>html.classList.toggle('lock',on);
+function closeAll(){closeModalUI();closeCartUI();}
+addEventListener('popstate',closeAll);
+function back(){if(history.state&&history.state.ui)history.back();else closeAll();}
+
+/* modal */
+function openModal(p){
+  lastFocus=document.activeElement;cur=p;size=null;
+  const mi=$('m-img');setImg(mi,p.imageUrl,[800,1200,1600],'(min-width:900px) 55vw, 100vw',PRODUCT_RATIO);mi.alt=p.imageUrl?p.title:'';
+  $('m-title').textContent=p.title;$('m-price').textContent=gs(p.price);$('m-desc').textContent=p.description;
+  $('size-err').style.display='none';$('stock-note').style.display='none';
+  $('guide').classList.remove('open');$('guide-btn').setAttribute('aria-expanded','false');
+  const out=isOut(p),sz=$('sizes');
+  sz.replaceChildren(...SIZES.map(s=>{
+    const b=el('button','opt',s);b.type='button';
+    if(out||!p.sizes.includes(s)){b.disabled=true;b.setAttribute('aria-label','Talle '+s+' no disponible');return b;}
+    b.onclick=()=>{
+      sz.querySelectorAll('.opt').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');size=s;
+      $('size-err').style.display='none';
+      const w=$('stock-note');
+      if(lowStock(p)){w.textContent='Quedan solo '+p.stock+(p.stock===1?' unidad':' unidades');w.style.display='block';}else w.style.display='none';
+    };
+    return b;
+  }));
+  const add=$('add');add.disabled=out;add.textContent=out?'Agotado':'Agregar al pedido';
+  const m=$('modal');m.inert=false;m.classList.add('active');m.scrollTop=0;lock(true);
+  history.pushState({ui:'modal'},'');$('m-close').focus({preventScroll:true});
+}
+function closeModalUI(){
+  const m=$('modal');if(!m.classList.contains('active'))return;
+  m.classList.remove('active');m.inert=true;
+  if(!$('drawer').classList.contains('active'))lock(false);
+  if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
+}
+$('m-close').onclick=back;
+$('guide-btn').onclick=()=>{const o=$('guide').classList.toggle('open');$('guide-btn').setAttribute('aria-expanded',o);};
+
+/* carrito */
+function renderCart(){
+  const n=cart.length;
+  $('count').textContent=n;$('hcount').textContent=n;
+  $('hcart').classList.toggle('has',n>0);
+  $('fab').classList.toggle('visible',n>0);
+  document.body.classList.toggle('has-cart',n>0);
+  const box=$('items');box.textContent='';let total=0;
+  cart.forEach((it,i)=>{
+    total+=it.price;
+    const p=byId(it.id);
+    const d=el('div','item'),t=document.createElement('div');
+    const im=document.createElement('img');im.alt='';im.width=56;im.height=70;im.decoding='async';if(p&&p.imageUrl)im.src=sized(p.imageUrl,160,PRODUCT_RATIO);
+    t.append(el('p',null,it.title),el('span',null,'Talle '+it.size),el('span',null,gs(it.price)));
+    const rm=el('button','rm','×');rm.type='button';rm.setAttribute('aria-label','Quitar '+it.title);
+    rm.onclick=()=>{cart.splice(i,1);save();renderCart();};
+    d.append(im,t,rm);box.appendChild(d);
+  });
+  if(!n)box.appendChild(el('p','empty','Tu pedido está vacío. Elegí una remera para empezar.'));
+  $('total').textContent=gs(total);
+}
+function bump(){const b=$('hcart');b.classList.add('bump');setTimeout(()=>b.classList.remove('bump'),300);}
+function openCartUI(){$('drawer').inert=false;$('drawer').classList.add('active');$('overlay').classList.add('active');lock(true);$('d-close').focus({preventScroll:true});}
+function closeCartUI(){
+  const d=$('drawer');if(!d.classList.contains('active'))return;
+  d.classList.remove('active');d.inert=true;$('overlay').classList.remove('active');
+  if(!$('modal').classList.contains('active'))lock(false);
+}
+function openCartFrom(btn){lastFocus=btn;openCartUI();history.pushState({ui:'cart'},'');}
+$('fab').onclick=()=>openCartFrom($('fab'));
+$('hcart').onclick=()=>openCartFrom($('hcart'));
+$('d-close').onclick=back;$('overlay').onclick=back;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')back();});
+
+$('add').onclick=()=>{
+  const err=$('size-err');
+  if(!cur||isOut(cur))return;
+  if(!size){err.textContent='Seleccioná un talle para continuar.';err.style.display='block';return;}
+  if(cart.filter(c=>c.id===cur.id).length>=cur.stock){err.textContent='Ya agregaste todas las unidades disponibles de esta prenda.';err.style.display='block';return;}
+  if(cart.length>=30){err.textContent='Llegaste al máximo de prendas por pedido. Escribinos para pedidos grandes.';err.style.display='block';return;}
+  cart.push({id:cur.id,title:cur.title,price:cur.price,size});save();renderCart();bump();
+  closeModalUI();history.replaceState({ui:'cart'},'');openCartUI();
+};
+$('send').onclick=()=>{
+  if(!cart.length)return;
+  let t="Hola MIRAI CLUB, quiero hacer el siguiente pedido:\n\n",sum=0;
+  cart.forEach(i=>{t+=`▪️ ${i.title} (Talle ${i.size}) - ${gs(i.price)}\n`;sum+=i.price;});
+  t+=`\n*TOTAL: ${gs(sum)}*\n\n¿Me confirman disponibilidad y métodos de pago/envío?`;
+  openWA(t);
+};
+$('wa-contact').onclick=e=>{e.preventDefault();openWA("Hola MIRAI CLUB, tengo una consulta sobre el catálogo.");};
+$('logo').onclick=e=>{e.preventDefault();scrollTo({top:0,behavior:reduce?'auto':'smooth'});};
+
+/* la tienda: "ver más" solo si el texto no entra en 3 líneas, y compartir (menú nativo o copiar link) */
+function fitAbout(){const a=$('about');if(a.classList.contains('open'))return;$('about-more').hidden=a.scrollHeight<=a.clientHeight+2;}
+$('about-more').onclick=()=>{
+  const o=$('about').classList.toggle('open');
+  $('about-more').setAttribute('aria-expanded',o?'true':'false');$('about-more-label').textContent=o?'Ver menos':'Ver más';
+};
+addEventListener('load',fitAbout);addEventListener('resize',fitAbout,{passive:true});fitAbout();
+const shareUrl=()=>SITE_URL||(/^https?:$/.test(location.protocol)?location.origin+location.pathname:'https://instagram.com/miraiclubpy');
+const shareText='MIRAI CLUB · Remeras oversize de edición limitada. Asunción, Paraguay.';
+function sharePanel(open){
+  const p=$('share-panel');p.hidden=!open;$('share').setAttribute('aria-expanded',open?'true':'false');
+  if(!open)return;
+  const url=shareUrl();
+  $('share-url').value=url;$('share-status').textContent='';$('share-copy-label').textContent='Copiar link';
+  $('share-wa').href='https://wa.me/?text='+encodeURIComponent(shareText+' '+url);
+  $('share-fb').href='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url);
+}
+/* 1) menú nativo del celular/PC si existe; 2) si no existe o falla, panel con WhatsApp, Facebook y copiar */
+$('share').onclick=async()=>{
+  if(!$('share-panel').hidden){sharePanel(false);return;}
+  const data={title:'MIRAI CLUB',text:shareText,url:shareUrl()};
+  if(navigator.share&&(!navigator.canShare||navigator.canShare(data))){
+    try{await navigator.share(data);return;}catch(e){if(e.name==='AbortError')return;}
+  }
+  sharePanel(true);
+};
+/* copiar: portapapeles moderno, y si el navegador lo bloquea, el método clásico seleccionando el campo */
+$('share-copy').onclick=async()=>{
+  const inp=$('share-url'),url=inp.value;let ok=false;
+  try{if(navigator.clipboard&&isSecureContext){await navigator.clipboard.writeText(url);ok=true;}}catch(e){}
+  if(!ok){inp.focus({preventScroll:true});inp.select();inp.setSelectionRange(0,url.length);try{ok=document.execCommand('copy');}catch(e){}}
+  $('share-copy-label').textContent=ok?'Copiado':'Copiar link';
+  $('share-status').textContent=ok?'Link copiado. Pegalo donde quieras.':'Tu navegador no deja copiar solo: el link quedó seleccionado, copialo con Ctrl+C o manteniendo presionado.';
+};
+document.addEventListener('click',e=>{if(!$('share-panel').hidden&&!e.target.closest('.share-wrap'))sharePanel(false);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('share-panel').hidden)sharePanel(false);});
+renderCart();
+
+/* arranque: carga los productos (planilla o prueba) y recién ahí pinta catálogo, filtros y pedido guardado */
+(async function init(){
+  const g=$('grid');g.setAttribute('aria-busy','true');
+  products=await loadProducts();
+  g.removeAttribute('aria-busy');
+  $('total-n').textContent='('+String(products.length).padStart(2,'0')+')';
+  restoreCart();buildFilters();setFilter(pendingFilter);renderThumbs();renderCart();
+})();
+
+/* cinta */
+const mq=$('marquee');
+mq.innerHTML=Array(8).fill('<span>Train with purpose</span><span class="d">/</span><span>No es moda. Es evolución</span><span class="d">/</span><span>Edición limitada</span><span class="d">/</span><span>Est. 26\' Asunción</span><span class="d">/</span>').join('');
+
+/* manifiesto: cada palabra se ilumina con el scroll */
+const mText='No es moda. Es evolución. Remeras oversize de edición limitada y estampados propios, hechas para entrenar con propósito.';
+const mp=$('manifesto-text'),mw=[];
+mText.split(' ').forEach((w,i,a)=>{
+  const s=el('span','w'+(w.startsWith('evoluc')?' em':''),w);mw.push(s);
+  mp.appendChild(s);if(i<a.length-1)mp.appendChild(document.createTextNode(' '));
+});
+
+/* cinta animada con Web Animations API: corre en el compositor, no compite con el scroll */
+let mqAnim=null,half=0,mqVisible=true,paused=false,boost=0,boosting=false;
+function setupMarquee(){
+  if(reduce)return;
+  const h=mq.scrollWidth/2;if(!h||h===half)return;
+  let prog=0;
+  if(mqAnim){const d=mqAnim.effect.getTiming().duration;prog=((mqAnim.currentTime||0)%d)/d;mqAnim.cancel();}
+  half=h;
+  mqAnim=mq.animate([{transform:'translate3d(0,0,0)'},{transform:`translate3d(${-h}px,0,0)`}],{duration:h/32*1000,iterations:Infinity,easing:'linear'});
+  mqAnim.currentTime=prog*mqAnim.effect.getTiming().duration;
+  if(paused||!mqVisible)mqAnim.pause();
+}
+/* el scroll acelera la cinta y vuelve sola a su velocidad */
+function kick(v){
+  if(!mqAnim||paused||!mqVisible)return;
+  boost=Math.min(boost+Math.abs(v)*.06,10);
+  if(!boosting){boosting=true;requestAnimationFrame(decay);}
+}
+function decay(){
+  boost*=.9;if(boost<.02)boost=0;
+  mqAnim.playbackRate=1+boost;
+  if(boost)requestAnimationFrame(decay);else boosting=false;
+}
+
+/* scroll: medidas en caché, un solo rAF por frame */
+const hdr=$('hdr'),bg=$('hero-bg'),copy=$('hero-copy'),hero=$('hero'),bar=$('progress'),man=$('manifesto');
+const cssProgress=!reduce&&window.CSS&&CSS.supports('animation-timeline','scroll()');
+let annH=34,heroH=1,maxY=1,manTop=0,manH=1,lastY=scrollY,ticking=false,litN=-1;
+function measure(){
+  const st=parseFloat(getComputedStyle(hdr).paddingTop)||0;
+  annH=Math.max(0,($('ann').offsetHeight||34+st)-st);
+  heroH=hero.offsetHeight||1;
+  maxY=Math.max(1,html.scrollHeight-innerHeight);
+  manTop=man.getBoundingClientRect().top+scrollY;manH=man.offsetHeight||1;
+  setupMarquee();
+}
+new ResizeObserver(measure).observe(document.body);
+addEventListener('resize',measure,{passive:true});
+addEventListener('load',measure);
+document.fonts&&document.fonts.ready.then(measure);
+measure();
+function onScroll(){
+  if(ticking)return;ticking=true;
+  requestAnimationFrame(()=>{
+    const y=scrollY;
+    hdr.style.transform=`translate3d(0,${Math.max(0,Math.min(annH,annH-y))}px,0)`;
+    hdr.classList.toggle('solid',y>annH+10);
+    if(!cssProgress)bar.style.transform=`scaleX(${Math.min(1,y/maxY)})`;
+    if(!reduce&&y<heroH*1.2){
+      const p=Math.min(1,y/heroH);
+      bg.style.transform=`translate3d(0,${y*.3}px,0) scale(${1+p*.1})`;
+      copy.style.transform=`translate3d(0,${-y*.2}px,0)`;
+      copy.style.opacity=Math.max(0,1-p*1.7);
+    }
+    const t=Math.max(0,Math.min(1,(y+innerHeight*.82-manTop)/(manH+innerHeight*.4)));
+    const n=reduce?mw.length:Math.round(t*1.25*mw.length);
+    if(n!==litN){litN=n;mw.forEach((w,i)=>w.classList.toggle('lit',i<n));}
+    kick(y-lastY);lastY=y;ticking=false;
+  });
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* pausa cuando la cinta sale de pantalla + botón de pausa (accesibilidad) */
+if(!reduce){
+  new IntersectionObserver(es=>{
+    mqVisible=es[0].isIntersecting;
+    if(mqAnim&&!paused)mqVisible?mqAnim.play():mqAnim.pause();
+  }).observe(mq.parentElement);
+}else $('tpause').style.display='none';
+$('tpause').onclick=()=>{
+  paused=!paused;
+  if(mqAnim){if(paused){mqAnim.pause();boost=0;mqAnim.playbackRate=1;}else if(mqVisible)mqAnim.play();}
+  $('tpause').setAttribute('aria-pressed',paused);
+  $('tpause').textContent=paused?'Play':'Pausa';
+  $('tpause').setAttribute('aria-label',paused?'Reanudar cinta de texto':'Pausar cinta de texto');
+};
+</script>
+</body>
+</html>
