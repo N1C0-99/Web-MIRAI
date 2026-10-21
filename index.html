@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:description" content="Train with purpose. Catálogo oficial.">
 <meta property="og:url" content="https://miraiclub.vercel.app/">
-<meta property="og:image" content="https://miraiclub.vercel.app/img/web/remera2-4x5-1000.jpg">
+<meta property="og:image" content="https://miraiclub.vercel.app/remera2-4x5-1000.jpg">
 <meta property="og:image:width" content="1000">
 <meta property="og:image:height" content="1250">
 <meta name="twitter:card" content="summary_large_image">
@@ -392,7 +392,7 @@ html{scroll-behavior:auto}
     </nav>
     <a href="#hero" class="logo" id="logo" aria-label="MIRAI CLUB, inicio">
       <!-- Logo real de la marca (archivo local). No se reemplaza por placeholder. -->
-      <img src="img/logo-mirai.png" alt="MIRAI Club" width="489" height="253">
+      <img src="logo-mirai.png" alt="MIRAI Club" width="489" height="253">
     </a>
     <div class="hr">
       <a class="hide-sm" href="https://instagram.com/miraiclubpy" target="_blank" rel="noopener">Instagram</a>
@@ -529,7 +529,7 @@ html{scroll-behavior:auto}
 <section class="store" id="tienda" aria-labelledby="store-title">
   <div class="store-in">
     <div class="store-id rv">
-      <div class="store-logo"><img src="img/logo-mirai.png" alt="" width="489" height="253" loading="lazy" decoding="async"></div>
+      <div class="store-logo"><img src="logo-mirai.png" alt="" width="489" height="253" loading="lazy" decoding="async"></div>
       <h2 class="store-name" id="store-title">Mirai Club</h2>
     </div>
     <div class="store-grid">
@@ -676,7 +676,7 @@ function setImg(im,u,widths,sizes,ratio){
   if(!u){im.removeAttribute('src');im.removeAttribute('srcset');return;}
   im.src=sized(u,widths[Math.min(1,widths.length-1)],ratio);
   if(isUnsplash(u)){im.srcset=widths.map(w=>sized(u,w,ratio)+' '+w+'w').join(', ');im.sizes=sizes;}
-  /* foto propia con versión liviana al lado (ej. img/web/remera2-4x5-1000.jpg + ...-600.jpg): el navegador elige */
+  /* foto propia con versión liviana al lado (ej. remera2-4x5-1000.jpg + ...-600.jpg): el navegador elige */
   else if(/-1000\.jpg$/i.test(u)&&!/^https?:/i.test(u)){const s=u.replace(/-1000\.jpg$/i,'-600.jpg');im.src=encodeURI(u);im.srcset=encodeURI(s)+' 600w, '+encodeURI(u)+' 1000w';im.sizes=sizes;}
   else{im.removeAttribute('srcset');im.removeAttribute('sizes');}
 }
@@ -689,7 +689,7 @@ const MOCK_PRODUCTS=[
     frente a una pared de ladrillo pintada de blanco. Remera oversize negra con el logo MIRAI CLUB grande en la espalda
     (serigrafía blanca), costura de hombro caída. Luz dura de ventana desde la derecha que marca los pliegues de la tela.
     Lente 50 mm f/4, foco en el estampado. Fondo gris claro desaturado. */
- {id:"1",title:"Remera Mirai Club (Back)",price:150000,category:"Oversize",imageUrl:"img/web/remera2-4x5-1000.jpg",sizes:["S","M","XL"],stock:16,description:"Algodón 240g, corte oversize. Detalle en la espalda."},
+ {id:"1",title:"Remera Mirai Club (Back)",price:150000,category:"Oversize",imageUrl:"remera2-4x5-1000.jpg",sizes:["S","M","XL"],stock:16,description:"Algodón 240g, corte oversize. Detalle en la espalda."},
  /* PROMPT 02 · Born to Run - Team · --ar 4:5 --style raw --v 7
     Grupo de 3 o 4 corredores (hombres y mujeres) parados en una vereda de noche charlando después de entrenar,
     respiración agitada, uno con las manos en la cintura. Todos con remeras Born to Run negras. Fondo de ciudad con torres
@@ -701,7 +701,7 @@ const MOCK_PRODUCTS=[
     segunda toma igual con la remera blanca). Luz suave de ventana grande a 45° + rebotador blanco del lado opuesto, sombra
     suave detrás. Lente macro 90 mm f/8, encuadre centrado, la remera ocupa el 70 % del cuadro. Estampado minimalista
     MIRAI en el pecho, tipografía monoespaciada chica. */
- {id:"3",title:"Colección Mirai Athlete",price:140000,category:"Oversize",imageUrl:"img/web/remera3-4x5-1000.jpg",sizes:["S","M","L","XL"],stock:40,description:"Opciones en blanco y negro. Minimalista y premium."},
+ {id:"3",title:"Colección Mirai Athlete",price:140000,category:"Oversize",imageUrl:"remera3-4x5-1000.jpg",sizes:["S","M","L","XL"],stock:40,description:"Opciones en blanco y negro. Minimalista y premium."},
  /* PROMPT 04 · Born to Run - Action · --ar 4:5 --style raw --v 7
     Modelo saltando en el aire desde la baranda de una escalera urbana junto a un muro de ladrillo blanco, piernas recogidas,
     remera oversize negra flotando por el movimiento. Jogger negro, zapatillas blancas. 1/1000 s para congelar, sol alto de
