@@ -99,6 +99,26 @@ header.solid .logo img{transform:scale(.82)}
 .hero-bg{position:absolute;inset:-8% 0;z-index:-2;will-change:transform}
 .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(1.1);transition:transform 2.4s var(--ease-out)}
 html.ready .hero-img{transform:none}
+/* carrusel de fondo: fundido entre imágenes + zoom lento (solo opacity y transform/scale) */
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s var(--ease-out)}
+.hero-slide.is-active{opacity:1}
+.hero-slide .hero-img{scale:1.06;transition:transform 2.4s var(--ease-out),scale 0s 1.4s}
+.hero-slide.is-active .hero-img{scale:1;transition:transform 2.4s var(--ease-out),scale 7s linear}
+.hero-slide--portada .hero-img{object-position:50% 50%}
+/* con la portada, la capa oscura solo cubre la parte baja (el texto) y deja el logo MIRAI blanco */
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,#0A0A0A 0%,rgba(10,10,10,.72) 32%,rgba(10,10,10,.12) 62%,rgba(10,10,10,0) 100%);opacity:0;transition:opacity 1.4s var(--ease-out)}
+.hero::after{transition:opacity 1.4s var(--ease-out)}
+.hero:has(.hero-slide--portada.is-active)::before{opacity:1}
+.hero:has(.hero-slide--portada.is-active)::after{opacity:0}
+.hero-dots{display:flex;gap:2px;margin-left:auto;align-self:center}
+.hero-dot{position:relative;width:44px;height:44px;transition:scale var(--press) var(--ease-out)}
+.hero-dot::before,.hero-dot::after{content:"";position:absolute;left:8px;right:8px;top:50%;height:3px;margin-top:-1.5px;border-radius:2px;background:rgba(242,240,236,.3)}
+.hero-dot::after{background:var(--text);transform:scaleX(0);transform-origin:left}
+.hero-dot[aria-current=true]::after{transform:scaleX(1)}
+.hero.is-playing .hero-dot[aria-current=true]::after{animation:dotfill var(--slide-ms,6500ms) linear both}
+@keyframes dotfill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero-dot:active{scale:.9}
+@media(prefers-reduced-motion:reduce){.hero-slide .hero-img,.hero-slide.is-active .hero-img{scale:1;transition:none}.hero-slide{transition-duration:.3s}}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,#0A0A0A 0%,rgba(10,10,10,.62) 42%,rgba(10,10,10,.4) 100%)}
 .hero-copy{will-change:transform,opacity;max-width:1200px}
 .hero-title{font:700 clamp(2.2rem,9.4vw,7.4rem)/.96 var(--mono);letter-spacing:-.055em;text-transform:uppercase;margin:1.1rem 0 1.4rem}
@@ -418,7 +438,8 @@ html{scroll-behavior:auto}
     negros profundos, grano tipo Ilford HP5 forzada a 3200. Dejá espacio negativo oscuro en el
     tercio inferior para el titular.
     -->
-    <!-- Pantallas altas (celular, tablet parada): recorte vertical 9:16 centrado en las personas. El resto: horizontal. -->
+    <!-- CARRUSEL DE FONDO · imagen 1: corredores (Unsplash). Pantallas altas: recorte vertical 9:16; el resto: horizontal. -->
+    <div class="hero-slide is-active">
     <picture>
       <source media="(max-aspect-ratio: 4/5)" sizes="max(100vw, 66vh)"
         srcset="https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&crop=faces,entropy&w=640&h=1138&q=75 640w, https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&crop=faces,entropy&w=960&h=1707&q=75 960w, https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&crop=faces,entropy&w=1280&h=2276&q=75 1280w">
@@ -427,6 +448,15 @@ html{scroll-behavior:auto}
         srcset="https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&w=1080&q=80 1080w, https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&w=1600&q=80 1600w, https://images.unsplash.com/photo-1787502312308-36d309aafca8?auto=format&fit=crop&w=2400&q=80 2400w"
         sizes="100vw">
     </picture>
+    </div>
+    <!-- imagen 2: portada MIRAI adaptada (PC: banner arriba a la derecha; celular: banner a lo ancho) -->
+    <div class="hero-slide hero-slide--portada" aria-hidden="true">
+    <picture>
+      <source media="(max-aspect-ratio: 4/5)" sizes="max(100vw, 66vh)" srcset="hero-portada-movil-720.jpg 720w, hero-portada-movil-1080.jpg 1080w">
+      <img class="hero-img" alt="" width="1920" height="1080" fetchpriority="low" decoding="async"
+        src="hero-portada-1920.jpg" srcset="hero-portada-1280.jpg 1280w, hero-portada-1920.jpg 1920w" sizes="max(100vw, 206vh)">
+    </picture>
+    </div>
   </div>
   <div class="hero-copy" id="hero-copy">
     <p class="eyebrow fade">Drop 01 — Est. 26'</p>
@@ -435,6 +465,10 @@ html{scroll-behavior:auto}
     <div class="pills fade">
       <a href="#catalogo" class="pill pill-solid" data-go="oversize">Oversize</a>
       <a href="#catalogo" class="pill" data-go="born-to-run">Born to Run</a>
+      <div class="hero-dots" role="group" aria-label="Imágenes de fondo">
+        <button class="hero-dot" type="button" aria-current="true" aria-label="Imagen 1 de 2"></button>
+        <button class="hero-dot" type="button" aria-current="false" aria-label="Imagen 2 de 2"></button>
+      </div>
     </div>
   </div>
   <span class="scroll-hint" aria-hidden="true"></span>
@@ -997,6 +1031,25 @@ renderCart();
   g.removeAttribute('aria-busy');
   $('total-n').textContent='('+String(products.length).padStart(2,'0')+')';
   restoreCart();buildFilters();setFilter(pendingFilter);renderThumbs();renderCart();
+})();
+
+/* hero: carrusel de fondo. Se pausa fuera de pantalla o con la pestaña oculta; con "reducir movimiento" no avanza solo */
+(function(){
+  const slides=[...document.querySelectorAll('.hero-slide')],dots=[...document.querySelectorAll('.hero-dot')],heroEl=$('hero');
+  if(slides.length<2){dots.forEach(d=>d.hidden=true);return;}
+  const MS=6500;let cur=0,timer=null,onScreen=true;
+  heroEl.style.setProperty('--slide-ms',MS+'ms');
+  function show(n){
+    cur=(n+slides.length)%slides.length;
+    slides.forEach((s,k)=>{s.classList.toggle('is-active',k===cur);s.setAttribute('aria-hidden',k===cur?'false':'true');});
+    dots.forEach((d,k)=>d.setAttribute('aria-current',k===cur?'true':'false'));
+  }
+  function stop(){clearInterval(timer);timer=null;heroEl.classList.remove('is-playing');}
+  function play(){stop();if(reduce||!onScreen||document.hidden)return;heroEl.classList.add('is-playing');timer=setInterval(()=>show(cur+1),MS);}
+  dots.forEach((d,k)=>d.addEventListener('click',()=>{show(k);play();}));
+  new IntersectionObserver(es=>{onScreen=es[0].isIntersecting;onScreen?play():stop();}).observe(heroEl);
+  document.addEventListener('visibilitychange',()=>document.hidden?stop():play());
+  show(0);play();
 })();
 
 /* cinta */
