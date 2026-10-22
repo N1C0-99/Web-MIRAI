@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="theme-color" content="#0A0A0A">
 <meta name="color-scheme" content="dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://images.unsplash.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://images.unsplash.com https://lh3.googleusercontent.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>MIRAI CLUB | Train with purpose</title>
 <meta name="description" content="No es moda. Es evolución. Remeras oversize de edición limitada y estampados propios. Asunción, Paraguay.">
 <meta property="og:title" content="MIRAI CLUB">
@@ -231,6 +231,56 @@ html.ready .fade{opacity:1;transform:none;transition-delay:.4s}
 .how li{border-top:1px solid var(--ink);padding-top:1.3rem}
 .how .n{display:block;font:700 3rem/1 var(--mono);letter-spacing:-.06em;color:var(--red-l);margin-bottom:1rem;font-variant-numeric:tabular-nums}
 .how p{max-width:30ch;color:#2b2b2a}
+
+/* cómo pedir ahora va pegado a la colección: una línea los separa */
+.how{border-top:1px solid var(--line-d)}
+
+/* comunidad #miraiclub: carrusel de fotos de clientes */
+.ugc{background:var(--panel);border-block:1px solid var(--line);padding:clamp(4.5rem,9vw,7rem) 0}
+.ugc-head{display:grid;gap:1.2rem;margin-bottom:2.2rem}
+@media(min-width:900px){.ugc-head{grid-template-columns:1.1fr 1fr;align-items:end;gap:3rem}}
+.ugc-title{font:700 clamp(2rem,6vw,4.2rem)/.95 var(--mono);letter-spacing:-.055em;text-transform:uppercase;margin-top:.9rem}
+.ugc-sub{color:#d6d3ce;max-width:46ch}
+.ugc-sub strong{color:var(--text);font-weight:500}
+.ugc-track{display:grid;grid-auto-flow:column;grid-auto-columns:min(74vw,300px);gap:.6rem;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;margin-inline:calc(var(--pl) * -1) calc(var(--pr) * -1);padding-inline:var(--pl) var(--pr);scroll-padding-inline:var(--pl)}
+.ugc-track::-webkit-scrollbar{display:none}
+.ugc-card{position:relative;display:block;aspect-ratio:1/1;overflow:hidden;border-radius:6px;background:#0d0d0d;scroll-snap-align:start;transition:scale var(--press) var(--ease-out)}
+.ugc-card img{width:100%;height:100%;transition:scale .8s var(--ease-out)}
+.ugc-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7),transparent 45%)}
+.ugc-user{position:absolute;left:.8rem;bottom:.75rem;z-index:1;font:500 .66rem var(--mono);letter-spacing:.12em;color:#fff}
+.ugc-card:active{scale:.98}
+.ugc-empty{width:min(calc(100vw - var(--pl) - var(--pr)),640px);border:1px dashed var(--line);border-radius:6px;padding:1.8rem 1.5rem;display:grid;gap:1rem}
+.ugc-empty h3{font:700 1.15rem var(--mono);letter-spacing:-.03em;text-transform:uppercase}
+.ugc-empty ol{margin-left:1.2rem;color:#d6d3ce;display:grid;gap:.45rem}
+.ugc-nav{display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem}
+.ugc-nav[hidden]{display:none}
+.ugc-arrow{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);font:400 1.1rem var(--mono);transition:background-color .2s ease,color .2s ease,scale var(--press) var(--ease-out)}
+.ugc-arrow:active{scale:.94}
+.ugc-cta{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem;margin-top:2rem}
+
+/* sugerencias */
+.ideas{background:var(--paper);color:var(--ink);padding:clamp(4.5rem,9vw,7rem) 0}
+.ideas .eyebrow{color:var(--muted-d)}
+.ideas-in{display:grid;gap:2.4rem}
+@media(min-width:900px){.ideas-in{grid-template-columns:1fr 1.1fr;gap:4rem;align-items:start}}
+.ideas-title{font:700 clamp(1.8rem,5vw,3.4rem)/1 var(--mono);letter-spacing:-.05em;text-transform:uppercase;margin:.9rem 0 1rem}
+.ideas-sub{color:#2b2b2a;max-width:40ch}
+.ideas-form{display:grid;gap:.9rem}
+.ideas-topics{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.4rem}
+.ideas-topics .eyebrow{width:100%;margin-bottom:.2rem}
+.topic{min-height:44px;padding:0 1.05rem;border:1px solid var(--ink);border-radius:999px;font:500 .62rem var(--mono);letter-spacing:.12em;text-transform:uppercase;transition:background-color .2s ease,color .2s ease,scale var(--press) var(--ease-out)}
+.topic[aria-pressed=true]{background:var(--ink);color:#fff}
+.topic:active{scale:.96}
+.ideas-form textarea{width:100%;min-height:128px;resize:vertical;padding:.9rem 1rem;border:1px solid var(--ink);border-radius:6px;background:#f4f4f1;color:var(--ink);font:400 16px/1.5 var(--sans)}
+.ideas-form textarea:focus{outline:2px solid var(--red-l);outline-offset:2px}
+.ideas-row{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;min-height:1.2em}
+.ideas-count{font:500 .62rem var(--mono);letter-spacing:.1em;color:var(--muted-d);font-variant-numeric:tabular-nums}
+.ideas-err{color:var(--red-l);font-size:.84rem}
+@media(hover:hover) and (pointer:fine){
+.ugc-card:hover img{scale:1.04}
+.ugc-arrow:hover{background:var(--text);color:var(--ink)}
+.topic:not([aria-pressed=true]):hover{background:var(--ink);color:#fff}
+}
 
 /* la tienda: redes, nosotros, ubicación, horario */
 .store{background:var(--panel);border-top:1px solid var(--line)}
@@ -530,24 +580,6 @@ html{scroll-behavior:auto}
   </div>
 </section>
 
-<section class="build">
-  <div class="build-in">
-    <div class="rv">
-      <p class="eyebrow">Un pedido, un mensaje</p>
-      <h2>Armá tu pedido</h2>
-      <ul>
-        <li>Sumá todas las prendas que quieras.</li>
-        <li>Se arma un solo mensaje con tu selección.</li>
-        <li>Confirmamos stock y coordinamos pago y envío.</li>
-      </ul>
-      <a href="#catalogo" class="btn btn-inline" data-go="all">Empezar</a>
-    </div>
-    <div class="thumbs rv" id="thumbs" role="list" aria-label="Selección rápida" style="--d:120ms"></div>
-  </div>
-</section>
-
-<section class="manifesto" id="manifesto"><p id="manifesto-text"></p></section>
-
 <section class="how" id="como">
   <div class="wrap">
     <p class="eyebrow rv">Cómo pedir</p>
@@ -556,6 +588,57 @@ html{scroll-behavior:auto}
       <li class="rv" style="--d:80ms"><span class="n">02</span><p>Agregala al pedido y tocá "Pedir por WhatsApp".</p></li>
       <li class="rv" style="--d:160ms"><span class="n">03</span><p>Coordinamos el pago y el envío o retiro en Asunción.</p></li>
     </ol>
+  </div>
+</section>
+
+<section class="manifesto" id="manifesto"><p id="manifesto-text"></p></section>
+
+<!-- COMUNIDAD #MIRAICLUB · las fotos salen de la pestaña "Comunidad" de la planilla MIRAI BD (imageUrl, usuario, link, mostrar) -->
+<section class="ugc" id="comunidad" aria-labelledby="ugc-title">
+  <div class="wrap">
+    <div class="ugc-head">
+      <div class="rv">
+        <p class="eyebrow">Comunidad · #miraiclub</p>
+        <h2 class="ugc-title" id="ugc-title">Gracias por correr con nosotros</h2>
+      </div>
+      <p class="ugc-sub rv" style="--d:80ms">Subí tu foto con tu remera Mirai, usá <strong>#miraiclub</strong> y etiquetá <strong>@miraiclubpy</strong>. Elegimos fotos para que aparezcan en este carrusel.</p>
+    </div>
+    <div class="ugc-carousel rv" style="--d:140ms">
+      <div class="ugc-track" id="ugc-track" tabindex="0" role="region" aria-label="Fotos de la comunidad #miraiclub"></div>
+      <div class="ugc-nav" id="ugc-nav" hidden>
+        <button class="ugc-arrow" id="ugc-prev" type="button" aria-label="Fotos anteriores">&larr;</button>
+        <button class="ugc-arrow" id="ugc-next" type="button" aria-label="Fotos siguientes">&rarr;</button>
+      </div>
+    </div>
+    <div class="ugc-cta rv" style="--d:200ms">
+      <a class="btn btn-inline" href="https://www.instagram.com/explore/tags/miraiclub/" target="_blank" rel="noopener">Ver #miraiclub en Instagram</a>
+      <a class="chip" href="https://instagram.com/miraiclubpy" target="_blank" rel="noopener">Seguir @miraiclubpy</a>
+    </div>
+  </div>
+</section>
+
+<!-- SUGERENCIAS · se envían por WhatsApp con el mensaje ya armado -->
+<section class="ideas" id="sugerencias" aria-labelledby="ideas-title">
+  <div class="wrap ideas-in">
+    <div class="rv">
+      <p class="eyebrow">Sugerencias</p>
+      <h2 class="ideas-title" id="ideas-title">¿Qué te gustaría ver en el próximo drop?</h2>
+      <p class="ideas-sub">Leemos todas. Las ideas que más se repiten llegan a la próxima colección.</p>
+    </div>
+    <form class="ideas-form rv" id="ideas-form" style="--d:100ms" novalidate>
+      <div class="ideas-topics" role="group" aria-labelledby="topic-label">
+        <span class="eyebrow" id="topic-label">Tema</span>
+        <button type="button" class="topic" aria-pressed="true">Nuevo diseño</button>
+        <button type="button" class="topic" aria-pressed="false">Colores</button>
+        <button type="button" class="topic" aria-pressed="false">Talles y calce</button>
+        <button type="button" class="topic" aria-pressed="false">Envíos y pagos</button>
+        <button type="button" class="topic" aria-pressed="false">Otro</button>
+      </div>
+      <label class="eyebrow" for="idea-text">Tu idea</label>
+      <textarea id="idea-text" rows="4" maxlength="500" placeholder="Ej.: una remera manga larga para correr de noche"></textarea>
+      <div class="ideas-row"><span class="ideas-count" id="idea-count">0/500</span><p class="ideas-err" id="idea-err" role="alert"></p></div>
+      <button type="submit" class="btn wa">Enviar sugerencia por WhatsApp</button>
+    </form>
   </div>
 </section>
 
@@ -601,7 +684,7 @@ html{scroll-behavior:auto}
         <!-- EDITAR: horarios reales -->
         <dl class="hours">
           <div><dt>Lun – Vie</dt><dd>09:00 – 18:00</dd></div>
-          <div><dt>Sábado</dt><dd>09:00 – 13:00</dd></div>
+          <div><dt>Sábado</dt><dd>09:00 – 18:00</dd></div>
           <div><dt>Domingo</dt><dd>Cerrado</dd></div>
         </dl>
       </div>
@@ -632,7 +715,7 @@ html{scroll-behavior:auto}
 <footer>
   <div class="f-grid">
     <div class="wide"><h4>Mirai Club</h4><p>Train with purpose.<br>Est. 26' Asunción, Paraguay.</p></div>
-    <div><h4>Ayuda</h4><a href="#como">Cómo pedir</a><a href="#tienda">Horarios y ubicación</a><a href="#" id="wa-contact">Soporte WhatsApp</a></div>
+    <div><h4>Ayuda</h4><a href="#como">Cómo pedir</a><a href="#tienda">Horarios y ubicación</a><a href="#sugerencias">Sugerencias</a><a href="#" id="wa-contact">Soporte WhatsApp</a></div>
     <div><h4>Seguinos</h4><a href="https://instagram.com/miraiclubpy" target="_blank" rel="noopener">@miraiclubpy</a></div>
   </div>
   <p class="wordmark" aria-hidden="true">Mirai Club</p>
@@ -788,14 +871,77 @@ function normalize(raw){
   if(!out.length)throw new Error('No hay productos válidos');
   return out.slice(0,200);
 }
+/* comunidad #miraiclub: fotos elegidas en la pestaña "Comunidad" de la planilla (imageUrl, usuario, link) */
+let community=[];
+const IG_TAG='https://www.instagram.com/explore/tags/miraiclub/';
+function driveImg(u){const m=String(u).match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=\w+&)?id=)([\w-]{20,})/);return m?`https://lh3.googleusercontent.com/d/${m[1]}=w900`:u;}
+function normalizeCommunity(list){
+  if(!Array.isArray(list))return [];
+  return list.map(r=>{
+    if(!r||typeof r!=='object')return null;
+    const img=safeImg(driveImg(String(r.imageUrl??'').trim()));if(!img)return null;
+    const user=String(r.usuario??'').trim().replace(/^@/,'').replace(/[^\w.]/g,'').slice(0,30);
+    const raw=String(r.link??'').trim(),link=/^https:\/\/(www\.)?instagram\.com\/[^\s"'<>]+$/i.test(raw)?raw:IG_TAG;
+    return {img,user,link};
+  }).filter(Boolean).slice(0,40);
+}
+let ugcHold=0,ugcHover=false,ugcVisible=false,ugcReady=false;
+function ugcStep(dir){
+  const t=$('ugc-track'),card=t.querySelector('.ugc-card');if(!card)return;
+  const w=card.getBoundingClientRect().width+(parseFloat(getComputedStyle(t).columnGap)||0);
+  const atEnd=t.scrollLeft+t.clientWidth>=t.scrollWidth-4,atStart=t.scrollLeft<=4;
+  const left=dir>0&&atEnd?0:dir<0&&atStart?t.scrollWidth:t.scrollLeft+dir*w;
+  t.scrollTo({left,behavior:reduce?'auto':'smooth'});
+}
+function startUgc(){
+  if(ugcReady)return;ugcReady=true;
+  const t=$('ugc-track'),hold=()=>{ugcHold=Date.now();};
+  $('ugc-prev').onclick=()=>{hold();ugcStep(-1);};
+  $('ugc-next').onclick=()=>{hold();ugcStep(1);};
+  ['pointerdown','wheel','touchstart','focusin','keydown'].forEach(ev=>t.addEventListener(ev,hold,{passive:true}));
+  t.addEventListener('pointerenter',()=>{ugcHover=true;});t.addEventListener('pointerleave',()=>{ugcHover=false;});
+  new IntersectionObserver(es=>{ugcVisible=es[0].isIntersecting;}).observe(t);
+  if(!reduce)setInterval(()=>{if(ugcVisible&&!ugcHover&&!document.hidden&&Date.now()-ugcHold>8000&&community.length>2)ugcStep(1);},4000);
+}
+function renderCommunity(){
+  const track=$('ugc-track'),nav=$('ugc-nav');if(!track)return;
+  if(!community.length){
+    const box=el('div','ugc-empty'),ol=document.createElement('ol');
+    ['Sacate una foto con tu remera Mirai, entrenando o en la calle.','Subila a Instagram con #miraiclub y etiquetá @miraiclubpy.','Elegimos fotos para que aparezcan en este carrusel.'].forEach(t=>ol.append(el('li',null,t)));
+    box.append(el('h3',null,'Tu foto puede ser la primera'),ol);
+    track.replaceChildren(box);nav.hidden=true;return;
+  }
+  track.replaceChildren(...community.map((c,i)=>{
+    const a=el('a','ugc-card');a.href=c.link;a.target='_blank';a.rel='noopener';
+    a.setAttribute('aria-label',(c.user?'Foto de @'+c.user:'Foto de la comunidad')+' en Instagram');
+    const im=document.createElement('img');im.src=c.img;im.alt=c.user?'@'+c.user+' con su remera Mirai':'Persona con remera Mirai';
+    im.width=600;im.height=600;im.loading=i<3?'eager':'lazy';im.decoding='async';
+    im.onerror=()=>{a.remove();nav.hidden=track.querySelectorAll('.ugc-card').length<2;}; /* foto no pública o borrada: se oculta */
+    a.append(im);if(c.user)a.append(el('span','ugc-user','@'+c.user));
+    return a;
+  }));
+  nav.hidden=community.length<2;
+  startUgc();
+}
+/* copia de la última respuesta buena de la planilla: se muestra al instante y sirve de respaldo si la planilla no responde */
+const CACHE_KEY='mirai_catalog_v1';
+function readCache(){try{const c=JSON.parse(localStorage.getItem(CACHE_KEY));return c&&c.data?c:null;}catch(e){return null;}}
+function writeCache(data){try{localStorage.setItem(CACHE_KEY,JSON.stringify({t:Date.now(),data}));}catch(e){}}
 async function loadProducts(){
   if(SHEET_API_URL){
-    const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),8000);
+    /* el script de Google tarda ~10 s en "despertar" si nadie entró hace rato: por eso 15 s */
+    const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),15000);
     try{
       const res=await fetch(SHEET_API_URL,{signal:ctrl.signal,cache:'no-store'});
       if(!res.ok)throw new Error('HTTP '+res.status);
-      return normalize(await res.json());
-    }catch(err){console.warn('[Mirai] No se pudo leer la planilla; uso MOCK_PRODUCTS.',err);}
+      const data=await res.json(),list=normalize(data);
+      community=normalizeCommunity(data&&data.comunidad);writeCache(data);
+      return list;
+    }catch(err){
+      const c=readCache();
+      if(c){try{community=normalizeCommunity(c.data.comunidad);console.warn('[Mirai] La planilla no respondió; uso la última copia guardada.',err);return normalize(c.data);}catch(e){}}
+      console.warn('[Mirai] No se pudo leer la planilla; uso MOCK_PRODUCTS.',err);
+    }
     finally{clearTimeout(timer);}
   }
   return normalize(MOCK_PRODUCTS);
@@ -884,6 +1030,7 @@ document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',e=>
 
 /* selección rápida (bloque "armá tu pedido") */
 function renderThumbs(){
+  if(!$('thumbs'))return;
   $('thumbs').replaceChildren(...products.map(p=>{
     const b=el('button','thumb');b.type='button';b.setAttribute('role','listitem');
     b.setAttribute('aria-label',p.title+', '+gs(p.price)+(isOut(p)?', agotado':''));
@@ -1024,13 +1171,36 @@ document.addEventListener('click',e=>{if(!$('share-panel').hidden&&!e.target.clo
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('share-panel').hidden)sharePanel(false);});
 renderCart();
 
+/* sugerencias: tema + texto; se envían por WhatsApp con el mensaje armado */
+(function(){
+  const form=$('ideas-form');if(!form)return;
+  const topics=[...form.querySelectorAll('.topic')],txt=$('idea-text'),cnt=$('idea-count'),err=$('idea-err');
+  topics.forEach(b=>b.addEventListener('click',()=>topics.forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'))));
+  txt.addEventListener('input',()=>{cnt.textContent=txt.value.length+'/500';if(txt.value.trim().length>=5)err.textContent='';});
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const idea=txt.value.trim();
+    if(idea.length<5){err.textContent='Contanos un poco más (al menos 5 letras).';txt.focus();return;}
+    const tema=(topics.find(x=>x.getAttribute('aria-pressed')==='true')||topics[0]).textContent;
+    openWA(`Hola MIRAI CLUB! Tengo una sugerencia\n\nTema: ${tema}\n${idea}`);
+  });
+})();
+
 /* arranque: carga los productos (planilla o prueba) y recién ahí pinta catálogo, filtros y pedido guardado */
 (async function init(){
   const g=$('grid');g.setAttribute('aria-busy','true');
-  products=await loadProducts();
+  const paint=list=>{
+    products=list;
+    $('total-n').textContent='('+String(products.length).padStart(2,'0')+')';
+    restoreCart();buildFilters();setFilter(pendingFilter);renderThumbs();renderCart();renderCommunity();
+  };
+  /* si hay copia guardada, se pinta ya; cuando llega la planilla solo se repinta si algo cambió */
+  let shown='';
+  const c=readCache();
+  if(c){try{const list=normalize(c.data);community=normalizeCommunity(c.data.comunidad);shown=JSON.stringify([list,community]);paint(list);g.removeAttribute('aria-busy');}catch(e){}}
+  const fresh=await loadProducts();
   g.removeAttribute('aria-busy');
-  $('total-n').textContent='('+String(products.length).padStart(2,'0')+')';
-  restoreCart();buildFilters();setFilter(pendingFilter);renderThumbs();renderCart();
+  if(JSON.stringify([fresh,community])!==shown)paint(fresh);
 })();
 
 /* hero: carrusel de fondo. Se pausa fuera de pantalla o con la pestaña oculta; con "reducir movimiento" no avanza solo */
