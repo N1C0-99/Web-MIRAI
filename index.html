@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="theme-color" content="#0A0A0A">
 <meta name="color-scheme" content="dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://images.unsplash.com https://lh3.googleusercontent.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://images.unsplash.com https://lh3.googleusercontent.com https://*.cdninstagram.com https://*.fbcdn.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>MIRAI CLUB | Train with purpose</title>
 <meta name="description" content="No es moda. Es evolución. Remeras oversize de edición limitada y estampados propios. Asunción, Paraguay.">
 <meta property="og:title" content="MIRAI CLUB">
@@ -616,7 +616,7 @@ html{scroll-behavior:auto}
         <p class="eyebrow">Comunidad · #miraiclub</p>
         <h2 class="ugc-title" id="ugc-title">Gracias por correr con nosotros</h2>
       </div>
-      <p class="ugc-sub rv" style="--d:80ms">Subí tu foto con tu remera Mirai, usá <strong>#miraiclub</strong> y etiquetá <strong>@miraiclubpy</strong>. Elegimos fotos para que aparezcan en este carrusel.</p>
+      <p class="ugc-sub rv" style="--d:80ms">Subí tu foto con tu remera Mirai, usá <strong>#miraiclub</strong> y etiquetá a <strong>@miraiclubpy</strong> en la foto. Aparece sola en este carrusel.</p>
     </div>
     <div class="ugc-carousel rv" style="--d:140ms">
       <div class="ugc-track" id="ugc-track" tabindex="0" role="region" aria-label="Fotos de la comunidad #miraiclub"></div>
@@ -924,7 +924,7 @@ function renderCommunity(){
   const track=$('ugc-track'),nav=$('ugc-nav');if(!track)return;
   if(!community.length){
     const box=el('div','ugc-empty'),ol=document.createElement('ol');
-    ['Sacate una foto con tu remera Mirai, entrenando o en la calle.','Subila a Instagram con #miraiclub y etiquetá @miraiclubpy.','Elegimos fotos para que aparezcan en este carrusel.'].forEach(t=>ol.append(el('li',null,t)));
+    ['Sacate una foto con tu remera Mirai, entrenando o en la calle.','Subila a Instagram con #miraiclub y etiquetá a @miraiclubpy en la foto (tu perfil tiene que ser público).','En menos de una hora aparece en este carrusel.'].forEach(t=>ol.append(el('li',null,t)));
     box.append(el('h3',null,'Tu foto puede ser la primera'),ol);
     track.replaceChildren(box);nav.hidden=true;return;
   }
