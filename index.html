@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="dark">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://images.unsplash.com https://lh3.googleusercontent.com https://*.cdninstagram.com https://*.fbcdn.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>MIRAI CLUB | Train with purpose</title>
-<meta name="description" content="No es moda. Es evolución. Remeras oversize de edición limitada y estampados propios. Asunción, Paraguay.">
+<meta name="description" content="No es moda. Es evolución. Indumentaria de edición limitada con diseños propios. Asunción, Paraguay.">
 <meta property="og:title" content="MIRAI CLUB">
 <meta property="og:type" content="website">
 <meta property="og:description" content="Train with purpose. Catálogo oficial.">
@@ -297,7 +297,7 @@ html.ready .fade{opacity:1;transform:none;transition-delay:.4s}
 .totop:hover{background:var(--text);color:var(--ink)}
 }
 
-/* la tienda: redes, nosotros, ubicación, horario */
+/* la tienda: redes, nosotros, horario */
 .store{background:var(--panel);border-top:1px solid var(--line)}
 .store-in{max-width:1500px;margin:0 auto;padding:clamp(4rem,8vw,6rem) var(--pr) clamp(4rem,8vw,6rem) var(--pl);display:grid;gap:2.75rem}
 .store-id{display:flex;align-items:center;gap:1.1rem}
@@ -306,7 +306,7 @@ html.ready .fade{opacity:1;transform:none;transition-delay:.4s}
 .store-logo img{width:100%;height:auto;object-fit:contain;mix-blend-mode:screen}
 .store-name{font:700 clamp(1.6rem,4vw,2.4rem)/1 var(--mono);letter-spacing:-.05em;text-transform:uppercase}
 .store-grid{display:grid;gap:2.4rem}
-@media(min-width:900px){.store-grid{grid-template-columns:1fr 1fr;gap:3rem 4rem}}
+@media(min-width:900px){.store-grid{grid-template-columns:1fr 1fr;gap:3rem 4rem}.store-about{grid-row:span 2}}
 .store-block h3{font:500 .66rem var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
 .socials{display:flex;gap:.75rem}
 .social{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;transition:background-color .2s ease,scale var(--press) var(--ease-out)}
@@ -320,7 +320,6 @@ html.ready .fade{opacity:1;transform:none;transition-delay:.4s}
 .more[hidden]{display:none}
 .more svg{width:12px;height:12px;transition:transform .25s var(--ease-out)}
 .more[aria-expanded=true] svg{transform:rotate(180deg)}
-.addr{color:#d6d3ce;font:500 .8rem/1.6 var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem}
 .chip{display:inline-flex;align-items:center;gap:.55rem;min-height:44px;padding:0 1.15rem;border:1px solid var(--line);border-radius:999px;font:500 .66rem var(--mono);letter-spacing:.14em;text-transform:uppercase;transition:background-color .2s ease,color .2s ease,border-color .2s ease,scale var(--press) var(--ease-out)}
 .chip svg,.share svg{width:16px;height:16px;flex:none}
 .hours{display:grid;gap:.75rem;max-width:420px}
@@ -680,22 +679,13 @@ html{scroll-behavior:auto}
           </a>
         </div>
       </div>
-      <div class="store-block rv" style="--d:80ms">
+      <div class="store-block store-about rv" style="--d:80ms">
         <h3>Nosotros</h3>
         <!-- EDITAR: historia de la marca -->
         <p class="about" id="about">En Mirai Club diseñamos remeras para entrenar y para el día a día. Nacimos en Asunción con una idea simple: ropa cómoda, de buena calidad y con identidad propia, hecha para gente que se mueve con propósito. Cada drop es de edición limitada y no se repite, por eso cada prenda es parte de un momento del club.</p>
         <button class="more" id="about-more" type="button" aria-expanded="false" aria-controls="about"><span id="about-more-label">Ver más</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
       </div>
       <div class="store-block rv" style="--d:160ms">
-        <h3>Ubicación</h3>
-        <!-- EDITAR: dirección real y el texto de búsqueda del mapa (query=...) -->
-        <p class="addr">Dirección a confirmar · Asunción, Paraguay</p>
-        <a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Asunci%C3%B3n%2C%20Paraguay" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          Ver en el mapa
-        </a>
-      </div>
-      <div class="store-block rv" style="--d:240ms">
         <h3>Horario de atención</h3>
         <!-- EDITAR: horarios reales -->
         <dl class="hours">
@@ -731,7 +721,7 @@ html{scroll-behavior:auto}
 <footer>
   <div class="f-grid">
     <div class="wide"><h4>Mirai Club</h4><p>Train with purpose.<br>Est. 26' Asunción, Paraguay.</p></div>
-    <div><h4>Ayuda</h4><a href="#como">Cómo pedir</a><a href="#tienda">Horarios y ubicación</a><a href="#sugerencias">Sugerencias</a><a href="#" id="wa-contact">Soporte WhatsApp</a></div>
+    <div><h4>Ayuda</h4><a href="#como">Cómo pedir</a><a href="#tienda">Horarios</a><a href="#sugerencias">Sugerencias</a><a href="#" id="wa-contact">Soporte WhatsApp</a></div>
     <div><h4>Seguinos</h4><a href="https://instagram.com/miraiclubpy" target="_blank" rel="noopener">@miraiclubpy</a></div>
   </div>
   <p class="wordmark" aria-hidden="true">Mirai Club</p>
@@ -1158,7 +1148,7 @@ $('about-more').onclick=()=>{
 };
 addEventListener('load',fitAbout);addEventListener('resize',fitAbout,{passive:true});fitAbout();
 const shareUrl=()=>SITE_URL||(/^https?:$/.test(location.protocol)?location.origin+location.pathname:'https://instagram.com/miraiclubpy');
-const shareText='MIRAI CLUB · Remeras oversize de edición limitada. Asunción, Paraguay.';
+const shareText='MIRAI CLUB · Indumentaria de edición limitada con diseños propios. Asunción, Paraguay.';
 function sharePanel(open){
   const p=$('share-panel');p.hidden=!open;$('share').setAttribute('aria-expanded',open?'true':'false');
   if(!open)return;
@@ -1244,7 +1234,7 @@ const mq=$('marquee');
 mq.innerHTML=Array(8).fill('<span>Train with purpose</span><span class="d">/</span><span>No es moda. Es evolución</span><span class="d">/</span><span>Edición limitada</span><span class="d">/</span><span>Est. 26\' Asunción</span><span class="d">/</span>').join('');
 
 /* manifiesto: cada palabra se ilumina con el scroll */
-const mText='No es moda. Es evolución. Remeras oversize de edición limitada y estampados propios, hechas para entrenar con propósito.';
+const mText='No es moda. Es evolución. Indumentaria de edición limitada con diseños propios, hecha para destacar y entrenar con propósito.';
 const mp=$('manifesto-text'),mw=[];
 mText.split(' ').forEach((w,i,a)=>{
   const s=el('span','w'+(w.startsWith('evoluc')?' em':''),w);mw.push(s);
