@@ -258,28 +258,43 @@ html.ready .fade{opacity:1;transform:none;transition-delay:.4s}
 .ugc-arrow:active{scale:.94}
 .ugc-cta{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem;margin-top:2rem}
 
-/* sugerencias */
-.ideas{background:var(--paper);color:var(--ink);padding:clamp(4.5rem,9vw,7rem) 0}
+/* sugerencias: franja compacta, sin robarle protagonismo al resto */
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ideas{background:var(--paper);color:var(--ink);padding:clamp(2.6rem,5vw,3.6rem) 0}
 .ideas .eyebrow{color:var(--muted-d)}
-.ideas-in{display:grid;gap:2.4rem}
-@media(min-width:900px){.ideas-in{grid-template-columns:1fr 1.1fr;gap:4rem;align-items:start}}
-.ideas-title{font:700 clamp(1.8rem,5vw,3.4rem)/1 var(--mono);letter-spacing:-.05em;text-transform:uppercase;margin:.9rem 0 1rem}
-.ideas-sub{color:#2b2b2a;max-width:40ch}
-.ideas-form{display:grid;gap:.9rem}
-.ideas-topics{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.4rem}
-.ideas-topics .eyebrow{width:100%;margin-bottom:.2rem}
-.topic{min-height:44px;padding:0 1.05rem;border:1px solid var(--ink);border-radius:999px;font:500 .62rem var(--mono);letter-spacing:.12em;text-transform:uppercase;transition:background-color .2s ease,color .2s ease,scale var(--press) var(--ease-out)}
-.topic[aria-pressed=true]{background:var(--ink);color:#fff}
+.ideas-in{display:grid;gap:1.3rem}
+@media(min-width:900px){.ideas-in{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:3.5rem;align-items:center}}
+.ideas-title{font:700 clamp(1.15rem,2.6vw,1.6rem)/1.1 var(--mono);letter-spacing:-.04em;text-transform:uppercase;margin:.55rem 0 .4rem;max-width:24ch}
+.ideas-sub{color:#2b2b2a;font-size:.9rem}
+.ideas-form{display:grid;gap:.6rem;min-width:0}
+.ideas-topics{display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;margin-inline:calc(var(--pl) * -1) calc(var(--pr) * -1);padding-inline:var(--pl) var(--pr)}
+.ideas-topics::-webkit-scrollbar{display:none}
+@media(min-width:900px){.ideas-topics{flex-wrap:wrap;overflow:visible;margin-inline:0;padding-inline:0}}
+.topic{flex:none;min-height:40px;padding:0 .95rem;border:1px solid var(--line-d);border-radius:999px;font:500 .58rem var(--mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;transition:background-color .2s ease,color .2s ease,border-color .2s ease,scale var(--press) var(--ease-out)}
+@media(pointer:coarse){.topic{min-height:44px}}
+.topic[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
 .topic:active{scale:.96}
-.ideas-form textarea{width:100%;min-height:128px;resize:vertical;padding:.9rem 1rem;border:1px solid var(--ink);border-radius:6px;background:#f4f4f1;color:var(--ink);font:400 16px/1.5 var(--sans)}
-.ideas-form textarea:focus{outline:2px solid var(--red-l);outline-offset:2px}
-.ideas-row{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;min-height:1.2em}
-.ideas-count{font:500 .62rem var(--mono);letter-spacing:.1em;color:var(--muted-d);font-variant-numeric:tabular-nums}
-.ideas-err{color:var(--red-l);font-size:.84rem}
+.ideas-form textarea{width:100%;min-height:76px;resize:vertical;padding:.75rem .9rem;border:1px solid var(--line-d);border-radius:6px;background:#f4f4f1;color:var(--ink);font:400 16px/1.45 var(--sans)}
+.ideas-form textarea:focus{outline:2px solid var(--red-l);outline-offset:2px;border-color:var(--ink)}
+.ideas-row{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.ideas-meta{display:grid;gap:.15rem;min-width:0}
+.ideas-count{font:500 .6rem var(--mono);letter-spacing:.1em;color:var(--muted-d);font-variant-numeric:tabular-nums}
+.ideas-err{color:var(--red-l);font-size:.8rem}
+.ideas-send{flex:none;min-height:44px;padding:0 1.3rem;font-size:.62rem;letter-spacing:.14em}
+
+/* volver arriba: aparece recién cerca del final */
+.totop{position:fixed;right:max(1rem,var(--sr));bottom:calc(1rem + var(--sb));z-index:95;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--panel);color:var(--text);border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.45);opacity:0;transform:translateY(14px);visibility:hidden;transition:opacity .25s ease,transform .3s var(--ease-out),visibility 0s .3s,background-color .2s ease,color .2s ease,scale var(--press) var(--ease-out)}
+.totop.show{opacity:1;transform:none;visibility:visible;transition:opacity .25s ease,transform .3s var(--ease-out),visibility 0s,background-color .2s ease,color .2s ease,scale var(--press) var(--ease-out)}
+.totop svg{width:18px;height:18px}
+.totop:active{scale:.92}
+.totop:focus-visible{outline:2px solid var(--red-d);outline-offset:3px}
+/* en celular, con pedido abierto, se sube por encima del botón "Mi pedido" */
+@media(max-width:899px){body.has-cart .totop{bottom:calc(.9rem + 56px + .7rem + var(--sb))}}
 @media(hover:hover) and (pointer:fine){
 .ugc-card:hover img{scale:1.04}
 .ugc-arrow:hover{background:var(--text);color:var(--ink)}
-.topic:not([aria-pressed=true]):hover{background:var(--ink);color:#fff}
+.topic:not([aria-pressed=true]):hover{border-color:var(--ink)}
+.totop:hover{background:var(--text);color:var(--ink)}
 }
 
 /* la tienda: redes, nosotros, ubicación, horario */
@@ -623,21 +638,22 @@ html{scroll-behavior:auto}
     <div class="rv">
       <p class="eyebrow">Sugerencias</p>
       <h2 class="ideas-title" id="ideas-title">¿Qué te gustaría ver en el próximo drop?</h2>
-      <p class="ideas-sub">Leemos todas. Las ideas que más se repiten llegan a la próxima colección.</p>
+      <p class="ideas-sub">Leemos todas y nos llegan por WhatsApp.</p>
     </div>
     <form class="ideas-form rv" id="ideas-form" style="--d:100ms" novalidate>
-      <div class="ideas-topics" role="group" aria-labelledby="topic-label">
-        <span class="eyebrow" id="topic-label">Tema</span>
+      <div class="ideas-topics" role="group" aria-label="Tema de la sugerencia">
         <button type="button" class="topic" aria-pressed="true">Nuevo diseño</button>
         <button type="button" class="topic" aria-pressed="false">Colores</button>
         <button type="button" class="topic" aria-pressed="false">Talles y calce</button>
         <button type="button" class="topic" aria-pressed="false">Envíos y pagos</button>
         <button type="button" class="topic" aria-pressed="false">Otro</button>
       </div>
-      <label class="eyebrow" for="idea-text">Tu idea</label>
-      <textarea id="idea-text" rows="4" maxlength="500" placeholder="Ej.: una remera manga larga para correr de noche"></textarea>
-      <div class="ideas-row"><span class="ideas-count" id="idea-count">0/500</span><p class="ideas-err" id="idea-err" role="alert"></p></div>
-      <button type="submit" class="btn wa">Enviar sugerencia por WhatsApp</button>
+      <label class="vh" for="idea-text">Tu idea</label>
+      <textarea id="idea-text" rows="2" maxlength="500" placeholder="Tu idea. Ej.: una remera manga larga para correr de noche"></textarea>
+      <div class="ideas-row">
+        <p class="ideas-meta"><span class="ideas-count" id="idea-count">0/500</span><span class="ideas-err" id="idea-err" role="alert"></span></p>
+        <button type="submit" class="btn btn-inline wa ideas-send">Enviar por WhatsApp</button>
+      </div>
     </form>
   </div>
 </section>
@@ -722,6 +738,7 @@ html{scroll-behavior:auto}
   <p class="eyebrow copy">© 2026 Mirai Club</p>
 </footer>
 
+<button id="totop" class="totop" type="button" aria-label="Volver arriba"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <button id="fab" class="fab" aria-label="Ver pedido"><span>Mi pedido</span><span id="count">0</span></button>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title" inert>
@@ -1291,9 +1308,13 @@ function onScroll(){
     const t=Math.max(0,Math.min(1,(y+innerHeight*.82-manTop)/(manH+innerHeight*.4)));
     const n=reduce?mw.length:Math.round(t*1.25*mw.length);
     if(n!==litN){litN=n;mw.forEach((w,i)=>w.classList.toggle('lit',i<n));}
+    toTop.classList.toggle('show',y>innerHeight&&y>=maxY-innerHeight*.9);
     kick(y-lastY);lastY=y;ticking=false;
   });
 }
+/* volver arriba: solo cuando falta menos de una pantalla para el final */
+const toTop=$('totop');
+toTop.addEventListener('click',()=>{scrollTo({top:0,behavior:reduce?'auto':'smooth'});toTop.blur();});
 addEventListener('scroll',onScroll,{passive:true});onScroll();
 
 /* pausa cuando la cinta sale de pantalla + botón de pausa (accesibilidad) */
