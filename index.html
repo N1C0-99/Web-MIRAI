@@ -401,7 +401,14 @@ footer{background:var(--ink);padding:4.5rem var(--pr) calc(2rem + var(--sb)) var
 .x{position:absolute;top:calc(.75rem + var(--st));right:max(.75rem,var(--sr));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(10,10,10,.75);font:400 1.5rem var(--mono);display:flex;align-items:center;justify-content:center;z-index:210;transition:background-color .2s ease,color .2s ease,scale var(--press) var(--ease-out)}
 .m-img{width:100%;aspect-ratio:4/5;max-height:62svh;background:#111}
 .m-img img{width:100%;height:100%}
-.m-img{position:relative}
+.m-img{position:relative;overflow:hidden}
+/* remera giratoria: se arrastra en horizontal; el scroll vertical del celular sigue funcionando */
+.m-img.can-spin{cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none}
+.m-img.can-spin.dragging{cursor:grabbing}
+.m-img img{-webkit-user-drag:none;transform-origin:50% 50%}
+.m-hint{position:absolute;top:calc(1rem + var(--st));left:50%;translate:-50% 0;display:none;align-items:center;gap:.45rem;padding:.5rem .85rem;border-radius:999px;background:rgba(10,10,10,.6);color:var(--text);font:500 .58rem var(--mono);letter-spacing:.14em;text-transform:uppercase;pointer-events:none;white-space:nowrap;transition:opacity .4s ease}
+.m-img.can-spin .m-hint{display:inline-flex}
+.m-img.spun .m-hint{opacity:0}
 .m-flip{position:absolute;left:max(.9rem,var(--sl));bottom:.9rem;display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:0 1rem;border-radius:999px;border:1px solid var(--line);background:rgba(10,10,10,.75);color:var(--text);font:500 .62rem var(--mono);letter-spacing:.14em;text-transform:uppercase;transition:background-color .2s ease,color .2s ease,scale var(--press) var(--ease-out)}
 .m-flip svg{width:16px;height:16px;transition:rotate .4s var(--ease-out)}
 .m-flip[aria-pressed=true] svg{rotate:180deg}
@@ -745,6 +752,7 @@ html{scroll-behavior:auto}
   <button class="x" id="m-close" aria-label="Cerrar">&times;</button>
   <!-- Imagen dinámica: usa la foto del producto abierto (ver prompts en el array "products"). -->
   <div class="m-img"><img id="m-img" src="data:," alt="" width="800" height="1000">
+    <span class="m-hint" aria-hidden="true">&#x2194; Arrastrá para girar</span>
     <button class="m-flip" id="m-flip" type="button" aria-pressed="false" aria-label="Ver el otro lado de la remera" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span>Girar</span></button>
   </div>
   <div class="m-info">
@@ -1122,9 +1130,10 @@ function fillModal(p,keepSize){
   cur=p;size=null;
   const mi=$('m-img');setImg(mi,p.imageUrl,[800,1200,1600],'(min-width:900px) 55vw, 100vw',PRODUCT_RATIO);mi.alt=p.imageUrl?p.title:'';
   /* botón para ver el otro lado de la remera */
-  const flip=$('m-flip');flip.hidden=!p.imageUrl2;let side=0;
+  const flip=$('m-flip');flip.hidden=!p.imageUrl2;
   flip.setAttribute('aria-pressed','false');
-  flip.onclick=()=>{side^=1;setImg(mi,side?p.imageUrl2:p.imageUrl,[800,1200,1600],'(min-width:900px) 55vw, 100vw',PRODUCT_RATIO);flip.setAttribute('aria-pressed',side?'true':'false');};
+  spin.reset(p);
+  flip.onclick=()=>spin.to(spin.rest()+180);
   $('m-title').textContent=p.name;$('m-price').textContent=gs(p.price);$('m-desc').textContent=p.description;
   const multi=variantsOf(p).length>1;
   $('color-head').hidden=!multi;$('color-name').textContent=p.color;
@@ -1146,6 +1155,55 @@ function fillModal(p,keepSize){
   const add=$('add');add.disabled=out;add.textContent=out?'Agotado':'Agregar al pedido';
   if(keepSize){const k=[...sz.querySelectorAll('.opt')].find(x=>x.textContent===keepSize&&!x.disabled);if(k)k.click();}
 }
+/* giro 3D de la remera en la ficha: arrastrar con el mouse o el dedo, tocar la foto o el botón "Girar".
+   Con dos fotos (espalda y frente) se simula: gira hasta 90°, ahí cambia la foto y sigue girando desde -90° */
+const spin=(()=>{
+  const box=document.querySelector('.m-img'),mi=$('m-img'),W=[800,1200,1600],S='(min-width:900px) 55vw, 100vw';
+  let p=null,angle=0,shown=0,raf=0,drag=null;
+  mi.draggable=false;
+  function render(a){
+    angle=a;
+    const n=((a%360)+360)%360,side=n>90&&n<270?1:0;
+    if(side!==shown){
+      shown=side;setImg(mi,side?p.imageUrl2:p.imageUrl,W,S,PRODUCT_RATIO);
+      $('m-flip').setAttribute('aria-pressed',side?'true':'false');
+    }
+    const eff=side?n-180:(n>180?n-360:n);
+    mi.style.transform=eff?`perspective(1400px) rotateY(${eff}deg)`:'';
+  }
+  function to(target){
+    cancelAnimationFrame(raf);
+    if(reduce){render(target);return;}
+    const from=angle,t0=performance.now(),dur=560;
+    const step=t=>{const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);render(from+(target-from)*e);if(k<1)raf=requestAnimationFrame(step);};
+    raf=requestAnimationFrame(step);
+  }
+  const rest=()=>Math.round(angle/180)*180;
+  box.addEventListener('pointerdown',e=>{
+    if(!p||!p.imageUrl2||e.button>0||e.target.closest('.m-flip'))return;
+    cancelAnimationFrame(raf);
+    drag={x:e.clientX,a:angle,id:e.pointerId,moved:false};
+    try{box.setPointerCapture(e.pointerId);}catch(err){}
+    box.classList.add('dragging');
+  });
+  box.addEventListener('pointermove',e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    const dx=e.clientX-drag.x;
+    if(Math.abs(dx)>4){drag.moved=true;box.classList.add('spun');}
+    if(drag.moved)render(drag.a+dx*.55);
+  });
+  box.addEventListener('pointerup',e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    const moved=drag.moved;drag=null;box.classList.remove('dragging');
+    /* al soltar se acomoda en el lado más cercano; un toque sin arrastrar da media vuelta */
+    to(moved?rest():rest()+180);
+  });
+  box.addEventListener('pointercancel',()=>{if(drag){drag=null;box.classList.remove('dragging');to(rest());}});
+  return {
+    reset(np){cancelAnimationFrame(raf);drag=null;p=np;angle=0;shown=0;mi.style.transform='';box.classList.toggle('can-spin',!!np.imageUrl2);},
+    to,rest
+  };
+})();
 function closeModalUI(){
   const m=$('modal');if(!m.classList.contains('active'))return;
   m.classList.remove('active');m.inert=true;
