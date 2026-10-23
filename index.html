@@ -168,6 +168,19 @@ button.look-card:active{scale:.98}
 .cat-note{display:flex;align-items:center;gap:.4rem;margin-bottom:1.8rem;font:500 .66rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted-d)}
 .cat-note[hidden]{display:none}
 .cat-note b{color:var(--ink);font-weight:700}
+/* colores: muestras redondas debajo del precio (tarjeta) y arriba de los talles (ficha) */
+.sw-label{text-align:center;margin-top:.7rem;font:500 .6rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted-d)}
+.sw-label b{color:var(--ink);font-weight:700}
+.swatches{display:flex;justify-content:center;gap:.3rem;margin-top:.2rem}
+.sw{position:relative;width:44px;height:44px;border-radius:50%;transition:scale var(--press) var(--ease-out)}
+.sw::before{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--sw);box-shadow:inset 0 0 0 1px rgba(10,10,10,.28)}
+.sw::after{content:"";position:absolute;inset:4px;border-radius:50%;border:1.5px solid transparent;transition:border-color .2s ease}
+.sw[aria-pressed=true]::after{border-color:currentColor}
+.sw.is-out::before{opacity:.35}
+.sw:active{scale:.92}
+.sel-head[hidden]{display:none}
+#colors .swatches{justify-content:flex-start;margin:0 0 1.4rem -6px;color:var(--text)}
+#colors .sw::before{box-shadow:inset 0 0 0 1px rgba(242,240,236,.4)}
 .cat-all{min-height:44px;padding:0 .6rem;text-decoration:underline;text-underline-offset:4px;color:var(--ink);font:inherit;letter-spacing:inherit;text-transform:inherit}
 
 /* catálogo (claro) */
@@ -548,8 +561,6 @@ html{scroll-behavior:auto}
     <h1 class="hero-title"><span class="line"><span>Train with</span></span><span class="line"><span class="r">purpose.</span></span></h1>
     <p class="hero-sub fade">No es moda. Es evolución.</p>
     <div class="pills fade">
-      <a href="#catalogo" class="pill pill-solid" data-go="running">Running</a>
-      <a href="#catalogo" class="pill" data-go="padel">Padel</a>
       <div class="hero-dots" role="group" aria-label="Imágenes de fondo">
         <button class="hero-dot" type="button" aria-current="true" aria-label="Imagen 1 de 3"></button>
         <button class="hero-dot" type="button" aria-current="false" aria-label="Imagen 2 de 3"></button>
@@ -739,6 +750,8 @@ html{scroll-behavior:auto}
     <h2 class="m-title" id="m-title"></h2>
     <p class="m-price" id="m-price"></p>
     <p class="m-desc" id="m-desc"></p>
+    <div class="sel-head" id="color-head" hidden><span class="eyebrow">Color · <b id="color-name"></b></span></div>
+    <div id="colors"></div>
     <div class="sel-head"><span class="eyebrow">Talle</span><button class="link" id="guide-btn" aria-expanded="false">Guía de talles</button></div>
     <p class="guide" id="guide">Corte oversize: pedí tu talle habitual para un calce holgado. Si preferís algo más ajustado, bajá un talle.</p>
     <div class="options" id="sizes"></div>
@@ -809,8 +822,8 @@ function setImg(im,u,widths,sizes,ratio){
 const MOCK_PRODUCTS=[
  {id:"1",title:"Born to Run",price:120000,category:"Running",imageUrl:"mirai-01-espalda-1000.jpg, mirai-01-frente-1000.jpg",sizes:["S","M","XL"],stock:16,description:"Remera negra. Frente: logo MIRAI chico. Espalda: estampa Born to Run y Est. 26' Asunción."},
  {id:"2",title:"Hoy También Suma",price:160000,category:"Running",imageUrl:"mirai-02-espalda-1000.jpg, mirai-02-frente-1000.jpg",sizes:["S","M","L","XL"],stock:2,description:"Remera negra. Frente: logo MIRAI en rojo. Espalda: MIRAI Club en rojo con la frase \"Hoy también suma\"."},
- {id:"3",title:"MIRAI Vertical Negra",price:140000,category:"Running",imageUrl:"mirai-03-espalda-1000.jpg, mirai-03-frente-1000.jpg",sizes:["S","M","L","XL"],stock:40,description:"Remera negra. Frente: inicial m. Espalda: MIRAI en vertical con ondas rojas."},
- {id:"4",title:"MIRAI Vertical Blanca",price:150000,category:"Running",imageUrl:"mirai-04-espalda-1000.jpg, mirai-04-frente-1000.jpg",sizes:["S","M","L","XL"],stock:16,description:"Remera blanca. Frente: inicial m. Espalda: MIRAI en vertical con ondas rojas."},
+ {id:"3",title:"MIRAI Vertical · Negra",price:140000,category:"Running",imageUrl:"mirai-03-espalda-1000.jpg, mirai-03-frente-1000.jpg",sizes:["S","M","L","XL"],stock:40,description:"Remera negra. Frente: inicial m. Espalda: MIRAI en vertical con ondas rojas."},
+ {id:"4",title:"MIRAI Vertical · Blanca",price:150000,category:"Running",imageUrl:"mirai-04-espalda-1000.jpg, mirai-04-frente-1000.jpg",sizes:["S","M","L","XL"],stock:16,description:"Remera blanca. Frente: inicial m. Espalda: MIRAI en vertical con ondas rojas."},
  {id:"5",title:"The Future in Motion",price:150000,category:"Running",imageUrl:"mirai-05-espalda-1000.jpg, mirai-05-frente-1000.jpg",sizes:["S","M","XL"],stock:0,description:"Remera gris oscuro lavado. Frente: emblema MIRAI. Espalda: MIRAI CLUB · The future in motion, con gráfica de corredor."},
  {id:"6",title:"Certified Champs Club",price:150000,category:"Padel",imageUrl:"mirai-06-espalda-1000.jpg, mirai-06-frente-1000.jpg",sizes:["S","M","L","XL"],stock:20,description:"Remera blanca para padel. Frente: logo Mirai Club chico. Espalda: Certified Champs Club con una cancha de padel."}
 ];
@@ -836,8 +849,11 @@ function normalize(raw){
   const seen=new Set();
   const out=list.map((r,i)=>{
     if(!r||typeof r!=='object')return null;
-    const title=String(r.title??'').trim().slice(0,120),price=toPrice(r.price);
-    if(!title||!(price>0))return null;
+    const rawTitle=String(r.title??'').trim().slice(0,120),price=toPrice(r.price);
+    if(!rawTitle||!(price>0))return null;
+    /* colores de una misma remera: filas con el mismo nombre y el color después de " · " (ej. "MIRAI Vertical · Negra") */
+    const cut=rawTitle.lastIndexOf(' · '),name=cut>0?rawTitle.slice(0,cut).trim():rawTitle,color=cut>0?rawTitle.slice(cut+3).trim():'';
+    const title=color?name+' '+color:name;
     const id=String(r.id??'').trim().slice(0,40)||'p'+(i+1);
     if(seen.has(id))return null;seen.add(id);
     const sizes=(Array.isArray(r.sizes)?r.sizes:String(r.sizes??'').split(/[\s,;/|]+/))
@@ -846,7 +862,7 @@ function normalize(raw){
     const label=String(r.category??'').trim().slice(0,40)||'Otros';
     /* imageUrl admite dos fotos separadas por coma: la principal y la del otro lado de la remera */
     const imgs=String(r.imageUrl??'').split(',').map(safeImg).filter(Boolean);
-    return {id,title,price,category:slug(label)||'otros',categoryLabel:label,imageUrl:imgs[0]||'',imageUrl2:imgs[1]||'',sizes,
+    return {id,title,name,color,group:slug(name)||id,price,category:slug(label)||'otros',categoryLabel:label,imageUrl:imgs[0]||'',imageUrl2:imgs[1]||'',sizes,
       stock:Math.max(0,Math.floor(Number(r.stock))||0),description:String(r.description??'').trim().slice(0,600)};
   }).filter(Boolean);
   if(!out.length)throw new Error('No hay productos válidos');
@@ -949,9 +965,24 @@ const reveal=n=>reduce?n.classList.add('in'):io.observe(n);
 document.querySelectorAll('.rv').forEach(reveal);
 
 /* catálogo: cada tarjeta trae foto, título, precio, talles y compra directa por WhatsApp */
-function buildCard(p,i){
+/* colores disponibles de una remera (sus filas hermanas en la planilla) */
+const variantsOf=p=>products.filter(x=>x.group===p.group);
+const COLOR_HEX={negra:'#0A0A0A',negro:'#0A0A0A',blanca:'#F2F0EC',blanco:'#F2F0EC',gris:'#77756f',roja:'#D90000',rojo:'#D90000',azul:'#1f3f8f',verde:'#2f6b3a',beige:'#d8c7a8',crema:'#ece3cf'};
+function swatches(p,onPick){
+  const vs=variantsOf(p),row=el('div','swatches');row.setAttribute('role','group');row.setAttribute('aria-label','Color');
+  vs.forEach(v=>{
+    const b=el('button','sw');b.type='button';b.setAttribute('aria-pressed',v===p?'true':'false');
+    b.setAttribute('aria-label','Color '+v.color+(isOut(v)?' (agotado)':''));b.title=v.color;
+    b.style.setProperty('--sw',COLOR_HEX[slug(v.color)]||'#b9b7b2');if(isOut(v))b.classList.add('is-out');
+    b.onclick=()=>{if(v!==p)onPick(v);};
+    row.append(b);
+  });
+  return row;
+}
+function buildCard(p,i,keepSize){
   const out=isOut(p),c=el('article','card'+(out?' is-out':''));
   c.style.setProperty('--d',(i%3)*60+'ms');
+  const multi=variantsOf(p).length>1;
   const view=el('button','card-img');view.type='button';view.setAttribute('aria-label','Ver detalles de '+p.title);
   const im=document.createElement('img');
   setImg(im,p.imageUrl,[400,700,1000],'(min-width:768px) 31vw, 48vw',PRODUCT_RATIO);
@@ -967,8 +998,16 @@ function buildCard(p,i){
   view.append(el('span','card-n',String(i+1).padStart(2,'0')),el('span','card-v','+ Ver'));
   if(out)view.append(el('span','card-out','Agotado'));
   view.onclick=()=>openModal(p);
-  c.append(view,el('h3','card-title',p.title),el('p','card-price',gs(p.price)));
+  c.append(view,el('h3','card-title',p.name),el('p','card-price',gs(p.price)));
   if(!out&&lowStock(p))c.append(el('p','tag','Últimas unidades'));
+  /* elegir color cambia la foto, el precio y los talles de la tarjeta */
+  if(multi){
+    const head=el('p','sw-label','Color · ');head.append(el('b',null,p.color));
+    c.append(head,swatches(p,v=>{
+      const n=buildCard(v,i,chosen);n.classList.add('in');c.replaceWith(n);
+      const f=n.querySelector('.sw[aria-pressed=true]');if(f)f.focus({preventScroll:true});
+    }));
+  }
 
   let chosen=null;
   const group=el('div','sizes');group.setAttribute('role','group');group.setAttribute('aria-label','Talle de '+p.title);
@@ -984,6 +1023,7 @@ function buildCard(p,i){
     return b;
   });
   group.append(...chips);
+  if(keepSize){const k=chips.find(x=>x.textContent===keepSize&&!x.disabled);if(k)k.click();}
   buy.onclick=()=>{
     if(!chosen){msg.textContent='Elegí un talle primero.';msg.hidden=false;const f=chips.find(x=>!x.disabled);if(f)f.focus();return;}
     openWA(`Hola MIRAI CLUB! Quiero comprar la prenda ${p.title} en talle ${chosen}. ¿Tienen disponibilidad?`);
@@ -992,13 +1032,16 @@ function buildCard(p,i){
   return c;
 }
 function renderGrid(list){
-  const g=$('grid'),cards=list.map(buildCard);
+  /* una tarjeta por remera: si tiene varios colores se muestra el primero con stock */
+  const seenG=new Set(),one=list.filter(p=>!seenG.has(p.group)&&seenG.add(p.group))
+    .map(p=>variantsOf(p).find(v=>!isOut(v))||p);
+  const g=$('grid'),cards=one.map((p,i)=>buildCard(p,i));
   g.replaceChildren(...cards);
   if(!cards.length)g.append(el('p','grid-empty','No hay prendas en esta categoría por ahora.'));
   cards.forEach(reveal);
 }
 function buildFilters(){
-  $('cat-n').textContent='('+String(products.length).padStart(2,'0')+')';
+  $('cat-n').textContent='('+String(new Set(products.map(p=>p.group)).size).padStart(2,'0')+')';
 }
 /* sin botones de filtro: los del inicio (Running / Padel) filtran y acá se avisa con "Ver todas" */
 function setFilter(cat){
@@ -1050,13 +1093,23 @@ function back(){if(history.state&&history.state.ui)history.back();else closeAll(
 
 /* modal */
 function openModal(p){
-  lastFocus=document.activeElement;cur=p;size=null;
+  lastFocus=document.activeElement;
+  fillModal(p);
+  const m=$('modal');m.inert=false;m.classList.add('active');m.scrollTop=0;lock(true);
+  history.pushState({ui:'modal'},'');$('m-close').focus({preventScroll:true});
+}
+/* rellena la ficha; al cambiar de color se vuelve a llamar manteniendo el talle elegido */
+function fillModal(p,keepSize){
+  cur=p;size=null;
   const mi=$('m-img');setImg(mi,p.imageUrl,[800,1200,1600],'(min-width:900px) 55vw, 100vw',PRODUCT_RATIO);mi.alt=p.imageUrl?p.title:'';
   /* botón para ver el otro lado de la remera */
   const flip=$('m-flip');flip.hidden=!p.imageUrl2;let side=0;
   flip.setAttribute('aria-pressed','false');
   flip.onclick=()=>{side^=1;setImg(mi,side?p.imageUrl2:p.imageUrl,[800,1200,1600],'(min-width:900px) 55vw, 100vw',PRODUCT_RATIO);flip.setAttribute('aria-pressed',side?'true':'false');};
-  $('m-title').textContent=p.title;$('m-price').textContent=gs(p.price);$('m-desc').textContent=p.description;
+  $('m-title').textContent=p.name;$('m-price').textContent=gs(p.price);$('m-desc').textContent=p.description;
+  const multi=variantsOf(p).length>1;
+  $('color-head').hidden=!multi;$('color-name').textContent=p.color;
+  $('colors').replaceChildren(...(multi?[swatches(p,v=>{fillModal(v,size);const f=$('colors').querySelector('.sw[aria-pressed=true]');if(f)f.focus();})]:[]));
   $('size-err').style.display='none';$('stock-note').style.display='none';
   $('guide').classList.remove('open');$('guide-btn').setAttribute('aria-expanded','false');
   const out=isOut(p),sz=$('sizes');
@@ -1072,8 +1125,7 @@ function openModal(p){
     return b;
   }));
   const add=$('add');add.disabled=out;add.textContent=out?'Agotado':'Agregar al pedido';
-  const m=$('modal');m.inert=false;m.classList.add('active');m.scrollTop=0;lock(true);
-  history.pushState({ui:'modal'},'');$('m-close').focus({preventScroll:true});
+  if(keepSize){const k=[...sz.querySelectorAll('.opt')].find(x=>x.textContent===keepSize&&!x.disabled);if(k)k.click();}
 }
 function closeModalUI(){
   const m=$('modal');if(!m.classList.contains('active'))return;
@@ -1195,7 +1247,7 @@ renderCart();
   const g=$('grid');g.setAttribute('aria-busy','true');
   const paint=list=>{
     products=list;
-    $('total-n').textContent='('+String(products.length).padStart(2,'0')+')';
+    $('total-n').textContent='('+String(new Set(products.map(p=>p.group)).size).padStart(2,'0')+')';
     restoreCart();buildFilters();setFilter(pendingFilter);renderThumbs();renderCart();renderCommunity();
   };
   /* si hay copia guardada, se pinta ya; cuando llega la planilla solo se repinta si algo cambió */
