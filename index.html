@@ -105,6 +105,7 @@ html.ready .hero-img{transform:none}
 .hero-slide .hero-img{scale:1.06;transition:transform 2.4s var(--ease-out),scale 0s 1.4s}
 .hero-slide.is-active .hero-img{scale:1;transition:transform 2.4s var(--ease-out),scale 7s linear}
 .hero-slide--portada .hero-img{object-position:50% 50%}
+.hero-slide--pista .hero-img{object-position:55% 35%}
 /* con la portada, la capa oscura solo cubre la parte baja (el texto) y deja el logo MIRAI blanco */
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,#0A0A0A 0%,rgba(10,10,10,.72) 32%,rgba(10,10,10,.12) 62%,rgba(10,10,10,0) 100%);opacity:0;transition:opacity 1.4s var(--ease-out)}
 .hero::after{transition:opacity 1.4s var(--ease-out)}
@@ -149,6 +150,7 @@ html.ready .fade{opacity:1;transform:none;transition-delay:.4s}
 .tile{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;color:#fff;background:#111}
 @media(min-width:768px){.tile{aspect-ratio:1/.82}}
 .tile img{position:absolute;left:0;top:-8%;width:100%;height:116%;transition:scale 1.2s var(--ease-out)}
+.tile-tee img{object-position:50% 50%}
 .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 58%)}
 .tile-in{position:absolute;left:var(--pl);right:var(--pr);bottom:1.2rem;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;gap:.6rem;transition:scale var(--press) var(--ease-out),opacity var(--press) ease;transform-origin:left bottom}
 .tile-t{display:block;font:700 clamp(1rem,3vw,2rem)/1 var(--mono);letter-spacing:-.04em;text-transform:uppercase}
@@ -176,6 +178,7 @@ html.ready .fade{opacity:1;transform:none;transition-delay:.4s}
 .card-img{display:block;width:100%;padding:0;position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--card);clip-path:inset(0 0 100% 0);transition:clip-path 1s var(--ease-out) var(--d,0ms),scale var(--press) var(--ease-out)}
 .card.in .card-img{clip-path:inset(0)}
 .card-img img{width:100%;height:100%;transition:scale .9s var(--ease-out)}
+.card-img .card-alt{position:absolute;inset:0;opacity:0;transition:opacity .45s ease,scale .9s var(--ease-out)}
 .card-n{position:absolute;top:.6rem;left:.6rem;background:var(--ink);color:#fff;padding:.18rem .45rem;font:500 .6rem var(--mono);letter-spacing:.12em;font-variant-numeric:tabular-nums}
 .card-v{position:absolute;right:.6rem;bottom:.6rem;background:var(--ink);color:#fff;padding:.3rem .65rem;border-radius:999px;font:500 .58rem var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .25s var(--ease-out)}
 .card-title{font:500 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;text-align:center;line-height:1.5;margin-top:1rem}
@@ -378,6 +381,12 @@ footer{background:var(--ink);padding:4.5rem var(--pr) calc(2rem + var(--sb)) var
 .x{position:absolute;top:calc(.75rem + var(--st));right:max(.75rem,var(--sr));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(10,10,10,.75);font:400 1.5rem var(--mono);display:flex;align-items:center;justify-content:center;z-index:210;transition:background-color .2s ease,color .2s ease,scale var(--press) var(--ease-out)}
 .m-img{width:100%;aspect-ratio:4/5;max-height:62svh;background:#111}
 .m-img img{width:100%;height:100%}
+.m-img{position:relative}
+.m-flip{position:absolute;left:max(.9rem,var(--sl));bottom:.9rem;display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:0 1rem;border-radius:999px;border:1px solid var(--line);background:rgba(10,10,10,.75);color:var(--text);font:500 .62rem var(--mono);letter-spacing:.14em;text-transform:uppercase;transition:background-color .2s ease,color .2s ease,scale var(--press) var(--ease-out)}
+.m-flip svg{width:16px;height:16px;transition:rotate .4s var(--ease-out)}
+.m-flip[aria-pressed=true] svg{rotate:180deg}
+.m-flip[hidden]{display:none}
+.m-flip:active{scale:.95}
 .m-info{padding:2rem var(--pr) 0 var(--pl);max-width:620px;margin:0 auto}
 .m-title{font:700 clamp(1.6rem,5vw,2.4rem)/1.05 var(--mono);letter-spacing:-.05em;text-transform:uppercase;margin:.6rem 0 .5rem}
 .m-price{font:700 1.15rem var(--mono);color:var(--red-d);margin-bottom:1.5rem;font-variant-numeric:tabular-nums}
@@ -436,6 +445,8 @@ footer{background:var(--ink);padding:4.5rem var(--pr) calc(2rem + var(--sb)) var
 .pill:hover,.pill-solid:hover{background:var(--red);border-color:var(--red);color:#fff}
 .tile:hover img{scale:1.04}
 .card:hover .card-img img{scale:1.04}
+.card:hover .card-img .card-alt{opacity:1}
+.m-flip:hover{background:var(--text);color:var(--ink)}
 .card:hover .card-v{opacity:1;transform:none}
 .filter-btn:not(.active):hover{background:var(--ink);color:#fff}
 .opt:not(:disabled):not(.selected):hover{border-color:var(--text)}
@@ -513,7 +524,12 @@ html{scroll-behavior:auto}
         sizes="100vw">
     </picture>
     </div>
-    <!-- imagen 2: portada MIRAI adaptada (PC: banner arriba a la derecha; celular: banner a lo ancho) -->
+    <!-- imagen 2: equipo MIRAI en la pista (foto propia). En el celular se recorta al centro del grupo. -->
+    <div class="hero-slide hero-slide--pista" aria-hidden="true">
+      <img class="hero-img" alt="" width="1402" height="1122" fetchpriority="low" decoding="async"
+        src="hero-pista-1400.jpg" srcset="hero-pista-900.jpg 900w, hero-pista-1400.jpg 1400w" sizes="max(100vw, 125vh)">
+    </div>
+    <!-- imagen 3: portada MIRAI adaptada (PC: banner arriba a la derecha; celular: banner a lo ancho) -->
     <div class="hero-slide hero-slide--portada" aria-hidden="true">
     <picture>
       <source media="(max-aspect-ratio: 4/5)" sizes="max(100vw, 66vh)" srcset="hero-portada-movil-720.jpg 720w, hero-portada-movil-1080.jpg 1080w">
@@ -527,11 +543,12 @@ html{scroll-behavior:auto}
     <h1 class="hero-title"><span class="line"><span>Train with</span></span><span class="line"><span class="r">purpose.</span></span></h1>
     <p class="hero-sub fade">No es moda. Es evolución.</p>
     <div class="pills fade">
-      <a href="#catalogo" class="pill pill-solid" data-go="oversize">Oversize</a>
-      <a href="#catalogo" class="pill" data-go="born-to-run">Born to Run</a>
+      <a href="#catalogo" class="pill pill-solid" data-go="running">Running</a>
+      <a href="#catalogo" class="pill" data-go="padel">Padel</a>
       <div class="hero-dots" role="group" aria-label="Imágenes de fondo">
-        <button class="hero-dot" type="button" aria-current="true" aria-label="Imagen 1 de 2"></button>
-        <button class="hero-dot" type="button" aria-current="false" aria-label="Imagen 2 de 2"></button>
+        <button class="hero-dot" type="button" aria-current="true" aria-label="Imagen 1 de 3"></button>
+        <button class="hero-dot" type="button" aria-current="false" aria-label="Imagen 2 de 3"></button>
+        <button class="hero-dot" type="button" aria-current="false" aria-label="Imagen 3 de 3"></button>
       </div>
     </div>
   </div>
@@ -541,36 +558,7 @@ html{scroll-behavior:auto}
 <div class="ticker"><div class="ticker-track" id="marquee" aria-hidden="true"></div><button class="tpause" id="tpause" aria-pressed="false" aria-label="Pausar cinta de texto">Pausa</button></div>
 
 <section class="tiles" aria-label="Líneas">
-  <a class="tile" href="#catalogo" data-go="oversize" aria-label="Ver línea Oversize">
-    <!--
-    PROMPT MOSAICO OVERSIZE (reemplaza a remera2.jpg) · Midjourney: --ar 4:5 --style raw --v 7
-    Retrato vertical de cuerpo entero. Modelo de 22 años, delgado, pelo rapado, de pie bajo un
-    viaducto de hormigón, el peso en una pierna, manos en los bolsillos, mirada fuera de cámara.
-    Remera oversize negra MIRAI CLUB que cae por debajo de la cadera, hombro caído y mangas a mitad
-    del antebrazo; jean baggy gris lavado, cadena plateada fina, zapatillas negras.
-    Luz natural de tarde nublada entrando de costado (lateral suave, 5600 K), sombras abiertas.
-    Lente 50 mm f/2.8 a la altura de la cintura, apenas en contrapicado para darle presencia.
-    Paleta: grises de hormigón y negro, nada saturado. Tela nítida para que se note el gramaje.
-    -->
-    <picture>
-      <source media="(min-width:768px)" sizes="50vw"
-        srcset="https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=700&h=700&q=80 700w, https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=1000&h=1000&q=80 1000w, https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=1400&h=1400&q=80 1400w">
-      <img src="https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=600&h=870&q=80"
-        srcset="https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=400&h=580&q=80 400w, https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=600&h=870&q=80 600w, https://images.unsplash.com/photo-1751353271394-b7263e9ba639?auto=format&fit=crop&crop=faces,entropy&w=900&h=1305&q=80 900w"
-        sizes="50vw" alt="" width="600" height="870" loading="lazy" decoding="async">
-    </picture>
-    <div class="tile-in"><span class="tile-t">Oversize</span><span class="tile-s">+ Ver</span></div>
-  </a>
-  <a class="tile" href="#catalogo" data-go="born-to-run" aria-label="Ver línea Born to Run">
-    <!--
-    PROMPT MOSAICO BORN TO RUN (reemplaza a todos.jpg) · Midjourney: --ar 4:5 --style raw --v 7
-    Dos corredores de espaldas trotando por un sendero urbano de noche, entre torres con ventanas
-    encendidas que se vuelven bokeh. Remeras negras Born to Run con el estampado de la espalda
-    visible. Una farola alta por detrás y arriba recorta hombros y nuca (contraluz).
-    Lente 85 mm f/1.8 tomado de lejos para comprimir el fondo, 1/250 s, ISO 2000.
-    Fondo frío azul verdoso, remeras y piel neutras, grano fino. Figuras en el tercio central,
-    cielo oscuro arriba para que el título del mosaico se lea.
-    -->
+  <a class="tile" href="#catalogo" data-go="running" aria-label="Ver línea Running">
     <picture>
       <source media="(min-width:768px)" sizes="50vw"
         srcset="https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=700&h=700&q=80 700w, https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=1000&h=1000&q=80 1000w, https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=1400&h=1400&q=80 1400w">
@@ -578,7 +566,12 @@ html{scroll-behavior:auto}
         srcset="https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=400&h=580&q=80 400w, https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=600&h=870&q=80 600w, https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=900&h=1305&q=80 900w"
         sizes="50vw" alt="" width="600" height="870" loading="lazy" decoding="async">
     </picture>
-    <div class="tile-in"><span class="tile-t">Born to Run</span><span class="tile-s">+ Ver</span></div>
+    <div class="tile-in"><span class="tile-t">Running</span><span class="tile-s">+ Ver</span></div>
+  </a>
+  <a class="tile tile-tee" href="#catalogo" data-go="padel" aria-label="Ver línea Padel">
+    <img src="mirai-06-espalda-1000.jpg" srcset="mirai-06-espalda-600.jpg 600w, mirai-06-espalda-1000.jpg 1000w"
+      sizes="50vw" alt="" width="1000" height="1250" loading="lazy" decoding="async">
+    <div class="tile-in"><span class="tile-t">Padel</span><span class="tile-s">+ Ver</span></div>
   </a>
 </section>
 
@@ -734,7 +727,9 @@ html{scroll-behavior:auto}
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title" inert>
   <button class="x" id="m-close" aria-label="Cerrar">&times;</button>
   <!-- Imagen dinámica: usa la foto del producto abierto (ver prompts en el array "products"). -->
-  <div class="m-img"><img id="m-img" src="data:," alt="" width="800" height="1000"></div>
+  <div class="m-img"><img id="m-img" src="data:," alt="" width="800" height="1000">
+    <button class="m-flip" id="m-flip" type="button" aria-pressed="false" aria-label="Ver el otro lado de la remera" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span>Girar</span></button>
+  </div>
   <div class="m-info">
     <p class="eyebrow">Drop 01</p>
     <h2 class="m-title" id="m-title"></h2>
@@ -808,39 +803,12 @@ function setImg(im,u,widths,sizes,ratio){
 /* datos de prueba con la misma estructura que la planilla:
    id · title · price · category · imageUrl · sizes (talles disponibles) · stock (unidades totales) · description */
 const MOCK_PRODUCTS=[
- /* PROMPT 01 · Remera Mirai Club (Back) · --ar 4:5 --style raw --v 7
-    Vista de espalda, plano medio desde la cintura. Modelo de pelo rizado oscuro mirando hacia abajo y a la izquierda,
-    frente a una pared de ladrillo pintada de blanco. Remera oversize negra con el logo MIRAI CLUB grande en la espalda
-    (serigrafía blanca), costura de hombro caída. Luz dura de ventana desde la derecha que marca los pliegues de la tela.
-    Lente 50 mm f/4, foco en el estampado. Fondo gris claro desaturado. */
- {id:"1",title:"Remera Mirai Club (Back)",price:150000,category:"Oversize",imageUrl:"remera2-4x5-1000.jpg",sizes:["S","M","XL"],stock:16,description:"Algodón 240g, corte oversize. Detalle en la espalda."},
- /* PROMPT 02 · Born to Run - Team · --ar 4:5 --style raw --v 7
-    Grupo de 3 o 4 corredores (hombres y mujeres) parados en una vereda de noche charlando después de entrenar,
-    respiración agitada, uno con las manos en la cintura. Todos con remeras Born to Run negras. Fondo de ciudad con torres
-    iluminadas y semáforos. Flash directo en cámara estilo snapshot editorial de revista de running, sombras duras detrás,
-    fondo subexpuesto 1 paso. Lente 28 mm f/5.6, 1/60 s. */
- {id:"2",title:"Born to Run - Team",price:160000,category:"Born to Run",imageUrl:"https://images.unsplash.com/photo-1788607316355-b0709feb75cb?auto=format&fit=crop&w=800&q=80",sizes:["S","M","L","XL"],stock:2,description:"Estampado frontal de alta densidad. Boxy fit."},
- /* PROMPT 03 · Colección Mirai Athlete · --ar 4:5 --style raw --v 7
-    Foto de producto: remera negra lisa colgada de una percha de madera clara sobre pared blanca con textura (hacé una
-    segunda toma igual con la remera blanca). Luz suave de ventana grande a 45° + rebotador blanco del lado opuesto, sombra
-    suave detrás. Lente macro 90 mm f/8, encuadre centrado, la remera ocupa el 70 % del cuadro. Estampado minimalista
-    MIRAI en el pecho, tipografía monoespaciada chica. */
- {id:"3",title:"Colección Mirai Athlete",price:140000,category:"Oversize",imageUrl:"remera3-4x5-1000.jpg",sizes:["S","M","L","XL"],stock:40,description:"Opciones en blanco y negro. Minimalista y premium."},
- /* PROMPT 04 · Born to Run - Action · --ar 4:5 --style raw --v 7
-    Modelo saltando en el aire desde la baranda de una escalera urbana junto a un muro de ladrillo blanco, piernas recogidas,
-    remera oversize negra flotando por el movimiento. Jogger negro, zapatillas blancas. 1/1000 s para congelar, sol alto de
-    mediodía con luz dura, recorte de cielo arriba. Lente 24 mm f/8 desde abajo (contrapicado) para exagerar la altura. */
- {id:"4",title:"Born to Run - Action",price:150000,category:"Born to Run",imageUrl:"https://images.unsplash.com/photo-1618453292507-4959ece6429e?auto=format&fit=crop&w=800&q=80",sizes:["S","M","L","XL"],stock:16,description:"Diseñada para el movimiento. Ideal para entrenar."},
- /* PROMPT 05 · Born to Run - Focus · --ar 4:5 --style raw --v 7
-    Retrato frontal en plano americano, modelo de 20 años con cuello térmico negro tapando la boca y mirada fija a cámara,
-    remera negra Born to Run, brazos relajados. Fondo de parque oscuro desenfocado al atardecer. Luz: softbox grande a la
-    izquierda (Rembrandt suave) + luz de recorte detrás. Lente 85 mm f/1.8. Paleta oscura, piel cálida. */
- {id:"5",title:"Born to Run - Focus",price:150000,category:"Born to Run",imageUrl:"https://images.unsplash.com/photo-1618328198676-499703032285?auto=format&fit=crop&w=800&q=80",sizes:["S","M","XL"],stock:0,description:"Estilo urbano y atlético."},
- /* PROMPT 06 · Born to Run - Stretch · --ar 4:5 --style raw --v 7
-    Corredora agachada atándose las zapatillas en el medio de una calle vacía de noche, iluminada por una farola cenital que
-    dibuja un círculo de luz sobre el asfalto; el resto en penumbra, árboles a los costados. Remera negra Born to Run, calzas
-    negras. Lente 35 mm f/1.4 tomado de lejos, figura chica en el tercio inferior, mucho espacio negativo. ISO 3200, grano. */
- {id:"6",title:"Born to Run - Stretch",price:150000,category:"Born to Run",imageUrl:"https://images.unsplash.com/photo-1679769177248-727f4d1047a5?auto=format&fit=crop&w=800&q=80",sizes:["S","M","L","XL"],stock:20,description:"Comodidad en cada movimiento."}
+ {id:"1",title:"Born to Run",price:120000,category:"Running",imageUrl:"mirai-01-espalda-1000.jpg, mirai-01-frente-1000.jpg",sizes:["S","M","XL"],stock:16,description:"Remera negra. Frente: logo MIRAI chico. Espalda: estampa Born to Run y Est. 26' Asunción."},
+ {id:"2",title:"Hoy También Suma",price:160000,category:"Running",imageUrl:"mirai-02-espalda-1000.jpg, mirai-02-frente-1000.jpg",sizes:["S","M","L","XL"],stock:2,description:"Remera negra. Frente: logo MIRAI en rojo. Espalda: MIRAI Club en rojo con la frase \"Hoy también suma\"."},
+ {id:"3",title:"MIRAI Vertical Negra",price:140000,category:"Running",imageUrl:"mirai-03-espalda-1000.jpg, mirai-03-frente-1000.jpg",sizes:["S","M","L","XL"],stock:40,description:"Remera negra. Frente: inicial m. Espalda: MIRAI en vertical con ondas rojas."},
+ {id:"4",title:"MIRAI Vertical Blanca",price:150000,category:"Running",imageUrl:"mirai-04-espalda-1000.jpg, mirai-04-frente-1000.jpg",sizes:["S","M","L","XL"],stock:16,description:"Remera blanca. Frente: inicial m. Espalda: MIRAI en vertical con ondas rojas."},
+ {id:"5",title:"The Future in Motion",price:150000,category:"Running",imageUrl:"mirai-05-espalda-1000.jpg, mirai-05-frente-1000.jpg",sizes:["S","M","XL"],stock:0,description:"Remera gris oscuro lavado. Frente: emblema MIRAI. Espalda: MIRAI CLUB · The future in motion, con gráfica de corredor."},
+ {id:"6",title:"Certified Champs Club",price:150000,category:"Padel",imageUrl:"mirai-06-espalda-1000.jpg, mirai-06-frente-1000.jpg",sizes:["S","M","L","XL"],stock:20,description:"Remera blanca para padel. Frente: logo Mirai Club chico. Espalda: Certified Champs Club con una cancha de padel."}
 ];
 function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
 const openWA=text=>window.open(`https://wa.me/${WA}?text=${encodeURIComponent(text)}`,'_blank','noopener');
@@ -872,7 +840,9 @@ function normalize(raw){
       .map(s=>String(s).trim().toUpperCase()).filter((s,j,a)=>SIZES.includes(s)&&a.indexOf(s)===j)
       .sort((a,b)=>SIZES.indexOf(a)-SIZES.indexOf(b));
     const label=String(r.category??'').trim().slice(0,40)||'Otros';
-    return {id,title,price,category:slug(label)||'otros',categoryLabel:label,imageUrl:safeImg(r.imageUrl),sizes,
+    /* imageUrl admite dos fotos separadas por coma: la principal y la del otro lado de la remera */
+    const imgs=String(r.imageUrl??'').split(',').map(safeImg).filter(Boolean);
+    return {id,title,price,category:slug(label)||'otros',categoryLabel:label,imageUrl:imgs[0]||'',imageUrl2:imgs[1]||'',sizes,
       stock:Math.max(0,Math.floor(Number(r.stock))||0),description:String(r.description??'').trim().slice(0,600)};
   }).filter(Boolean);
   if(!out.length)throw new Error('No hay productos válidos');
@@ -982,7 +952,15 @@ function buildCard(p,i){
   const im=document.createElement('img');
   setImg(im,p.imageUrl,[400,700,1000],'(min-width:768px) 31vw, 48vw',PRODUCT_RATIO);
   im.alt=p.imageUrl?p.title:'';im.width=600;im.height=750;im.loading=i<2?'eager':'lazy';im.decoding='async';
-  view.append(im,el('span','card-n',String(i+1).padStart(2,'0')),el('span','card-v','+ Ver'));
+  view.append(im);
+  /* segunda foto (el otro lado): aparece al pasar el mouse */
+  if(p.imageUrl2){
+    const im2=document.createElement('img');im2.className='card-alt';
+    setImg(im2,p.imageUrl2,[400,700,1000],'(min-width:768px) 31vw, 48vw',PRODUCT_RATIO);
+    im2.alt='';im2.width=600;im2.height=750;im2.loading='lazy';im2.decoding='async';
+    view.append(im2);view.classList.add('has-alt');
+  }
+  view.append(el('span','card-n',String(i+1).padStart(2,'0')),el('span','card-v','+ Ver'));
   if(out)view.append(el('span','card-out','Agotado'));
   view.onclick=()=>openModal(p);
   c.append(view,el('h3','card-title',p.title),el('p','card-price',gs(p.price)));
@@ -1059,6 +1037,10 @@ function back(){if(history.state&&history.state.ui)history.back();else closeAll(
 function openModal(p){
   lastFocus=document.activeElement;cur=p;size=null;
   const mi=$('m-img');setImg(mi,p.imageUrl,[800,1200,1600],'(min-width:900px) 55vw, 100vw',PRODUCT_RATIO);mi.alt=p.imageUrl?p.title:'';
+  /* botón para ver el otro lado de la remera */
+  const flip=$('m-flip');flip.hidden=!p.imageUrl2;let side=0;
+  flip.setAttribute('aria-pressed','false');
+  flip.onclick=()=>{side^=1;setImg(mi,side?p.imageUrl2:p.imageUrl,[800,1200,1600],'(min-width:900px) 55vw, 100vw',PRODUCT_RATIO);flip.setAttribute('aria-pressed',side?'true':'false');};
   $('m-title').textContent=p.title;$('m-price').textContent=gs(p.price);$('m-desc').textContent=p.description;
   $('size-err').style.display='none';$('stock-note').style.display='none';
   $('guide').classList.remove('open');$('guide-btn').setAttribute('aria-expanded','false');
