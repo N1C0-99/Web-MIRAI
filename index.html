@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="theme-color" content="#0A0A0A">
 <meta name="color-scheme" content="dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://images.unsplash.com https://lh3.googleusercontent.com https://*.cdninstagram.com https://*.fbcdn.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://images.unsplash.com https://lh3.googleusercontent.com https://*.cdninstagram.com https://*.fbcdn.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://lhkdtzskffzmbelhgeqk.supabase.co https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>MIRAI CLUB | Train with purpose</title>
 <meta name="description" content="No es moda. Es evolución. Indumentaria de edición limitada con diseños propios. Asunción, Paraguay.">
 <meta property="og:title" content="MIRAI CLUB">
@@ -778,6 +778,9 @@ html{scroll-behavior:auto}
    Vacía = la web usa MOCK_PRODUCTS. Si la planilla falla, responde mal o tarda más de 8 s, también usa MOCK_PRODUCTS.
    Si las fotos de la planilla están en otro dominio, agregalo a img-src del Content-Security-Policy (en el <head>). */
 const SHEET_API_URL="https://script.google.com/macros/s/AKfycbyka2VKG8RUycN3U4i4y6IYAuuZWDwUd94-LtsrujI1cm_2tRxuRuJ6RyqRo-siVBCO/exec";
+/* SUPABASE: base de datos principal (proyecto "mirai-club"). Se llena sola desde la planilla cada 5 minutos.
+   La clave es la "publishable": pública a propósito, solo permite leer. */
+const SUPABASE_URL="https://lhkdtzskffzmbelhgeqk.supabase.co",SUPABASE_KEY="sb_publishable_-lP6mP2U6tk8Je7OCWZxlQ_hyYCXhUo";
 /* SITE_URL: la dirección pública de la web cuando la publiques (ej. "https://miraiclub.com.py"). Es el link que se comparte.
    Vacía = se comparte la dirección actual si la web está publicada; abierta desde el archivo, se comparte el Instagram. */
 const SITE_URL="https://miraiclub.vercel.app/";
@@ -924,23 +927,37 @@ function renderCommunity(){
 const CACHE_KEY='mirai_catalog_v1';
 function readCache(){try{const c=JSON.parse(localStorage.getItem(CACHE_KEY));return c&&c.data?c:null;}catch(e){return null;}}
 function writeCache(data){try{localStorage.setItem(CACHE_KEY,JSON.stringify({t:Date.now(),data}));}catch(e){}}
+/* Supabase: copia de la planilla que se actualiza sola cada 5 min. Responde rápido, sin el "despertar" del script de Google */
+async function fetchSupabase(signal){
+  const get=(table,select)=>fetch(`${SUPABASE_URL}/rest/v1/${table}?select=${select}&order=orden`,{headers:{apikey:SUPABASE_KEY},signal,cache:'no-store'})
+    .then(r=>{if(!r.ok)throw new Error('Supabase HTTP '+r.status);return r.json();});
+  const [products,comunidad]=await Promise.all([
+    get('productos','id,title,price,category,imageUrl:image_url,sizes,stock,description'),
+    get('comunidad','imageUrl:image_url,usuario,link').catch(()=>[])
+  ]);
+  return {products,comunidad};
+}
+async function fetchSheet(signal){
+  const res=await fetch(SHEET_API_URL,{signal,cache:'no-store'});
+  if(!res.ok)throw new Error('Planilla HTTP '+res.status);
+  return res.json();
+}
 async function loadProducts(){
-  if(SHEET_API_URL){
-    /* el script de Google tarda ~10 s en "despertar" si nadie entró hace rato: por eso 15 s */
-    const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),15000);
+  /* orden: Supabase → planilla directa (tarda ~10 s si estaba dormida) → última copia guardada → MOCK_PRODUCTS */
+  const sources=[[SUPABASE_URL&&fetchSupabase,6000],[SHEET_API_URL&&fetchSheet,15000]];
+  for(const [get,ms] of sources){
+    if(!get)continue;
+    const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),ms);
     try{
-      const res=await fetch(SHEET_API_URL,{signal:ctrl.signal,cache:'no-store'});
-      if(!res.ok)throw new Error('HTTP '+res.status);
-      const data=await res.json(),list=normalize(data);
+      const data=await get(ctrl.signal),list=normalize(data);
       community=normalizeCommunity(data&&data.comunidad);writeCache(data);
       return list;
-    }catch(err){
-      const c=readCache();
-      if(c){try{community=normalizeCommunity(c.data.comunidad);console.warn('[Mirai] La planilla no respondió; uso la última copia guardada.',err);return normalize(c.data);}catch(e){}}
-      console.warn('[Mirai] No se pudo leer la planilla; uso MOCK_PRODUCTS.',err);
-    }
+    }catch(err){console.warn('[Mirai] '+get.name+' no respondió.',err);}
     finally{clearTimeout(timer);}
   }
+  const c=readCache();
+  if(c){try{community=normalizeCommunity(c.data.comunidad);console.warn('[Mirai] Uso la última copia guardada.');return normalize(c.data);}catch(e){}}
+  console.warn('[Mirai] Sin datos; uso MOCK_PRODUCTS.');
   return normalize(MOCK_PRODUCTS);
 }
 
