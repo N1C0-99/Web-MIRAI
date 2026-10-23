@@ -150,7 +150,19 @@ html.ready .fade{opacity:1;transform:none;transition-delay:.4s}
 .tile{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;color:#fff;background:#111}
 @media(min-width:768px){.tile{aspect-ratio:1/.82}}
 .tile img{position:absolute;left:0;top:-8%;width:100%;height:116%;transition:scale 1.2s var(--ease-out)}
-.tile-tee img{object-position:50% 50%}
+/* celular (vertical): se ve el centro del grupo; PC (horizontal): entra la foto casi entera */
+.tile-running img{object-position:48% 60%}
+.tile-padel img{object-position:45% 58%}
+
+/* lookbook de la colección: fotos de la carpeta "coleccion", de borde a borde en el celular */
+.look{margin:0 0 2.4rem}
+.look-track{display:grid;grid-auto-flow:column;grid-auto-columns:min(72vw,320px);gap:.5rem;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;margin-inline:calc(var(--pl) * -1) calc(var(--pr) * -1);padding-inline:var(--pl) var(--pr);scroll-padding-inline:var(--pl)}
+.look-track::-webkit-scrollbar{display:none}
+.look-card{position:relative;display:block;width:100%;padding:0;aspect-ratio:4/5;overflow:hidden;border-radius:4px;background:var(--card);scroll-snap-align:start;transition:scale var(--press) var(--ease-out)}
+.look-card img{width:100%;height:100%;object-fit:cover;transition:scale .9s var(--ease-out)}
+button.look-card:active{scale:.98}
+.look-tag{position:absolute;left:.7rem;bottom:.7rem;z-index:1;padding:.45rem .7rem;border-radius:999px;background:rgba(10,10,10,.72);color:#fff;font:500 .58rem var(--mono);letter-spacing:.14em;text-transform:uppercase}
+@media(min-width:1100px){.look-track{grid-auto-flow:row;grid-template-columns:repeat(5,1fr);overflow:visible;margin-inline:0;padding-inline:0}}
 .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 58%)}
 .tile-in{position:absolute;left:var(--pl);right:var(--pr);bottom:1.2rem;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;gap:.6rem;transition:scale var(--press) var(--ease-out),opacity var(--press) ease;transform-origin:left bottom}
 .tile-t{display:block;font:700 clamp(1rem,3vw,2rem)/1 var(--mono);letter-spacing:-.04em;text-transform:uppercase}
@@ -446,6 +458,7 @@ footer{background:var(--ink);padding:4.5rem var(--pr) calc(2rem + var(--sb)) var
 .tile:hover img{scale:1.04}
 .card:hover .card-img img{scale:1.04}
 .card:hover .card-img .card-alt{opacity:1}
+button.look-card:hover img{scale:1.04}
 .m-flip:hover{background:var(--text);color:var(--ink)}
 .card:hover .card-v{opacity:1;transform:none}
 .filter-btn:not(.active):hover{background:var(--ink);color:#fff}
@@ -558,19 +571,15 @@ html{scroll-behavior:auto}
 <div class="ticker"><div class="ticker-track" id="marquee" aria-hidden="true"></div><button class="tpause" id="tpause" aria-pressed="false" aria-label="Pausar cinta de texto">Pausa</button></div>
 
 <section class="tiles" aria-label="Líneas">
-  <a class="tile" href="#catalogo" data-go="running" aria-label="Ver línea Running">
-    <picture>
-      <source media="(min-width:768px)" sizes="50vw"
-        srcset="https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=700&h=700&q=80 700w, https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=1000&h=1000&q=80 1000w, https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=1400&h=1400&q=80 1400w">
-      <img src="https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=600&h=870&q=80"
-        srcset="https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=400&h=580&q=80 400w, https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=600&h=870&q=80 600w, https://images.unsplash.com/photo-1760706112663-1b3932597980?auto=format&fit=crop&crop=faces,entropy&w=900&h=1305&q=80 900w"
-        sizes="50vw" alt="" width="600" height="870" loading="lazy" decoding="async">
-    </picture>
+  <!-- fotos propias: el recorte de cada pantalla lo hace object-position (ver .tile-running / .tile-padel) -->
+  <a class="tile tile-running" href="#catalogo" data-go="running" aria-label="Ver línea Running">
+    <img src="tile-running-800.jpg" srcset="tile-running-800.jpg 800w, tile-running-1400.jpg 1400w"
+      sizes="(min-width:768px) 50vw, 90vw" alt="" width="1400" height="1120" loading="lazy" decoding="async">
     <div class="tile-in"><span class="tile-t">Running</span><span class="tile-s">+ Ver</span></div>
   </a>
-  <a class="tile tile-tee" href="#catalogo" data-go="padel" aria-label="Ver línea Padel">
-    <img src="mirai-06-espalda-1000.jpg" srcset="mirai-06-espalda-600.jpg 600w, mirai-06-espalda-1000.jpg 1000w"
-      sizes="50vw" alt="" width="1000" height="1250" loading="lazy" decoding="async">
+  <a class="tile tile-padel" href="#catalogo" data-go="padel" aria-label="Ver línea Padel">
+    <img src="tile-padel-600.jpg" srcset="tile-padel-600.jpg 600w, tile-padel-1080.jpg 1080w"
+      sizes="50vw" alt="" width="1080" height="1350" loading="lazy" decoding="async">
     <div class="tile-in"><span class="tile-t">Padel</span><span class="tile-s">+ Ver</span></div>
   </a>
 </section>
@@ -580,6 +589,16 @@ html{scroll-behavior:auto}
     <div class="sec-head rv">
       <h2 class="sec-title">Colección<sup id="total-n"></sup></h2>
       <p class="eyebrow">Edición limitada</p>
+    </div>
+    <!-- lookbook: fotos de publicar/coleccion. data-product = id de la remera que abre al tocar -->
+    <div class="look rv">
+      <div class="look-track" role="region" aria-label="Fotos de la colección" tabindex="0">
+        <button class="look-card" type="button" data-product="3"><img src="look-3-2-600.jpg" srcset="look-3-2-600.jpg 600w, look-3-2-1000.jpg 1000w" sizes="(min-width:1100px) 19vw, 72vw" alt="Remeras MIRAI Vertical blanca y negra" width="1000" height="1250" loading="lazy" decoding="async"><span class="look-tag">+ Ver</span></button>
+        <button class="look-card" type="button" data-product="4"><img src="look-3-3-600.jpg" srcset="look-3-3-600.jpg 600w, look-3-3-1000.jpg 1000w" sizes="(min-width:1100px) 19vw, 72vw" alt="Corredor con la remera MIRAI Vertical blanca" width="1000" height="1250" loading="lazy" decoding="async"><span class="look-tag">+ Ver</span></button>
+        <button class="look-card" type="button" data-product="6"><img src="look-6-3-600.jpg" srcset="look-6-3-600.jpg 600w, look-6-3-1000.jpg 1000w" sizes="(min-width:1100px) 19vw, 72vw" alt="Remera Certified Champs Club de espalda" width="1000" height="1250" loading="lazy" decoding="async"><span class="look-tag">+ Ver</span></button>
+        <button class="look-card" type="button" data-product="6"><img src="look-6-4-600.jpg" srcset="look-6-4-600.jpg 600w, look-6-4-1000.jpg 1000w" sizes="(min-width:1100px) 19vw, 72vw" alt="Remera Certified Champs Club sobre una cancha de padel" width="1000" height="1250" loading="lazy" decoding="async"><span class="look-tag">+ Ver</span></button>
+        <div class="look-card"><img src="look-7-600.jpg" srcset="look-7-600.jpg 600w, look-7-1000.jpg 1000w" sizes="(min-width:1100px) 19vw, 72vw" alt="Remeras Built for the Court sobre una cancha de padel" width="1000" height="1319" loading="lazy" decoding="async"></div>
+      </div>
     </div>
     <!-- Filtros y productos se generan desde los datos (planilla o MOCK_PRODUCTS). Los prompts de las fotos de prueba están en MOCK_PRODUCTS. -->
     <div class="filters" id="filters" role="group" aria-label="Filtrar productos"></div>
@@ -1008,6 +1027,10 @@ function setFilter(cat){
   });
   renderGrid(cat==='all'?products:products.filter(p=>p.category===cat));
 }
+/* lookbook: cada foto abre la ficha de su remera */
+document.querySelectorAll('.look-card[data-product]').forEach(b=>b.addEventListener('click',()=>{
+  const p=products.find(x=>x.id===b.dataset.product);if(p)openModal(p);
+}));
 document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',e=>{
   e.preventDefault();setFilter(a.dataset.go);
   $('catalogo').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
